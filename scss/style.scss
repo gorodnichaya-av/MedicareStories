@@ -1,3 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800&display=swap');
+
+$black: #000000;
+$blue: #374BFF;
+$lightBlue:#379FFF;
+$green:#26FFB1;
+$neonGreen:#92FF26;
+$neonPink: #FF26C2;
+
+
 * {
   box-sizing: border-box;
+}
+
+body {
+  background-color: $black;
+} 
+
+a {
+  color: $blue;
+  text-decoration: none;
+  &:hover {
+    color: $lightBlue
+  }
+}
+
+/***** Typography ****/
+body {
+  line-height: 1.7;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+}
+h1 {
+  line-height: 1.3;
+}
+h2,
+h3,
+h4 {
+  line-height: 1.5;
+}
+@media (max-width: 991px) {
+  body {
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 40px;
+  }
+  h2 {
+    font-size: 25px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 14px;
+  }
+  small {
+    font-size: 14px;
+  }
+}
+@media (min-width: 992px) {
+  body {
+    font-size: 18px;
+  }
+  h1 {
+    font-size: 50px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  h4 {
+    font-size: 16px;
+  }
+  small {
+    font-size: 16px;
+  }
+}
+.text-blue {
+  color: $blue;
+}
+.font-jetbrains-mono {
+  font-family: 'JetBrains Mono', monospace;
 }
