@@ -6,6 +6,7 @@ $lightBlue:#379FFF;
 $green:#26FFB1;
 $neonGreen:#92FF26;
 $neonPink: #FF26C2;
+$white: #ffffff;
 
 
 * {
@@ -13,7 +14,8 @@ $neonPink: #FF26C2;
 }
 
 body {
-  background-color: $black;
+  margin: 0;
+  padding: 0;
 } 
 
 a {
@@ -24,9 +26,23 @@ a {
   }
 }
 
+.container {
+   max-width: 1320px;
+   padding-left: 20px;
+   padding-right: 20px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.section {
+  min-height: 100vh;
+  border: 1px solid $white;
+}
+
 /***** Typography ****/
 body {
   line-height: 1.7;
+  background: $black url(../images/bg.png) no-repeat 50% 0 / 100% auto;
 }
 h1,
 h2,
@@ -85,6 +101,237 @@ h4 {
 .text-blue {
   color: $blue;
 }
+.text-white {
+  color: $white;
+}
 .font-jetbrains-mono {
   font-family: 'JetBrains Mono', monospace;
+}
+
+/***** words ******/
+.word-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 25px;
+  &--goals {
+    position: absolute;
+    top: 0;
+    bottom: -25px;
+  }
+}
+.word-stories {
+  position: absolute;
+  right: -83px;
+  bottom: 0;
+}
+
+/***** header ******/
+
+.header {
+  width: 100%;
+  height: 150vh;
+  &__container {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+  }
+  &__contact {
+    color: $neonGreen;
+    font-weight: 700;
+    font-size: 16px;
+    opacity: 0;
+    transition: all 0.5s linear;
+  }
+  &__menu {
+    position: fixed;
+    top: 50px;
+    right: 44px;
+    display: flex;
+    align-items: center;
+    &.colored {
+      .header__menu-btn:before,
+      .header__menu-btn:after,
+      .header__menu-btn span {
+        background-color: $neonGreen;
+      }
+      .header__contact {
+        opacity: 1;
+      }
+    }
+  }
+  &__menu-btn {
+    position: relative;
+    width: 25px;
+    height: 22px;
+    margin-left: 21px;
+    &:before,
+    &:after, 
+    span {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $white; 
+      transition: all 0.5s;
+    }
+    &:before {
+      top: 0;
+    }
+    &:after {
+      bottom: 0;
+    }
+    span {
+      top: 50%;
+      margin-top: -1px;
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+
+.logo {
+  width: 604px;
+  height: 319px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  transition: 0.5s all;
+  &.small {
+    width: 166px;
+    height: 88px;
+    top: 50px;
+    left: 20px;
+    transform: translate(0, 0);
+  }
+  &__hover,
+  &__static {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &__hover {
+    animation: pulse 1s infinite;
+    &-1 {
+      width: 79.3%;
+    }
+    &-2 {
+      width: 88.58%;
+    }
+  }
+  &__static {
+    width: 100%;
+  }
+  img {
+    display: block; 
+    height: auto;
+    transition: 0.3s all;
+  }
+}
+
+// Percents Horizontal-scroll
+.js-horizontal-scroll {
+  position: relative;
+  height: 400vw;
+}
+.js-horizontal-items {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.horizont-item {
+  flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  
+}
+
+.percents {
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+  }
+  &__number-up {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 157px;
+    color: $blue;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    line-height: 1; 
+    text-transform: uppercase;
+    &:before {
+      content: "";
+      width: 70px;
+      height: 113px;
+      display: block;
+      margin-right: 10px;
+      background: url(../images/icons/arrowUp.svg) no-repeat 50% 50% / contain;
+    }
+    small {
+      font-size: 0.5em;
+      align-self: flex-start;
+      margin-top: 12px;
+    }
+  }
+  &__text {
+    max-width: 100%;
+    text-align: center;
+    color: $black;
+    font-size: 30px;
+  }
+}
+
+/***** Ball slider ******/
+#obj {
+  background: blue;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  position: absolute;
+  top:-10px;
+  left: -10px;
+  opacity: 0.5;
+}
+.scroll-container {
+  height: 200vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container-wrap {
+  height: 100vh;
+  
+}
+.container-ball {
+  width: 293px;
+  margin: 0 auto;
+  position: relative;
 }
