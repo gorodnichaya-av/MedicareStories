@@ -18,8 +18,8 @@ window.addEventListener('scroll', () => {
 
 
 // Horizontal scroll content
-const container = document.querySelector('.js-horizontal-items'),
-    containerScroll = document.querySelector('.js-horizontal-scroll');
+const containerScroll = document.querySelectorAll('.js-horizontal-scroll'),
+      container = containerScroll.querySelector('.js-horizontal-items');
 
 window.addEventListener("scroll", function () {
     horizontalScroll();
