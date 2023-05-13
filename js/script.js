@@ -47,6 +47,11 @@ napkins.forEach(elem => {
   
   function startMoving(e) {
     isDown = true;
+    let clientX = e.touches[0].clientX;
+    let clientY = e.touches[0].clientY;
+
+    console.log(clientX);
+    console.log(clientY);
     offset = [
       elem.offsetLeft - e.clientX,
       elem.offsetTop - e.clientY
@@ -61,10 +66,8 @@ napkins.forEach(elem => {
     event.preventDefault();
     if (isDown) {
         let mousePosition = {
-    
-            x : event.clientX,
-            y : event.clientY
-    
+          x : event.clientX,
+          y : event.clientY
         };
         elem.style.left = (mousePosition.x + offset[0]) + 'px';
         elem.style.top  = (mousePosition.y + offset[1]) + 'px';
