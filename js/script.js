@@ -29,26 +29,35 @@ window.addEventListener('scroll', () => {
 // Napkins moving
 
 const napkins = document.querySelectorAll('.js-napkin');
- 
-
 
 napkins.forEach(elem => {
   var isDown = false,
       offset = [0,0];
   
-  elem.addEventListener('mousedown', function(e) {
+  
+
+  elem.addEventListener('mousedown', startMoving, true);
+  elem.addEventListener('touchstart', startMoving, true);
+
+  elem.addEventListener('mouseup', endMoving, true);
+  elem.addEventListener('touchend', endMoving, true);
+
+  elem.addEventListener('mousemove', moving, true);
+  elem.addEventListener('touchmove', moving, true);
+  
+  function startMoving(e) {
     isDown = true;
     offset = [
       elem.offsetLeft - e.clientX,
       elem.offsetTop - e.clientY
     ];
-  }, true);
-  
-  document.addEventListener('mouseup', function() {
+  }
+
+  function endMoving() {
     isDown = false;
-  }, true);
-  
-  document.addEventListener('mousemove', function(event) {
+  }
+
+  function moving(event) {
     event.preventDefault();
     if (isDown) {
         let mousePosition = {
@@ -60,25 +69,23 @@ napkins.forEach(elem => {
         elem.style.left = (mousePosition.x + offset[0]) + 'px';
         elem.style.top  = (mousePosition.y + offset[1]) + 'px';
     }
-  }, true);
+  }
 });
-
-
 
 
 
 // Horizontal scroll content
 // const containerScroll = document.querySelectorAll('.js-horizontal-scroll'),
-//       container = containerScroll.querySelector('.js-horizontal-items');
+//        container = containerScroll.querySelector('.js-horizontal-items');
 
 // window.addEventListener("scroll", function () {
-//     horizontalScroll();
+//      horizontalScroll();
 // });
 
 // function horizontalScroll() {
-//     let y = window.scrollY - containerScroll.offsetTop;
+//      let y = window.scrollY - containerScroll.offsetTop;
 
-//     container.scrollTo({left: y})
+//      container.scrollTo({left: y})
 // }
 
 

@@ -613,6 +613,9 @@ p {
 }
 
 @media (max-width: 1279px) {
+  .napkins {
+    overflow-y: hidden;
+  }
   .napkins-headline {
     margin-top: 140px;
   }
