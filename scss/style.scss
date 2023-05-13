@@ -41,11 +41,16 @@ img {
 }
 
 .section {
-  min-height: 100vh;
   border: 1px solid $white;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 1280px) {
+  .section {
+    min-height: 100vh;
+  }
 }
 
 /***** Typography ****/
@@ -69,6 +74,23 @@ h3,
 h4 {
   line-height: 1.5;
 }
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.more-link {
+  position: relative;
+  padding-right: 20px;
+  color: $green;
+  font-weight: 700;
+  svg {
+    width: 15px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
 @media (max-width: 991px) {
   body {
     font-size: 16px;
@@ -87,6 +109,11 @@ h4 {
   }
   small {
     font-size: 14px;
+  }
+}
+@media (max-width: 767px) {
+  .more-link {
+    font-size: 15px;
   }
 }
 @media (min-width: 992px) {
@@ -127,20 +154,12 @@ h4 {
   position: relative;
   overflow: hidden;
   min-height: 25px;
-  &--goals {
-    position: absolute;
-    top: 0;
-    bottom: -25px;
+  max-width: 100%;
+  &--stories {
+    width: 100%;
   }
-  &--journey {
-    position: absolute;
-    right: 0;
-    top: calc(100vh - 120px);
-  }
-  &--success {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+  img {
+    display: block;
   }
 }
 .word-stories {
@@ -155,8 +174,51 @@ h4 {
 }
 .word-success {
   position: relative;
-  right: -30px;
-  bottom: -30px;
+}
+@media (max-width: 767px) {
+  .word-success {
+    max-width: unset;
+    width: 439px;
+    right: -103px;
+    bottom: -5px;
+  }
+}
+@media (min-width: 768px) {
+  .word-wrap {
+    &--success {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
+  .word-success {
+    right: -30px;
+    bottom: -30px;
+  }
+}
+@media (min-width: 1280px) {
+  .word-wrap {
+    &--goals {
+      position: absolute;
+      top: 0;
+      bottom: -25px;
+    }
+    &--journey {
+      position: absolute;
+      right: 0;
+      top: calc(100vh - 120px);
+    }
+  }
+  .word-stories {
+    position: absolute;
+    right: -83px;
+    bottom: 0;
+    display: inline-block;
+  }
+  .word-journey {
+    position: relative;
+    right: -40px;
+  }
 }
 
 /***** header ******/
@@ -237,7 +299,8 @@ h4 {
 }
 
 .logo {
-  width: 604px;
+  width: 100%;
+  max-width: 604px;
   height: 319px;
   position: fixed;
   top: 50%;
@@ -246,7 +309,7 @@ h4 {
   display: inline-block;
   transition: 0.5s all;
   &.small {
-    width: 166px;
+    max-width: 166px;
     height: 88px;
     top: 50px;
     left: 20px;
@@ -425,6 +488,7 @@ h4 {
   text-align: center;
 }
 .napkins {
+  overflow: hidden;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -477,7 +541,7 @@ h4 {
 }
 
 .approaches {
-  height: calc(460px * 6);
+  height: calc(460px * 5);
   left: 500px;
   &__circle {
     width: 460px;
@@ -497,27 +561,48 @@ h4 {
   }
 }
 
-/***** Percents Horizontal-scroll *****/
-.js-horizontal-scroll {
-  position: relative;
+@media (max-width: 1279px) {
+  .neon-arrow-scroll {
+    display: none;
+  }
 }
-.js-horizontal-items {
-  position: sticky;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+
+@media (max-width: 560px) {
+  .approaches {
+    &__circle {
+      width: calc(100vw - 40px);
+      height: calc(100vw - 40px);
+    }
+  }
 }
-.horizontal-item {
-  flex-shrink: 0;
-  position: sticky;
-  top: 0;
-  overflow: hidden;
-  
+
+/***** Horizontal-scroll *****/
+
+@media (min-width: 1280px) {
+  .js-horizontal-scroll {
+    position: relative;
+  }
+  .js-horizontal-items {
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .horizontal-item {
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    
+  }
 }
+
+
+/***** Percents ******/
 
 .percents {
   height: 400vw;
@@ -530,7 +615,6 @@ h4 {
   }
   &__number-up {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 157px;
     color: $blue;
     font-weight: 800;
     display: flex;
@@ -558,6 +642,20 @@ h4 {
     text-align: center;
     color: $black;
     font-size: 30px;
+  }
+}
+@media (max-width: 767px) {
+  .percents {
+    &__number-up {
+      font-size: 100px;
+    }
+  }
+}
+@media (min-width: 768px) {
+  .percents {
+    &__number-up {
+      font-size: 157px;
+    }
   }
 }
 
@@ -589,10 +687,7 @@ h4 {
 }
 
 /***** photos ******/
-.photos {
-  display: flex;
-  justify-content: space-between;
-}
+
 .photo-parallax {
   position: relative;
   &__text {
@@ -610,10 +705,54 @@ h4 {
       color: inherit;
     }
   }
+  img {
+    display: block;
+  }
+}
+@media (max-width: 767px) {
+  .photos {
+    width: 100%;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    &__item {
+      & + & {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  .photos {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 /***** footer ******/
 .footer {
   position: relative;
   align-items: center;
+  background-color: $black;
+}
+
+@media (max-width: 1279px) {
+  .footer {
+    height: 100vh;
+  }
+}
+@media (max-width: 767px) {
+  .footer {
+    flex-direction: column;
+    padding-top: 274px;
+    h2 {
+      margin-bottom: 87px;
+    }
+    .container {
+      flex-grow: 1;
+    }
+  }
+  .word-wrap--success {
+    margin-top: 274px;
+  }
 }
