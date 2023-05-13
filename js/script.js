@@ -5,11 +5,8 @@ const morelink = document.querySelectorAll('.more-link'),
       svgArrow = document.createElement('span');
 
 svgArrow.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="currentColor"/></svg>`;
-console.log(morelink);
-console.log(svgArrow);
 
 morelink.forEach(elem => {
-  console.log(elem)
   elem.append(svgArrow.cloneNode(true));
 });
 
@@ -29,20 +26,60 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// Napkins moving
 
-// Horizontal scroll content
-const containerScroll = document.querySelectorAll('.js-horizontal-scroll'),
-      container = containerScroll.querySelector('.js-horizontal-items');
+const napkins = document.querySelectorAll('.js-napkin');
+ 
 
-window.addEventListener("scroll", function () {
-    horizontalScroll();
+
+napkins.forEach(elem => {
+  var isDown = false,
+      offset = [0,0];
+  
+  elem.addEventListener('mousedown', function(e) {
+    isDown = true;
+    offset = [
+      elem.offsetLeft - e.clientX,
+      elem.offsetTop - e.clientY
+    ];
+  }, true);
+  
+  document.addEventListener('mouseup', function() {
+    isDown = false;
+  }, true);
+  
+  document.addEventListener('mousemove', function(event) {
+    event.preventDefault();
+    if (isDown) {
+        let mousePosition = {
+    
+            x : event.clientX,
+            y : event.clientY
+    
+        };
+        elem.style.left = (mousePosition.x + offset[0]) + 'px';
+        elem.style.top  = (mousePosition.y + offset[1]) + 'px';
+    }
+  }, true);
 });
 
-function horizontalScroll() {
-    let y = window.scrollY - containerScroll.offsetTop;
 
-    container.scrollTo({left: y})
-}
+
+
+
+// Horizontal scroll content
+// const containerScroll = document.querySelectorAll('.js-horizontal-scroll'),
+//       container = containerScroll.querySelector('.js-horizontal-items');
+
+// window.addEventListener("scroll", function () {
+//     horizontalScroll();
+// });
+
+// function horizontalScroll() {
+//     let y = window.scrollY - containerScroll.offsetTop;
+
+//     container.scrollTo({left: y})
+// }
 
 
 // Ball slides on line
@@ -83,7 +120,7 @@ function moveObj(prcnt) {
 window.addEventListener('scroll', function () {
 
   let percentValue = (this.scrollY / (scrollContentHeight - window.innerHeight)) * 10;
-  console.log(percentValue);
+ // console.log(percentValue);
 
   // moveObj(percentValue);
 });
