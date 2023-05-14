@@ -138,7 +138,7 @@ parallaxElements.forEach(item => {
 });
 
 
-// https://stackoverflow.com/questions/28220786/backgroundimage-follow-mousecursor
+//Parallax image inside container on mouemove
 const parallaxImgContainer = document.querySelectorAll('.js-photo-parallax');
 
 parallaxImgContainer.forEach(item => {
@@ -155,8 +155,24 @@ parallaxImgContainer.forEach(item => {
   });
 })
     
+// Money bug animation
 
+const moneyBug = document.querySelector('.js-money-bug'),
+      moneyBugContainer = document.querySelector('.js-money-bug-container'),
+      moneyBugStart = moneyBugContainer.offsetTop,
+      moneyBugContainerHeight = moneyBugContainer.offsetHeight;
 
+window.addEventListener('scroll', function() {
+  console.log(moneyBugContainerHeight);
+  console.log(moneyBugStart);
+});
+
+function movingBug(percent) {
+  percent = (percent * moneyBugContainerHeight) / 100;
+
+  obj.style.transform = 'scale()';
+
+}
 
 
 // Ball slides on line
