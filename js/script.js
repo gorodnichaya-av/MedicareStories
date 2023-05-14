@@ -34,44 +34,51 @@ napkins.forEach(elem => {
   var isDown = false,
       offset = [0,0];
   
-  
-
-  elem.addEventListener('mousedown', startMoving, true);
-  elem.addEventListener('touchstart', startMoving, true);
-
-  elem.addEventListener('mouseup', endMoving, true);
-  elem.addEventListener('touchend', endMoving, true);
-
-  elem.addEventListener('mousemove', moving, true);
-  elem.addEventListener('touchmove', moving, true);
-  
-  function startMoving(e) {
+  elem.addEventListener('mousedown', function(e) {
     isDown = true;
-    let clientX = e.touches[0].clientX;
-    let clientY = e.touches[0].clientY;
-
-    console.log(clientX);
-    console.log(clientY);
     offset = [
       elem.offsetLeft - e.clientX,
       elem.offsetTop - e.clientY
     ];
-  }
+  }, true);
 
-  function endMoving() {
-    isDown = false;
-  }
-
-  function moving(event) {
+  elem.addEventListener('touchstart', function(e) {
+    isDown = true;
+    offset = [
+      elem.offsetLeft - e.touches[0].clientX,
+      elem.offsetTop - e.touches[0].clientY
+    ];
+  }, true);
+  
+  elem.addEventListener('mouseup', endMoving, true);
+  elem.addEventListener('touchend', endMoving, true);
+  
+  document.addEventListener('mousemove', function(event) {
     event.preventDefault();
     if (isDown) {
         let mousePosition = {
-          x : event.clientX,
-          y : event.clientY
+            x : event.clientX,
+            y : event.clientY
         };
         elem.style.left = (mousePosition.x + offset[0]) + 'px';
         elem.style.top  = (mousePosition.y + offset[1]) + 'px';
     }
+  }, true);
+
+  document.addEventListener('touchmove', function(event) {
+    event.preventDefault();
+    if (isDown) {
+        let touchPosition = {
+            x : event.touches[0].clientX,
+            y : event.touches[0].clientY
+        };
+        elem.style.left = (touchPosition.x + offset[0]) + 'px';
+        elem.style.top  = (touchPosition.y + offset[1]) + 'px';
+    }
+  }, true);
+
+  function endMoving() {
+    isDown = false;
   }
 });
 

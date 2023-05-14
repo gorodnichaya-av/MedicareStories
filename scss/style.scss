@@ -604,6 +604,7 @@ p {
 }
 .napkins {
   border: 1px solid white;
+  touch-action: none;
   &__empty,
   &__drawings,
   &__craft {
