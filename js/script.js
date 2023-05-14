@@ -85,18 +85,28 @@ napkins.forEach(elem => {
 
 
 // Horizontal scroll content
-// const containerScroll = document.querySelectorAll('.js-horizontal-scroll'),
-//        container = containerScroll.querySelector('.js-horizontal-items');
+const horizontalScrollContainer = document.querySelectorAll('.js-horizontal-scroll');
 
-// window.addEventListener("scroll", function () {
-//      horizontalScroll();
-// });
+horizontalScrollContainer.forEach(item => {
+  const horizontalItems = item.querySelector('.js-horizontal-items');
 
-// function horizontalScroll() {
-//      let y = window.scrollY - containerScroll.offsetTop;
+  window.addEventListener("scroll", function () {
+    horizontalScroll(item, horizontalItems);
+ });
+});
 
-//      container.scrollTo({left: y})
-// }
+function horizontalScroll(parent, items) {
+  let y = window.scrollY - parent.offsetTop;
+  items.scrollTo({left: y});
+
+  if(parent.classList.contains('approaches') && y > 0) {
+    document.querySelector('.neon-arrow-scroll').hidden = true;
+    document.querySelector('.js-neon-arrow').classList.add('visible');
+  } else {
+    document.querySelector('.neon-arrow-scroll').hidden = false;
+    document.querySelector('.js-neon-arrow').classList.remove('visible');
+  }
+}
 
 
 // Ball slides on line
