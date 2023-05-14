@@ -964,8 +964,19 @@ p {
 
 /***** photos ******/
 
+.photos {
+  &__item {
+    position: relative;
+    will-change: transform;
+    transform-style: preserve-3d;
+  }
+}
+
 .photo-parallax {
+  overflow: hidden;
   position: relative;
+  width: 400px;
+  height: 600px;
   &__text {
     position: absolute;
     left: 0;
@@ -982,7 +993,13 @@ p {
     }
   }
   img {
+    max-width: unset;
     display: block;
+    position: relative;
+    object-fit: cover;
+    width: 100%;
+    height: 100%; 
+    transform: translate3d(0,0,0) scale(1.1);
   }
 }
 @media (max-width: 767px) {

@@ -92,7 +92,7 @@ horizontalScrollContainer.forEach(item => {
 
   window.addEventListener("scroll", function () {
     horizontalScroll(item, horizontalItems);
- });
+  });
 });
 
 function horizontalScroll(parent, items) {
@@ -106,7 +106,57 @@ function horizontalScroll(parent, items) {
     document.querySelector('.neon-arrow-scroll').hidden = false;
     document.querySelector('.js-neon-arrow').classList.remove('visible');
   }
+};
+
+
+// Parallax elements 
+
+const parallaxElements = document.querySelectorAll('.js-photos-item'),
+      parallaxElementsStart = document.querySelector('.js-photos').offsetTop;
+
+function parallaxPhotos(elem, scrollYVal) {
+  const dataScrollY = elem.getAttribute('data-initial-scroll');
+  elem.style.transform = 'translate3d(0px ,'+ -(scrollYVal / dataScrollY)   + '%, 0px)'
 }
+
+function parallaxInitElem(elem) {
+  const dataScrollY = elem.getAttribute('data-initial-scroll');
+  elem.style.transform = 'translate3d(0px ,'+ dataScrollY + '%, 0px)'
+}
+
+parallaxElements.forEach(item => {
+  parallaxInitElem(item);
+
+  window.addEventListener('scroll', function () {
+    if ((this.scrollY + (this.innerHeight * 0.8)) > parallaxElementsStart) {
+      let indexScroll = this.scrollY - parallaxElementsStart;
+      parallaxPhotos(item, indexScroll);
+    } else {
+      return;
+    }
+  });
+});
+
+
+// https://stackoverflow.com/questions/28220786/backgroundimage-follow-mousecursor
+const parallaxImgContainer = document.querySelectorAll('.js-photo-parallax');
+
+parallaxImgContainer.forEach(item => {
+  const img =  item.querySelector('img');
+  img.addEventListener('mousemove', function(event) {
+    const widthContainer = item.offsetWidth,
+          heightContainer = item.offsetHeight;
+    let xPos = event.clientX,
+        yPos = event.clientY,
+        xShift = ((widthContainer/2 - xPos)/widthContainer*2)*2,
+        yShift = ((heightContainer/2 - yPos)/heightContainer*2)*2;
+  
+    img.style.transform = 'translate3d(' + xShift + '%, ' + yShift + '%, ' + 0 + ') scale(1.1)';
+  });
+})
+    
+
+
 
 
 // Ball slides on line
