@@ -511,7 +511,6 @@ p {
 }
 .money-bug {
   position: relative;
-  min-height: 900px;
   height: 100vh;
   border: 2px solid green;
   &__bug {
@@ -568,14 +567,33 @@ p {
     }
   }
 }
-
+.coins-wrap {
+  width: 100vw;
+  height: calc(100vh + 650px);
+  overflow: hidden;
+  border: 1px solid red;
+  position: absolute;
+  top: -650px;
+  bottom: -100vh;
+  &.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+}
 .coins {
-  height: 900px;
-  margin-top: -500px;
   border: 2px solid orange;
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
   position: relative;
+  height: 100%;
   &__coin {
     position: absolute;
+    transform: matrix(1,0,0,1,0,0);
     &--1 {
       top: 0;
       left: 51px;

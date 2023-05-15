@@ -206,8 +206,6 @@ window.addEventListener('scroll', function () {
     moneyLines.forEach((item, i) => {
       const itemHide = initialTopArray[i] + initialHeightArray[i] + 200;
 
-      console.log(initialTopArray[i]*1.5);
-
       if ((centerWindow - moneyBugStart) > initialTopArray[i] && (centerWindow - moneyBugStart) < itemHide) {
         item.style.height = `${initialHeightArray[i]}px`;
         item.style.top = `${initialTopArray[i]*1.8}px`;
@@ -222,8 +220,6 @@ window.addEventListener('scroll', function () {
       }
     });
 
-    
-
     movingBug(percentVal);
 });
 
@@ -231,6 +227,28 @@ function movingBug(percent) {
     let scaleVal = 0.5 + (percent * 0.5 / 100),
         rotateVal = -45 + (percent * 45 / 100);
     moneyBug.style.transform = `translate(-50%, -50%) scale(${scaleVal}) rotate(${rotateVal}deg) `;
+}
+
+
+// Coins functionallity
+const coinsWrap = document.querySelector('.js-coins'),
+      coinsArray = coinsWrap.querySelectorAll('.js-coin');
+
+var initialCoinPosition = {};
+
+window.addEventListener('scroll', function() {
+  coinsArray.forEach((item, i) => {
+    console.log(i, getOffset(item).left);
+    console.log(i, getOffset(item).top);
+  });
+});
+
+function getOffset(el) {
+  const rect = el.getBoundingClientRect();
+  return {
+    left: rect.left + window.scrollX,
+    top: rect.top + window.scrollY
+  };
 }
 
 // Ball slides on line
