@@ -228,7 +228,6 @@ p {
 @media (min-width: 1280px) {
   .word-wrap {
     &--goals {
-      position: absolute;
       top: 0;
       bottom: -25px;
     }
@@ -521,13 +520,12 @@ p {
     left: 50%;
     margin-top: 100px;
     transform: translate(-50%, -50%) scale(0.5) rotate(-45deg); 
-    border: 1px solid red;
     transition: all 0.3s;
   }
   &__line {
     position: absolute;
     width: 3px;
-    transition: all 0.3s;
+    transition: all 0.5s;
     &:before {
       content: "";
       position: absolute;
@@ -536,7 +534,7 @@ p {
       top: 0;
       bottom: 0;
       background-color: $neonGreen; 
-      transition: all 0.3s;
+      transition: all 0.5s;
     }
     &.bg-hidden {
       &:before {

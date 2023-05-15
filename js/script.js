@@ -206,16 +206,19 @@ window.addEventListener('scroll', function () {
     moneyLines.forEach((item, i) => {
       const itemHide = initialTopArray[i] + initialHeightArray[i] + 200;
 
+      console.log(initialTopArray[i]*1.5);
+
       if ((centerWindow - moneyBugStart) > initialTopArray[i] && (centerWindow - moneyBugStart) < itemHide) {
         item.style.height = `${initialHeightArray[i]}px`;
-        item.style.top = `(${initialTopArray[i]*1.4})px`;
+        item.style.top = `${initialTopArray[i]*1.8}px`;
         item.classList.remove('bg-hidden')
       } else if ((centerWindow - moneyBugStart) >= itemHide){
         item.style.height = `${initialHeightArray[i]}px`;
         item.classList.add('bg-hidden');
-        item.style.top = `${initialTopArray[i]}px`; 
+        
       } else {
         item.style.height = '0px';
+        item.style.top = `${initialTopArray[i]}px`; 
       }
     });
 
