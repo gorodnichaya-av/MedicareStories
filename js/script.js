@@ -232,15 +232,32 @@ function movingBug(percent) {
 
 // Coins functionallity
 const coinsWrap = document.querySelector('.js-coins'),
-      coinsArray = coinsWrap.querySelectorAll('.js-coin');
+      coinsArray = coinsWrap.querySelectorAll('.js-coin'),
+      coinsTop = coinsWrap.offsetTop,
+      coinsContainerHeight = document.querySelector('.js-percents').offsetHeight,
+      coinsContainerTop = document.querySelector('.js-percents').offsetTop,
+      percentsCount = document.querySelectorAll('.percents__item').length;
+
+console.log(coinsContainerHeight / percentsCount);
+console.log(coinsContainerTop);
 
 var initialCoinPosition = {};
+coinsArray.forEach((item, i) => {
+  initialCoinPosition.id = i;
+  initialCoinPosition.position = {
+    x: getOffset(item).left,
+    y: getOffset(item).top
+  }
+  console.log(i, initialCoinPosition);
+});
+console.log(initialCoinPosition);
 
 window.addEventListener('scroll', function() {
-  coinsArray.forEach((item, i) => {
-    console.log(i, getOffset(item).left);
-    console.log(i, getOffset(item).top);
-  });
+  if (this.scrollY >= coinsContainerTop && this.scrollY < (coinsContainerTop + coinsContainerHeight - coinsContainerHeight / percentsCount)) {
+    coinsWrap.classList.add('fixed');
+  } else {
+    coinsWrap.classList.remove('fixed');
+  }
 });
 
 function getOffset(el) {

@@ -44,7 +44,6 @@ img {
 }
 
 .section {
-  border: 1px solid $white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,10 +56,54 @@ img {
   }
 }
 
+/***** Backgrounds of sections ******/
+
+.black-green-bg {
+  background: linear-gradient(180deg, rgba(1,69,57,0) 0%, rgba(1,69,57,1) 100%);
+}
+.goals {
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 25vh;
+    background: linear-gradient(180deg, rgba(1,69,57,1) 0%, rgba(38,243,169,0.5) 100%);
+  }
+}
+.percents {
+  .js-horizontal-items {
+    background: linear-gradient(180deg, rgba(38,243,169,0.5) 0%, rgba(38,243,169,1) 45%, rgba(38,243,169,1) 55%, rgba(76,165,215,1) 100%);
+  }
+}
+.napkins-headline {
+  background: linear-gradient(180deg, rgba(76,165,215,1) 0%, rgba(46,148,243,1) 100%);
+}
+.section--napkin {
+  background: linear-gradient(180deg, rgba(46,148,243,1) 0%, rgba(251,55,255,1) 100%);
+}
+.section--approach {
+  background: linear-gradient(180deg, rgba(251,55,255,1) 0%, rgba(201,25,151,1) 100%);
+}
+.approaches {
+  .js-horizontal-items {
+    background: linear-gradient(180deg, rgba(201,25,151,1) 0%, rgba(206,35,155,1) 100%);
+  }
+}
+.stories-arrow {
+  background: linear-gradient(180deg, rgba(206,35,155,1) 0%, rgba(157,12,47,1) 100%);
+}
+.section--photos {
+  background: linear-gradient(180deg, rgba(157,12,47,1) 0%, rgba(157,12,47,0) 100%);
+}
+
+
 /***** Typography ****/
 body {
   line-height: 1.7;
-  background: $black url(../images/bg.png) no-repeat 50% 0 / 100% auto;
+  background-color: $black;
 }
 h1,
 h2,
@@ -228,8 +271,8 @@ p {
 @media (min-width: 1280px) {
   .word-wrap {
     &--goals {
-      top: 0;
-      bottom: -25px;
+      margin-top: -68px;
+      margin-bottom: -68px;
     }
     &--journey {
       position: absolute;
@@ -246,6 +289,10 @@ p {
   .word-journey {
     position: relative;
     right: -40px;
+  }
+  .word-goals {
+    position: relative;
+    left: -40px;
   }
 }
 
@@ -575,6 +622,7 @@ p {
   position: absolute;
   top: -650px;
   bottom: -100vh;
+  transition: all 0.3s;
   &.fixed {
     position: fixed;
     top: 0;
@@ -844,10 +892,10 @@ p {
 }
 .neon-arrow-scroll {
   position: absolute;
-  border: 2px solid pink;
   top: 0;
   bottom: -100vh;
   left: 50px;
+  z-index: 2;
   .neon-arrow {
     position: sticky;
     top: 50vh;
