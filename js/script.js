@@ -236,12 +236,11 @@ const coinsWrap = document.querySelector('.js-coins'),
       coinsTop = coinsWrap.offsetTop,
       coinsContainerHeight = document.querySelector('.js-percents').offsetHeight,
       coinsContainerStart = document.querySelector('.js-percents').offsetTop,
-      percentsCount = document.querySelectorAll('.percents__item').length;
+      percentsArray = document.querySelectorAll('.percents__item'),
+      percentsCount = percentsArray.length,
+      percentItemHeight = coinsContainerHeight / percentsCount;
 
-// console.log(coinsContainerHeight / percentsCount);
-// console.log(coinsContainerTop);
-
-var initialCoinPosition = [];
+var initialCoinPosition = []; // initial values of X,Y positions of coints
 coinsArray.forEach((item, i) => {
   initialCoinPosition.push({
     pageX: getOffset(item).left,
@@ -250,12 +249,21 @@ coinsArray.forEach((item, i) => {
     parentY: item.offsetTop
   });
 });
-
+// moving conins on scroll
 window.addEventListener('scroll', function() {
     let percentVal,
         centerWindow = this.scrollY + (this.innerHeight / 2);
 
-    if (this.scrollY < coinsContainerStart + coinsTop) {
+    
+    var counterItems = 0;
+    for (let i = 0; i < percentsCount; i++) {
+        if (this.scrollY >= (coinsContainerStart + percentItemHeight * i)) {
+            counterItems = i;
+        }
+    }
+    
+
+    if (this.scrollY < coinsContainerStart + coinsTop) { // window Scroll < (offset Top of main coin's parent (percents) + real negative top of coin's parent (coint-wrap))
         percentVal = 1;
         coinsWrap.classList.remove('fixed');
     } else if (this.scrollY >= (coinsContainerStart + coinsTop)) {
@@ -271,7 +279,7 @@ window.addEventListener('scroll', function() {
 
     movingCoins(percentVal);
 });
-
+// get Offset of coins
 function getOffset(el) {
   const rect = el.getBoundingClientRect();
   return {
@@ -285,11 +293,9 @@ function movingCoins(percent) {
         rotateVal,
         skewVal;
 
-    
-    // console.log(initialCoinPosition);
-
     coinsArray.forEach((item, i) => {
         const indexVal = i;
+
         let positionXVal = initialCoinPosition[i].pageX,
             leftVal = initialCoinPosition[i].parentX,
             topVal = initialCoinPosition[i].parentY,
@@ -308,7 +314,7 @@ function movingCoins(percent) {
                 finishTop = 101,  // 101 - space from top
                 sumTop = finishTop - topVal;
                 topVal = topVal + (percent * sumTop / 100);
-                leftVal = leftVal + (percent * 156 / 100); // 156 - moving space
+                leftVal = leftVal + (percent * (window.innerWidth*0.122) / 100); // window.innerWidth*0.122 - moving space to left in percent of window width (12,2%)
                 rotateVal = -25 + (percent * 25 / 100);
                 item.style.top = `${topVal}px`;
                 item.style.left = `${leftVal}px`;
@@ -319,12 +325,11 @@ function movingCoins(percent) {
                 item.style.transform = `scale(${scaleVal}) rotate(-40deg) translate(${positionXVal}px)`; 
               break;    
             case 3:
-                // console.log(leftVal);
                 finishTop = window.innerHeight - 50 - item.offsetHeight,  // 50 - space from bottom
                 sumTop = finishTop - topVal;
                 rotateVal = 35 - (percent * 10 / 100);
                 topVal = topVal + (percent * sumTop / 100);
-                leftVal = leftVal + (percent * 235 / 100); // 156 - moving space;
+                leftVal = leftVal + (percent * (window.innerWidth*0.235) / 100); // window.innerWidth*0.122 - moving space to left in percent of window width (18,4%)
                 item.style.top = `${topVal}px`;
                 item.style.left = `${leftVal}px`;
                 item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg)`; 
