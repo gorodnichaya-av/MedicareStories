@@ -270,6 +270,7 @@ window.addEventListener('scroll', function() {
     if (this.scrollY < coinsContainerStart + coinsTop) { // window Scroll < (offset Top of main coin's parent (percents) + real negative top of coin's parent (coint-wrap))
         percentVal = 1;
         coinsWrap.classList.remove('fixed');
+        coinsWrap.classList.remove('bottom-absolute');
     } else if (this.scrollY >= (coinsContainerStart + coinsTop) && this.scrollY <= (coinsContainerStart + coinsContainerHeight - percentItemHeight + this.innerHeight / 2)) {
         coinsWrap.classList.add('fixed');
         if (this.scrollY < coinsContainerStart) {
@@ -277,6 +278,7 @@ window.addEventListener('scroll', function() {
         } else {
             percentVal = 100;
         }
+        coinsWrap.classList.remove('bottom-absolute');
     } else {
         coinsWrap.classList.remove('fixed');
         coinsWrap.classList.add('bottom-absolute');
