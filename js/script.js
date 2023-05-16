@@ -151,6 +151,11 @@ parallaxElements.forEach(item => {
     window.addEventListener('scroll', function () {
         if ((this.scrollY + (this.innerHeight * 0.8)) > parallaxElementsStart) {
             let indexScroll = this.scrollY - parallaxElementsStart;
+            if (indexScroll <= 200) {
+                item.classList.add('colored');
+            } else {
+                item.classList.remove('colored');
+            }
             parallaxPhotos(item, indexScroll);
         } else {
             return;
@@ -159,7 +164,7 @@ parallaxElements.forEach(item => {
 });
 
 //Parallax image inside container on mouemove
-const parallaxImgContainer = document.querySelectorAll('.js-photo-parallax');
+/*const parallaxImgContainer = document.querySelectorAll('.js-photo-parallax');
 
 parallaxImgContainer.forEach(item => {
     const img = item.querySelector('img');
@@ -173,7 +178,7 @@ parallaxImgContainer.forEach(item => {
 
         img.style.transform = 'translate3d(' + xShift + '%, ' + yShift + '%, ' + 0 + ') scale(1.1)';
     });
-})
+})*/
 
 // Money bug animation
 
