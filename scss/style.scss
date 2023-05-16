@@ -382,7 +382,8 @@ p {
   left: 50%;
   transform: translate(-50%, -50%);
   display: inline-block;
-  transition: 0.5s all;
+  transition: 0.3s all linear;
+  z-index: 5;
   &.small {
     max-width: 166px;
     height: 88px;
@@ -559,6 +560,7 @@ p {
 .money-bug {
   position: relative;
   height: 100vh;
+  min-height: 900px;
   border: 2px solid green;
   &__bug {
     position: sticky;
@@ -615,54 +617,51 @@ p {
   }
 }
 .coins-wrap {
-  width: 100vw;
-  height: calc(100vh + 650px);
+  height: 100vh;
   overflow: hidden;
-  border: 1px solid red;
   position: absolute;
-  top: -650px;
-  bottom: -100vh;
-  transition: all 0.3s;
+  left: 0;
+  right: 0;
+  top: -900px;
+  z-index: 5;
+  border: 1px solid orange;
   &.fixed {
     position: fixed;
     top: 0;
-    left: 0;
-    bottom: 0;
-    width: 100vw;
-    height: 100vh;
   }
 }
 .coins {
-  border: 2px solid orange;
+  height: 100%;
   width: 900px;
+  padding-top: 450px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  height: 100%;
   &__coin {
     position: absolute;
-    transform: matrix(1,0,0,1,0,0);
-    &--1 {
-      top: 0;
+    transition: all 0.3s;
+    &--0 {
+      top: 450px;
       left: 51px;
+      transform: rotate(10deg);
     }
-    &--2 {
-      top: 60px;
-      right: 114px;
+    &--1 {
+      top: calc(60px + 450px);
+      left: 650px;
       transform: rotate(-25deg);
     }
-    &--3 {
-      top: 290px;
+    &--2 {
+      top: calc(290px + 450px);
       left: -60px;
       transform: rotate(-40deg);
     }
-    &--4 {
-      top: 290px;
-      right: 35px;
+    &--3 {
+      top: calc(290px + 450px);
+      left: 730px;
       transform: rotate(35deg);
     }
-    &--5 {
-      top: 130px;
+    &--4 {
+      top: calc(130px + 450px);;
       left: 167px;
     }
   }

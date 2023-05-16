@@ -235,29 +235,41 @@ const coinsWrap = document.querySelector('.js-coins'),
       coinsArray = coinsWrap.querySelectorAll('.js-coin'),
       coinsTop = coinsWrap.offsetTop,
       coinsContainerHeight = document.querySelector('.js-percents').offsetHeight,
-      coinsContainerTop = document.querySelector('.js-percents').offsetTop,
+      coinsContainerStart = document.querySelector('.js-percents').offsetTop,
       percentsCount = document.querySelectorAll('.percents__item').length;
 
-console.log(coinsContainerHeight / percentsCount);
-console.log(coinsContainerTop);
+// console.log(coinsContainerHeight / percentsCount);
+// console.log(coinsContainerTop);
 
-var initialCoinPosition = {};
+var initialCoinPosition = [];
 coinsArray.forEach((item, i) => {
-  initialCoinPosition.id = i;
-  initialCoinPosition.position = {
-    x: getOffset(item).left,
-    y: getOffset(item).top
-  }
-  console.log(i, initialCoinPosition);
+  initialCoinPosition.push({
+    pageX: getOffset(item).left,
+    pageY: getOffset(item).top,
+    parentX: item.offsetLeft,
+    parentY: item.offsetTop
+  });
 });
-console.log(initialCoinPosition);
 
 window.addEventListener('scroll', function() {
-  if (this.scrollY >= coinsContainerTop && this.scrollY < (coinsContainerTop + coinsContainerHeight - coinsContainerHeight / percentsCount)) {
-    coinsWrap.classList.add('fixed');
-  } else {
-    coinsWrap.classList.remove('fixed');
-  }
+    let percentVal,
+        centerWindow = this.scrollY + (this.innerHeight / 2);
+
+    if (this.scrollY < coinsContainerStart + coinsTop) {
+        percentVal = 1;
+        coinsWrap.classList.remove('fixed');
+    } else if (this.scrollY >= (coinsContainerStart + coinsTop)) {
+        coinsWrap.classList.add('fixed');
+        if (this.scrollY < coinsContainerStart) {
+            percentVal = (this.scrollY - coinsContainerStart - coinsTop) / (-coinsTop) * 100;
+        } else {
+            percentVal = 100;
+        }
+    } else {
+        percentVal = 100;
+    }
+
+    movingCoins(percentVal);
 });
 
 function getOffset(el) {
@@ -267,6 +279,72 @@ function getOffset(el) {
     top: rect.top + window.scrollY
   };
 }
+
+function movingCoins(percent) {
+    let scaleVal = 1 + (percent * 0.5 / 100),
+        rotateVal,
+        skewVal;
+
+    
+    // console.log(initialCoinPosition);
+
+    coinsArray.forEach((item, i) => {
+        const indexVal = i;
+        let positionXVal = initialCoinPosition[i].pageX,
+            leftVal = initialCoinPosition[i].parentX,
+            topVal = initialCoinPosition[i].parentY,
+            finishTop,
+            sumTop;
+
+        switch (indexVal) {
+            case 0:
+                rotateVal = 10 + (percent * 27 / 100); // 10 - initial value of rotate, 27 - changing of value = finish value = 37deg
+                skewVal = 0 - (percent * 15 / 100); // 0 - initial value of skew, 15 - changing of value = finish value = -15deg
+                leftVal = leftVal - (percent * positionXVal / 100);
+                item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg) skew(${skewVal}deg)`;
+                item.style.left = `${leftVal}px`;
+              break;
+            case 1:
+                finishTop = 101,  // 101 - space from top
+                sumTop = finishTop - topVal;
+                topVal = topVal + (percent * sumTop / 100);
+                leftVal = leftVal + (percent * 156 / 100); // 156 - moving space
+                rotateVal = -25 + (percent * 25 / 100);
+                item.style.top = `${topVal}px`;
+                item.style.left = `${leftVal}px`;
+                item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg)`;
+              break;
+            case 2:
+                positionXVal = 0 - (percent * positionXVal / 100);
+                item.style.transform = `scale(${scaleVal}) rotate(-40deg) translate(${positionXVal}px)`; 
+              break;    
+            case 3:
+                // console.log(leftVal);
+                finishTop = window.innerHeight - 50 - item.offsetHeight,  // 50 - space from bottom
+                sumTop = finishTop - topVal;
+                rotateVal = 35 - (percent * 10 / 100);
+                topVal = topVal + (percent * sumTop / 100);
+                leftVal = leftVal + (percent * 235 / 100); // 156 - moving space;
+                item.style.top = `${topVal}px`;
+                item.style.left = `${leftVal}px`;
+                item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg)`; 
+            break;  
+            case 4:
+                positionXVal = 0 - (percent * positionXVal / 100);
+                item.style.transform = `scale(${scaleVal}) translate(${positionXVal}px, ${positionXVal}px)`; 
+            break;            
+            default:
+                rotateVal = 0;
+          }
+
+          item.style.opacity = `0.8`;
+          
+    });
+   
+}
+
+
+
 
 // Ball slides on line
 
