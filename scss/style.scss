@@ -561,7 +561,6 @@ p {
   position: relative;
   height: 100vh;
   min-height: 900px;
-  border: 2px solid green;
   &__bug {
     position: sticky;
     top: 50%;
@@ -623,11 +622,15 @@ p {
   left: 0;
   right: 0;
   top: -900px;
+  bottom: 0;
   z-index: 5;
-  border: 1px solid orange;
   &.fixed {
     position: fixed;
     top: 0;
+  }
+  &.bottom-absolute {
+    top: unset;
+    bottom: 0;
   }
 }
 .coins {

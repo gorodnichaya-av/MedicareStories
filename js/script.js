@@ -261,12 +261,11 @@ window.addEventListener('scroll', function() {
             counterItems = i;
         }
     }
-    
 
     if (this.scrollY < coinsContainerStart + coinsTop) { // window Scroll < (offset Top of main coin's parent (percents) + real negative top of coin's parent (coint-wrap))
         percentVal = 1;
         coinsWrap.classList.remove('fixed');
-    } else if (this.scrollY >= (coinsContainerStart + coinsTop)) {
+    } else if (this.scrollY >= (coinsContainerStart + coinsTop) && this.scrollY <= (coinsContainerStart + coinsContainerHeight - percentItemHeight + this.innerHeight / 2)) {
         coinsWrap.classList.add('fixed');
         if (this.scrollY < coinsContainerStart) {
             percentVal = (this.scrollY - coinsContainerStart - coinsTop) / (-coinsTop) * 100;
@@ -274,10 +273,12 @@ window.addEventListener('scroll', function() {
             percentVal = 100;
         }
     } else {
+        coinsWrap.classList.remove('fixed');
+        coinsWrap.classList.add('bottom-absolute');
         percentVal = 100;
     }
 
-    movingCoins(percentVal);
+    movingCoins(percentVal, counterItems);
 });
 // get Offset of coins
 function getOffset(el) {
@@ -288,7 +289,7 @@ function getOffset(el) {
   };
 }
 
-function movingCoins(percent) {
+function movingCoins(percent, counter) {
     let scaleVal = 1 + (percent * 0.5 / 100),
         rotateVal,
         skewVal;
@@ -304,30 +305,30 @@ function movingCoins(percent) {
 
         switch (indexVal) {
             case 0:
-                rotateVal = 10 + (percent * 27 / 100); // 10 - initial value of rotate, 27 - changing of value = finish value = 37deg
+                rotateVal = (counter % 2 === 0) ?  10 + (percent * 27 / 100) : -(10 + (percent * 27 / 100)); // 10 - initial value of rotate, 27 - changing of value = finish value = 37deg
                 skewVal = 0 - (percent * 15 / 100); // 0 - initial value of skew, 15 - changing of value = finish value = -15deg
                 leftVal = leftVal - (percent * positionXVal / 100);
-                item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg) skew(${skewVal}deg)`;
                 item.style.left = `${leftVal}px`;
+                item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg) skew(${skewVal}deg)`;
               break;
             case 1:
                 finishTop = 101,  // 101 - space from top
                 sumTop = finishTop - topVal;
                 topVal = topVal + (percent * sumTop / 100);
                 leftVal = leftVal + (percent * (window.innerWidth*0.122) / 100); // window.innerWidth*0.122 - moving space to left in percent of window width (12,2%)
-                rotateVal = -25 + (percent * 25 / 100);
+                rotateVal = (counter % 2 === 0) ? -25 + (percent * 50 / 100) : -25 + (percent * 70 / 100);
                 item.style.top = `${topVal}px`;
                 item.style.left = `${leftVal}px`;
                 item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg)`;
               break;
             case 2:
-                positionXVal = 0 - (percent * positionXVal / 100);
+                positionXVal = 0 - (percent * positionXVal / 80);
                 item.style.transform = `scale(${scaleVal}) rotate(-40deg) translate(${positionXVal}px)`; 
               break;    
             case 3:
                 finishTop = window.innerHeight - 50 - item.offsetHeight,  // 50 - space from bottom
                 sumTop = finishTop - topVal;
-                rotateVal = 35 - (percent * 10 / 100);
+                rotateVal = rotateVal = (counter % 2 === 0) ? 35 - (percent * 10 / 100) : -(35 - (percent * 10 / 100));
                 topVal = topVal + (percent * sumTop / 100);
                 leftVal = leftVal + (percent * (window.innerWidth*0.235) / 100); // window.innerWidth*0.122 - moving space to left in percent of window width (18,4%)
                 item.style.top = `${topVal}px`;
