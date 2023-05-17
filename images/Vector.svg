@@ -1,3 +1,3 @@
-<svg width="2" height="252" viewBox="0 0 2 252" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.999989 0L1.00001 252" stroke="#379FFF" stroke-miterlimit="10"/>
+<svg width="293" height="649" viewBox="0 0 293 649" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path id="uncert__timeline__path" d="M87.7529 1C149.18 136.564 195.667 203.929 252.116 180.645C308.565 157.36 306.904 19.2968 235.515 40.0876C164.126 60.8783 132.426 233.181 110.841 283.914C91.1038 330.304 44.5261 336.955 10.9998 301.304C-13.873 274.853 7.90523 207.398 66.8434 213.22C252.116 260.304 204 648.304 204 648.304" stroke="black" stroke-opacity="0.5" stroke-miterlimit="10" stroke-dasharray="12 12"/>
 </svg>

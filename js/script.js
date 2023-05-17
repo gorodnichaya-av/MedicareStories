@@ -406,39 +406,48 @@ function movingCoins(percent, counter) {
 
 // Ball slides on line
 
-const scrollContent = document.querySelector('.scroll-container'),
-    scrollContentHeight = scrollContent.scrollHeight,
-    path = document.getElementById('uncert__timeline__passed'),
-    obj = document.getElementById('obj'),
-    pathLength = Math.floor(path.getTotalLength()),
-    verticalScrollStart = scrollContent.offsetTop,
-    verticalScrollStop = scrollContentHeight + verticalScrollStart;
-
-// Move obj element along path based on percentage of total length
-function moveObj(prcnt) {
-    prcnt = (prcnt * pathLength) / 100;
-    console.log(prcnt);
-    // Get x and y values at a certain point in the line
-    pt = path.getPointAtLength(prcnt);
-    pt.x = Math.round(pt.x);
-    pt.y = Math.round(pt.y);
-
-    obj.style.transform = 'translate3d(' + pt.x + 'px,' + pt.y + 'px, 0)';
-    path.setAttribute('stroke-dashoffset', (pathLength - prcnt));
-}
-
-// Initialize moveObj(0); Scroll functionality
-
-scrollContent.addEventListener('scroll', function() {
-  console.log(this.scrollY);
-  let percentValue = (this.scrollY / (scrollContentHeight - window.innerHeight)) * 100;
-  console.log(percentValue);
-  moveObj(percentValue);
-});
+const verticalScrollContent = document.querySelectorAll('.js-vertical-scroll');
 
 window
     .addEventListener('scroll', function () {
+        verticalScrollContent.forEach(item => {
 
-        let percentValue = (this.scrollY / (scrollContentHeight - window.innerHeight)) * 10;
-        // console.log(percentValue); moveObj(percentValue);
+            const verticalId = item.getAttribute('data-vertical'),
+                  verticalScrollContentStart = document.querySelector(`[${verticalId}]`),
+                  verticalScrollContentHeight = item.offsetHeight,
+                  verticalPath = item.querySelector('.vertical-scroll-path-passed'),
+                  verticalBall = item.querySelector('.vertical-scroll-ball'),
+                  verticalPathLength = Math.floor(verticalPath.getTotalLength()),
+                  verticalScrollStart = verticalScrollContentStart.offsetTop,
+                  verticalScrollStop = verticalScrollContentHeight + verticalScrollStart,
+                  centerWindow = this.scrollY + (this.innerHeight / 2);
+            let percentValue;
+
+            console.log(verticalScrollContentStart);
+      
+              if (this.scrollY < (verticalScrollStart - (this.innerHeight / 2))) {
+                  percentValue = 0;
+              } else if (centerWindow >= (verticalScrollStart) && centerWindow <= verticalScrollStop) {
+                  percentValue = (centerWindow - verticalScrollStart) / verticalScrollContentHeight * 100;
+              } else {
+                  percentValue = 100;
+              }
+              
+              moveObj(percentValue, verticalBall, verticalPath, verticalPathLength);
+        });
+
+
+        
     });
+
+// Move obj element along path based on percentage of total length
+function moveObj(prcnt, ball, path, pathLenth) {
+    prcnt = (prcnt * pathLenth) / 100;
+    // Get x and y values at a certain point in the line
+    let pt = path.getPointAtLength(prcnt);
+    pt.x = Math.round(pt.x);
+    pt.y = Math.round(pt.y);
+
+    ball.style.transform = 'translate3d(' + pt.x + 'px,' + pt.y + 'px, 0)';
+    path.setAttribute('stroke-dashoffset', (pathLenth - prcnt));
+}

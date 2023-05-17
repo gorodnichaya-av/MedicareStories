@@ -61,7 +61,7 @@ img {
 
 /***** Backgrounds of sections ******/
 
-.black-green-bg {
+.money-bug-headline {
   background: linear-gradient(180deg, rgba(1,69,57,0) 0%, rgba(1,69,57,1) 100%);
 }
 .goals {
@@ -459,7 +459,7 @@ p {
   left: 50%;
   transform: translate(-50%, -50%);
   display: inline-block;
-  transition-property: top, left;
+  transition-property: all;
   transition-duration: 0.3s;
   transition-timing-function: linear;
   &.small {
@@ -526,9 +526,18 @@ p {
   }
 }
 
+@media (min-width: 768px) {
+  .main-headline {
+    padding-top: 322px;
+    padding-bottom: 350px;
+  }
+}
+
 /***** profitable-stories *****/
 
 .profitable-stories {
+  position: relative;
+  min-height: calc(1377px - 322px - 322px);
   &__row {
     width: 100%;
     display: flex;
@@ -639,7 +648,51 @@ p {
   }
 }
 
+/***** vertical-scroll ******/
+.vertical-scroll {
+  &--profitable {
+    position: absolute;
+    top: -322px;
+    height: 1377px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &-ball {
+    background: url(../images/icons/scrollingDot.svg) no-repeat 50% 50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top:-10px;
+    left: -10px;
+    opacity: 0.5;
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__container-ball {
+    width: 293px;
+    margin: 0 auto;
+    position: relative;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .mobile-vertical-scroll {
+    margin-top: 68px;
+    margin-bottom: 112px;
+  }
+}
 /***** money-bug ******/
+
+.money-bug-headline {
+  padding-top: 390px;
+  padding-bottom: 50vh;
+}
+
 .goals {
   margin-top: -25vh;
 }
@@ -707,7 +760,7 @@ p {
   position: absolute;
   left: 0;
   right: 0;
-  top: -900px;
+  top: -1000px;
   bottom: 0;
   z-index: 5;
   &.fixed {
@@ -1082,40 +1135,6 @@ p {
         }
       }
     }
-  }
-}
-
-/***** Ball slider ******/
-#obj {
-  background: url(../images/icons/scrollingDot.svg) no-repeat 50% 50%;
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  position: absolute;
-  top:-10px;
-  left: -10px;
-  opacity: 0.5;
-}
-.scroll-container {
-  //height: 200vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.container-wrap {
-  height: 100vh;
-  
-}
-.container-ball {
-  width: 293px;
-  margin: 0 auto;
-  position: relative;
-}
-
-@media (max-width: 767px) {
-  .mobile-vertical-scroll {
-    margin-top: 68px;
-    margin-bottom: 112px;
   }
 }
 
