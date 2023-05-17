@@ -1,5 +1,10 @@
 'use strict';
 
+// scroll to top page on reload
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+}
+
 // add arrows to nav items with children
 const morelink = document.querySelectorAll('.more-link'),
     svgArrow = document.createElement('span');
@@ -424,12 +429,12 @@ function moveObj(prcnt) {
 
 // Initialize moveObj(0); Scroll functionality
 
-/*scrollContent.addEventListener('scroll', function() {
+scrollContent.addEventListener('scroll', function() {
   console.log(this.scrollY);
   let percentValue = (this.scrollY / (scrollContentHeight - window.innerHeight)) * 100;
   console.log(percentValue);
   moveObj(percentValue);
-});*/
+});
 
 window
     .addEventListener('scroll', function () {
