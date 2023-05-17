@@ -19,10 +19,30 @@
           <img class="logo__hover logo__hover-2" src="images/logo-shadow.svg" alt="">
           <img class="logo__static" src="images/logo.svg" alt="The Medical Stories">
         </a>
-        <div class="header__menu js-menu">
+        <div class="header__menu js-menu-container">
           <a href="#" class="header__contact">Contact Us</a>
-          <div class="header__menu-btn"><span></span></div>
-        </div>
+          <div class="header__menu-btn js-menu-btn"><span></span></div>
+          <div class="main-menu js-menu">
+            <div class="main-menu__content">
+              <ul class="main-menu__list">
+                <li class="active"><a href="#">Home</a></li>
+                <li>
+                  <a href="#">Services <span class="main-menu__btn js-submenu-btn">+</span></a>
+                  <ul class="main-menu__sublist js-submenu">
+                    <li><a href="#">Strategy</a></li>
+                    <li><a href="#">Digital Marketing</a></li>
+                    <li><a href="#">Web & Software Solutions</a></li>
+                    <li><a href="#">Branding & Creative</a></li>
+                    <li><a href="#">Social Media Marketing</a></li>
+                    <li><a href="#">Reporting & Measurement</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Success Stories</a></li>
+                <li><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+          </div><!-- /.main-menu -->
+        </div><!-- /.header__menu -->
       </div>
     </header>
 
@@ -325,6 +345,7 @@
     </footer>
   </div>
 
+  <script src="js/jquery-3.7.0.min.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>
