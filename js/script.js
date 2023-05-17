@@ -162,6 +162,7 @@ function horizontalScroll(parent, items) {
             .querySelector('.js-neon-arrow')
             .classList
             .add('visible');
+        journeyWord.classList.remove('fixed');
     } else {
         document
             .querySelector('.neon-arrow-scroll')
@@ -279,7 +280,6 @@ function movingBug(percent) {
     moneyBug.style.transform = `translate(-50%, -50%) scale(${scaleVal}) rotate(${rotateVal}deg) `;
 }
 
-
 // Coins functionallity
 const coinsWrap = document.querySelector('.js-coins'),
       coinsArray = coinsWrap.querySelectorAll('.js-coin'),
@@ -303,7 +303,6 @@ coinsArray.forEach((item, i) => {
 window.addEventListener('scroll', function() {
     let percentVal,
         centerWindow = this.scrollY + (this.innerHeight / 2);
-
     
     var counterItems = 0;
     for (let i = 0; i < percentsCount; i++) {
@@ -402,11 +401,46 @@ function movingCoins(percent, counter) {
 }
 
 
+// Words position 
+const goalsWord = document.querySelector('.js-word-goals'),
+      goalsWordTop = goalsWord.offsetTop,
+      journeyWord = document.querySelector('.js-word-journey'),
+      journeyWordTop = journeyWord.offsetTop;
 
+window.addEventListener('scroll', function() {
+    const journeyStop = document.querySelector('.approaches').offsetTop + document.querySelector('.approaches').offsetHeight - (this.innerHeight),
+          goalsStop = coinsContainerStart + coinsContainerHeight;
+
+    if (this.scrollY > (goalsWordTop + 80) && this.scrollY < goalsStop) {
+        goalsWord.classList.add('fixed');
+    } else {
+        goalsWord.classList.remove('fixed');
+    }
+    if (this.scrollY > (journeyWordTop + 80) && this.scrollY < journeyStop) {
+        journeyWord.classList.add('fixed');
+    } else {
+        journeyWord.classList.remove('fixed');
+    } 
+});
 
 // Ball slides on line
 
 const verticalScrollContent = document.querySelectorAll('.js-vertical-scroll');
+
+verticalScrollContent.forEach(item => {
+
+    const verticalId = item.getAttribute('data-vertical'),
+          verticalScrollContentStart = document.querySelector(`[${verticalId}]`),
+          verticalScrollContentHeight = item.offsetHeight,
+          verticalPath = item.querySelector('.vertical-scroll-path-passed'),
+          verticalBall = item.querySelector('.vertical-scroll-ball'),
+          verticalPathLength = Math.floor(verticalPath.getTotalLength()),
+          verticalScrollStart = verticalScrollContentStart.offsetTop,
+          verticalScrollStop = verticalScrollContentHeight + verticalScrollStart,
+          centerWindow = this.scrollY + (this.innerHeight / 2);
+
+    //console.log(verticalPathLength);
+});
 
 window
     .addEventListener('scroll', function () {
@@ -423,7 +457,7 @@ window
                   centerWindow = this.scrollY + (this.innerHeight / 2);
             let percentValue;
 
-            console.log(verticalScrollContentStart);
+            // console.log(verticalScrollContentStart);
       
               if (this.scrollY < (verticalScrollStart - (this.innerHeight / 2))) {
                   percentValue = 0;
@@ -435,9 +469,6 @@ window
               
               moveObj(percentValue, verticalBall, verticalPath, verticalPathLength);
         });
-
-
-        
     });
 
 // Move obj element along path based on percentage of total length

@@ -55,7 +55,7 @@ img {
 
 @media (min-width: 1280px) {
   .section {
-    min-height: 100vh;
+    min-height: 80vh;
   }
 }
 
@@ -99,6 +99,7 @@ img {
   background: linear-gradient(180deg, rgba(206,35,155,1) 0%, rgba(157,12,47,1) 100%);
 }
 .section--photos {
+  position: relative;
   background: linear-gradient(180deg, rgba(157,12,47,1) 0%, rgba(157,12,47,0) 100%);
 }
 
@@ -274,13 +275,26 @@ p {
 @media (min-width: 1280px) {
   .word-wrap {
     &--goals {
-      margin-top: -68px;
-      margin-bottom: -68px;
+      margin-top: -80px;
+      margin-bottom: -56px;
+      &.fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
     }
     &--journey {
-      position: absolute;
-      right: 0;
-      top: calc(100vh - 120px);
+      position: relative;
+      z-index: 2;
+      margin-top: -80px;
+      margin-bottom: -56px;
+      display: flex;
+      justify-content: flex-end;
+      &.fixed {
+        position: fixed;
+        top: 0;
+        right: 0;
+      }
     }
   }
   .word-stories {
@@ -650,12 +664,37 @@ p {
 
 /***** vertical-scroll ******/
 .vertical-scroll {
+  width: 100%;
   &--profitable {
     position: absolute;
     top: -322px;
     height: 1377px;
     left: 50%;
     transform: translateX(-50%);
+    .vertical-scroll__container-ball {
+      width: 293px;
+    }
+  }
+  &--napkins {
+    position: relative;
+    height: 541px;
+    top: -200px;
+    margin-bottom: -150px;
+    .vertical-scroll__container-ball {
+      width: 155px;
+    }
+  }
+  &--photos {
+    position: relative;
+    top: -462px;
+    margin-bottom: -100px;
+    .vertical-scroll__container-ball {
+      width: 421px;
+      left: -45px;
+    }
+    .vertical-scroll-ball {
+      background-image: url(../images/scrollingDotPink.svg);
+    }
   }
   &-ball {
     background: url(../images/icons/scrollingDot.svg) no-repeat 50% 50%;
@@ -665,7 +704,6 @@ p {
     position: absolute;
     top:-10px;
     left: -10px;
-    opacity: 0.5;
   }
   &__container {
     display: flex;
@@ -673,7 +711,6 @@ p {
     justify-content: center;
   }
   &__container-ball {
-    width: 293px;
     margin: 0 auto;
     position: relative;
   }
@@ -918,6 +955,9 @@ p {
       transform: translateY(-50%);
     }
   }
+  .napkins-headline {
+    padding-bottom: 30vh;
+  }
 }
 
 /***** Horizontal-scroll *****/
@@ -1144,6 +1184,12 @@ p {
   .stories-arrow {
     padding-top: 250px;
     padding-bottom: 250px;
+  }
+}
+@media (min-width: 1280px) {
+  .stories-arrow {
+    padding-top: 302px;
+    padding-bottom: 302px;
   }
 }
 
