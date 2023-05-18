@@ -202,12 +202,8 @@ const parallaxElements = document.querySelectorAll('.js-photos-item'),
 
 function parallaxPhotos(elem, scrollYVal) {
     const dataScrollY = elem.getAttribute('data-initial-scroll'),
-          parallaxMoving = dataScrollY - (scrollYVal * dataScrollY / 100) * (1 + dataScrollY * 4 / 100);
+          parallaxMoving = dataScrollY - (scrollYVal * dataScrollY / 100) * (1 + dataScrollY * 3 / 100);
 
-          console.log(dataScrollY);
-          console.log(scrollYVal);
-          console.log(scrollYVal * dataScrollY / 100);
-          console.log(parallaxMoving);
     elem.style.transform = 'translate3d(0px ,' + parallaxMoving + '%, 0px)'
 }
 
