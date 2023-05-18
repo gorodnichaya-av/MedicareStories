@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Medicare Stories</title>
+  <link rel="stylesheet" href="js/slick/slick.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -56,14 +57,14 @@
       <div class="js-vertical-scroll-start" data-verttical-start-1></div>
     </div><!-- /.section -->
 
-    <div class="mobile-vertical-scroll">
-      <div class="scroll-container">
-        <div class="container-ball">
-          <div id="obj"></div>
-            <svg width="2" height="252" viewBox="0 0 2 252" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0.999989 0L1.00001 252" stroke="white" stroke-opacity="0.5" stroke-miterlimit="10" stroke-dasharray="6 6"/>
-              <path d="M0.999989 0L1.00001 252" stroke="#379FFF" stroke-dashoffset="252" stroke-dasharray="252 252"/>
-            </svg>
+    <div class="mobile-vertical-scroll js-vertical-scroll" data-vertical="data-verttical-start-1">
+      <div class="vertical-scroll__container">
+        <div class="vertical-scroll__container-ball">
+          <div class="vertical-scroll-ball"></div>
+          <svg width="2" height="252" viewBox="0 0 2 252" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="vertical-scroll-path" d="M0.999989 0L1.00001 252" stroke="white" stroke-opacity="0.5" stroke-miterlimit="10" stroke-dasharray="6 6"/>
+            <path class="vertical-scroll-path-passed" d="M0.999989 0L1.00001 252" stroke="#379FFF" stroke-dashoffset="252" stroke-dasharray="252 252"/>
+          </svg>
         </div>
       </div>
     </div><!-- /.mobile-vertical-scroll -->
@@ -116,7 +117,7 @@
       </div><!-- /.vertical-scroll -->
     </div><!-- /.section -->
 
-    <div class="money-bug-headline black-green-bg">
+    <div class="money-bug-headline">
       <div class="container container--short">
         <h2 class="text-white">
           Need to increase leads and cut costs? <br>
@@ -237,7 +238,7 @@
     </div>
     
     <div class="approaches js-horizontal-scroll">
-      <div class="js-horizontal-items">
+      <div class="js-horizontal-items approaches__items">
         <div class="horizontal-item approaches__item approaches__item--arrow">
           <img class="neon-arrow js-neon-arrow" src="images/NeonArrow.svg" alt="">
         </div>
@@ -353,6 +354,7 @@
   </div>
 
   <script src="js/jquery-3.7.0.min.js"></script>
+  <script src="js/slick/slick.min.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>

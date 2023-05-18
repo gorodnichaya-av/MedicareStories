@@ -16,12 +16,10 @@ morelink.forEach(elem => {
 });
 
 // Header screen
-const headerScrollStart = document
-        .querySelector('.js-header')
-        .offsetTop,
-    headerScrollStop = document
-        .querySelector('.js-header')
-        .offsetHeight + headerScrollStart,
+const 
+    header = document.querySelector('.js-header'),
+    headerScrollStart = document.querySelector('.js-header').offsetTop,
+    headerScrollStop = document.querySelector('.js-header').offsetHeight + headerScrollStart,
     headerLogo = document.querySelector('.js-logo'),
     headerMenuContainer = document.querySelector('.js-menu-container');
 
@@ -33,6 +31,7 @@ window.addEventListener('scroll', () => {
         headerMenuContainer
             .classList
             .add('colored');
+        header.classList.add('colored');
     } else {
         headerLogo
             .classList
@@ -40,6 +39,7 @@ window.addEventListener('scroll', () => {
         headerMenuContainer
             .classList
             .remove('colored');
+            header.classList.remove('colored');
     }
 });
 
@@ -48,6 +48,7 @@ jQuery(document).ready(function() {
           subMenuBtn = $('.js-submenu-btn'),
           mainMenu = $('.js-menu')
 
+    // Show/hide main-menu
     menuBtn.on('click', function(e) {
         e.preventDefault();
         const parent = $(this).closest('header');
@@ -63,6 +64,7 @@ jQuery(document).ready(function() {
         }
     });
 
+     // Show/hide sub-menu
     subMenuBtn.on('click', function(e) {
         e.preventDefault();
         const parent = $(this).closest('li'),
@@ -79,6 +81,23 @@ jQuery(document).ready(function() {
             subMenu.slideDown();
         }
     });
+
+    // slider for percents on mobile
+
+    const windowWidth = window.innerWidth;
+
+    if (windowWidth < 1280) {
+
+        $('.percents__items').slick({
+            arrows: false,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            fade: true,
+            autoplay: true,
+            autoplaySpeed: 2000,
+        });
+    }
 });
 
 
@@ -466,29 +485,4 @@ function moveObj(prcnt, ball, path, pathLenth) {
 
     ball.style.transform = 'translate3d(' + pt.x + 'px,' + pt.y + 'px, 0)';
     path.setAttribute('stroke-dashoffset', (pathLenth - prcnt));
-}
-
-
-// slider for percents on mobile
-
-const windowWidth = window.innerWidth;
-
-if (windowWidth < 1280) {
-    const slides = document.querySelectorAll('.percents__item');
-    slides.forEach(function(item, i) {
-        
-        /*(function loop() {
-            setTimeout(() => {
-                console.log(item);
-                item.classList.add('animation')
-                loop();
-            }, i * 2000);
-        })();
-        (function loopStop() {
-            setTimeout(() => {
-                item.classList.remove('animation')
-                loopStop();
-            }, (i + 1) * 2000);
-        })();*/
-    })
 }
