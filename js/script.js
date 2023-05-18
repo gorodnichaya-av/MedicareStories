@@ -232,23 +232,6 @@ parallaxElements.forEach(item => {
     });
 });
 
-//Parallax image inside container on mouemove
-/*const parallaxImgContainer = document.querySelectorAll('.js-photo-parallax');
-
-parallaxImgContainer.forEach(item => {
-    const img = item.querySelector('img');
-    img.addEventListener('mousemove', function (event) {
-        const widthContainer = item.offsetWidth,
-            heightContainer = item.offsetHeight;
-        let xPos = event.clientX,
-            yPos = event.clientY,
-            xShift = ((widthContainer / 2 - xPos) / widthContainer * 2) * 2,
-            yShift = ((heightContainer / 2 - yPos) / heightContainer * 2) * 2;
-
-        img.style.transform = 'translate3d(' + xShift + '%, ' + yShift + '%, ' + 0 + ') scale(1.1)';
-    });
-})*/
-
 // Money bug animation
 
 const moneyBugContainer = document.querySelector('.js-money-bug-container'),
