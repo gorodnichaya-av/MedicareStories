@@ -442,9 +442,6 @@ window
             
             let percentValue;
 
-            console.log(verticalId);
-            // console.log(verticalScrollContentStart);
-      
               if (this.scrollY < (verticalScrollStart - (this.innerHeight / 2))) {
                   percentValue = 0;
               } else if (centerWindow >= (verticalScrollStart) && centerWindow <= verticalScrollStop) {
