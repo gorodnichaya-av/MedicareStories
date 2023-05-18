@@ -1619,6 +1619,11 @@ div[data-verttical-start-2] {
     margin-top: 20px;
   }
 }
+@media (min-width: 1280px) {
+  .footer {
+    height: 100vh;
+  }
+}
 
 /***** visibility ******/
 @media (max-width: 1279px) {

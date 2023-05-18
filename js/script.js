@@ -196,14 +196,18 @@ function horizontalScroll(parent, items) {
 // Parallax elements
 
 const parallaxElements = document.querySelectorAll('.js-photos-item'),
-      parallaxElementsStart = document.querySelector('.js-photos').offsetTop;
+      parallaxElementsStart = document.querySelector('.js-photos').offsetTop,
+      parallaxPatentHeight = document.querySelector('.js-photos').offsetHeight,
+      parallaxElementsStop = parallaxElementsStart + parallaxPatentHeight;
 
 function parallaxPhotos(elem, scrollYVal) {
     const dataScrollY = elem.getAttribute('data-initial-scroll'),
-          parallaxMoving = -(scrollYVal / dataScrollY);
-    console.log(dataScrollY);
-    console.log(scrollYVal);
-    console.log(parallaxMoving);
+          parallaxMoving = dataScrollY - (scrollYVal * dataScrollY / 100) * (1 + dataScrollY * 4 / 100);
+
+          console.log(dataScrollY);
+          console.log(scrollYVal);
+          console.log(scrollYVal * dataScrollY / 100);
+          console.log(parallaxMoving);
     elem.style.transform = 'translate3d(0px ,' + parallaxMoving + '%, 0px)'
 }
 
@@ -216,17 +220,19 @@ parallaxElements.forEach(item => {
     parallaxInitElem(item);
 
     window.addEventListener('scroll', function () {
-        if ((this.scrollY + (this.innerHeight * 0.2)) > parallaxElementsStart) {
-            let indexScroll = this.scrollY - parallaxElementsStart;
-            if (indexScroll > 200) {
+        let indexScroll = 1;
+        if (this.scrollY > (parallaxElementsStart - parallaxPatentHeight / 5) && this.scrollY < parallaxElementsStop) {
+            indexScroll = (this.scrollY - parallaxElementsStart) / parallaxPatentHeight * 100; 
+            if (indexScroll > 20) {
                 item.classList.add('colored');
             } else {
                 item.classList.remove('colored');
             }
             parallaxPhotos(item, indexScroll);
-        } else {
-            return;
+        } else if (this.scrollY >= parallaxElementsStop) {
+            indexScroll = 100;
         }
+        
     });
 });
 
