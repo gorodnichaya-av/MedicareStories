@@ -427,26 +427,10 @@ window.addEventListener('scroll', function() {
 
 const verticalScrollContent = document.querySelectorAll('.js-vertical-scroll');
 
-verticalScrollContent.forEach(item => {
-
-    const verticalId = item.getAttribute('data-vertical'),
-          verticalScrollContentStart = document.querySelector(`[${verticalId}]`),
-          verticalScrollContentHeight = item.offsetHeight,
-          verticalPath = item.querySelector('.vertical-scroll-path-passed'),
-          verticalBall = item.querySelector('.vertical-scroll-ball'),
-          verticalPathLength = Math.floor(verticalPath.getTotalLength()),
-          verticalScrollStart = verticalScrollContentStart.offsetTop,
-          verticalScrollStop = verticalScrollContentHeight + verticalScrollStart,
-          centerWindow = this.scrollY + (this.innerHeight / 2);
-
-    //console.log(verticalPathLength);
-});
-
 window
     .addEventListener('scroll', function () {
         verticalScrollContent.forEach(item => {
-
-            const verticalId = item.getAttribute('data-vertical'),
+            const verticalId = item.getAttribute('data-vertical'), 
                   verticalScrollContentStart = document.querySelector(`[${verticalId}]`),
                   verticalScrollContentHeight = item.offsetHeight,
                   verticalPath = item.querySelector('.vertical-scroll-path-passed'),
@@ -454,9 +438,11 @@ window
                   verticalPathLength = Math.floor(verticalPath.getTotalLength()),
                   verticalScrollStart = verticalScrollContentStart.offsetTop,
                   verticalScrollStop = verticalScrollContentHeight + verticalScrollStart,
-                  centerWindow = this.scrollY + (this.innerHeight / 2);
+                  centerWindow = this.scrollY + (this.innerHeight / 2); 
+            
             let percentValue;
 
+            console.log(verticalId);
             // console.log(verticalScrollContentStart);
       
               if (this.scrollY < (verticalScrollStart - (this.innerHeight / 2))) {

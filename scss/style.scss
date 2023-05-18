@@ -678,22 +678,25 @@ p {
   &--napkins {
     position: relative;
     height: 541px;
-    top: -200px;
-    margin-bottom: -150px;
+    margin-top: -400px;
+    margin-bottom: -141px;
     .vertical-scroll__container-ball {
       width: 155px;
+    }
+    .vertical-scroll-ball {
+      background-image: url(../images/icons/scrollingDotGreen.svg);
     }
   }
   &--photos {
     position: relative;
     top: -462px;
-    margin-bottom: -100px;
+    margin-bottom: -200px;
     .vertical-scroll__container-ball {
       width: 421px;
       left: -45px;
     }
     .vertical-scroll-ball {
-      background-image: url(../images/scrollingDotPink.svg);
+      background-image: url(../images/icons/scrollingDotPink.svg);
     }
   }
   &-ball {
@@ -714,6 +717,11 @@ p {
     margin: 0 auto;
     position: relative;
   }
+}
+
+div[data-verttical-start-2] {
+  position: relative;
+  top: -400px;
 }
 
 
@@ -956,6 +964,7 @@ p {
     }
   }
   .napkins-headline {
+    padding-top: calc(141px + 60px);
     padding-bottom: 30vh;
   }
 }
@@ -993,6 +1002,9 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  &__content {
+    position: relative;
   }
   &__number-up {
     font-family: 'JetBrains Mono', monospace;
@@ -1163,6 +1175,7 @@ p {
     &__item {
       width: 460px;
       &--arrow {
+        width: 425px;
         display: flex;
         align-items: center;
         justify-content: center;
