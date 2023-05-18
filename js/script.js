@@ -170,13 +170,12 @@ horizontalScrollContainer.forEach(item => {
 });
 
 function horizontalScroll(parent, items) {
-    let y = window.scrollY - parent.offsetTop;
+    const y = window.scrollY - parent.offsetTop;
     items.scrollTo({left: y});
 
-    if (parent.classList.contains('approaches') && y > 0) {
+    if (parent.classList.contains('approaches') && y >= 0) {
         document
-            .querySelector('.neon-arrow-scroll')
-            .hidden = true;
+            .querySelector('.neon-arrow-scroll').classList.add('hidden')
         document
             .querySelector('.js-neon-arrow')
             .classList
@@ -184,8 +183,7 @@ function horizontalScroll(parent, items) {
         journeyWord.classList.remove('fixed');
     } else {
         document
-            .querySelector('.neon-arrow-scroll')
-            .hidden = false;
+            .querySelector('.neon-arrow-scroll').classList.remove('hidden');
         document
             .querySelector('.js-neon-arrow')
             .classList
@@ -286,7 +284,7 @@ function movingBug(percent) {
     moneyBug.style.transform = `translate(-50%, -50%) scale(${scaleVal}) rotate(${rotateVal}deg) `;
 }
 
-// Coins functionallity
+// Coins animation
 const coinsWrap = document.querySelector('.js-coins'),
       coinsArray = coinsWrap.querySelectorAll('.js-coin'),
       coinsTop = coinsWrap.offsetTop,

@@ -1252,7 +1252,7 @@ div[data-verttical-start-2] {
 }
 @media (min-width: 1280px) {
   .percents {
-    height: 400vw;
+    min-height: calc(200vw - 100vh); // 2 percents__item * 100vw
     &__item {
       width: 100vw;
       height: 100vh;
@@ -1287,7 +1287,7 @@ div[data-verttical-start-2] {
   position: absolute;
   top: 0;
   bottom: -100vh;
-  left: 50px;
+  left: 147px;
   z-index: 2;
   .neon-arrow {
     position: sticky;
@@ -1405,7 +1405,12 @@ div[data-verttical-start-2] {
 
 @media (min-width: 1280px) {
   .neon-arrow-scroll {
-    width: 429px;
+    width: 425px;
+    &.hidden {
+      .neon-arrow {
+        opacity: 0;
+      }
+    }
   }
 
   .approaches-headline {
@@ -1420,7 +1425,7 @@ div[data-verttical-start-2] {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 50px;
+        margin-left: 147px;
         .neon-arrow {
           opacity: 0;
           &.visible {
