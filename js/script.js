@@ -177,13 +177,15 @@ function horizontalScroll(parent, items) {
 // Parallax elements
 
 const parallaxElements = document.querySelectorAll('.js-photos-item'),
-    parallaxElementsStart = document
-        .querySelector('.js-photos')
-        .offsetTop;
+      parallaxElementsStart = document.querySelector('.js-photos').offsetTop;
 
 function parallaxPhotos(elem, scrollYVal) {
-    const dataScrollY = elem.getAttribute('data-initial-scroll');
-    elem.style.transform = 'translate3d(0px ,' + -(scrollYVal / dataScrollY) + '%, 0px)'
+    const dataScrollY = elem.getAttribute('data-initial-scroll'),
+          parallaxMoving = -(scrollYVal / dataScrollY);
+    console.log(dataScrollY);
+    console.log(scrollYVal);
+    console.log(parallaxMoving);
+    elem.style.transform = 'translate3d(0px ,' + parallaxMoving + '%, 0px)'
 }
 
 function parallaxInitElem(elem) {
@@ -195,9 +197,9 @@ parallaxElements.forEach(item => {
     parallaxInitElem(item);
 
     window.addEventListener('scroll', function () {
-        if ((this.scrollY + (this.innerHeight * 0.8)) > parallaxElementsStart) {
+        if ((this.scrollY + (this.innerHeight * 0.2)) > parallaxElementsStart) {
             let indexScroll = this.scrollY - parallaxElementsStart;
-            if (indexScroll <= 200) {
+            if (indexScroll > 200) {
                 item.classList.add('colored');
             } else {
                 item.classList.remove('colored');
@@ -464,4 +466,29 @@ function moveObj(prcnt, ball, path, pathLenth) {
 
     ball.style.transform = 'translate3d(' + pt.x + 'px,' + pt.y + 'px, 0)';
     path.setAttribute('stroke-dashoffset', (pathLenth - prcnt));
+}
+
+
+// slider for percents on mobile
+
+const windowWidth = window.innerWidth;
+
+if (windowWidth < 1280) {
+    const slides = document.querySelectorAll('.percents__item');
+    slides.forEach(function(item, i) {
+        
+        /*(function loop() {
+            setTimeout(() => {
+                console.log(item);
+                item.classList.add('animation')
+                loop();
+            }, i * 2000);
+        })();
+        (function loopStop() {
+            setTimeout(() => {
+                item.classList.remove('animation')
+                loopStop();
+            }, (i + 1) * 2000);
+        })();*/
+    })
 }
