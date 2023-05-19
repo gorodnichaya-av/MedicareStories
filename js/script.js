@@ -105,7 +105,7 @@ window.addEventListener('scroll', function () {
         headerLogo.classList.remove('pink')
         headerLogo.classList.add('blue');
     }
-    if (this.scrollY > 100) {
+    if (this.scrollY > 10) {
         headerLogo
             .classList
             .add('small');
