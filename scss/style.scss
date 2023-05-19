@@ -818,8 +818,8 @@ strong {
   &--napkins {
     position: relative;
     height: 541px;
-    margin-top: -400px;
-    margin-bottom: -141px;
+    margin-top: -30vh;
+    margin-bottom: calc(-541px + 30vh);
     .vertical-scroll__container-ball {
       width: 155px;
     }
@@ -876,7 +876,7 @@ div[data-verttical-start-2] {
 .money-bug {
   position: relative;
   height: 100vh;
-  min-height: 900px;
+  min-height: 1280px;
   &__bug {
     position: sticky;
     top: 50%;
@@ -941,35 +941,40 @@ div[data-verttical-start-2] {
 .coins {
   height: 100%;
   width: 900px;
-  padding-top: 450px;
   margin-left: auto;
   margin-right: auto;
+  // padding-top: 450px;
   position: relative;
   &__coin {
     position: absolute;
     transition: all 0.3s;
     &--0 {
-      top: 450px;
+      // top: 450px;
+      top: 0;
       left: 51px;
       transform: rotate(10deg);
     }
     &--1 {
-      top: calc(60px + 450px);
+      // top: calc(60px + 450px);
+      top: 60px;
       left: 650px;
       transform: rotate(-25deg);
     }
     &--2 {
-      top: calc(290px + 450px);
+      //top: calc(290px + 450px);
+      top: 290px;
       left: -60px;
       transform: rotate(-40deg);
     }
     &--3 {
-      top: calc(290px + 450px);
+      // top: calc(290px + 450px);
+      top: 290px;
       left: 730px;
       transform: rotate(35deg);
     }
     &--4 {
-      top: calc(130px + 450px);;
+      //top: calc(130px + 450px);
+      top: 130px;
       left: 167px;
     }
   }
@@ -995,19 +1000,23 @@ div[data-verttical-start-2] {
     padding-bottom: 50vh;
   }
   .coins-wrap {
-    height: 100vh;
+    // height: 100vh;
     overflow: hidden;
     position: absolute;
     left: 0;
     right: 0;
-    top: -1000px;
+    // top: -1000px;
+    top: -600px;
     bottom: 0;
     z-index: 5;
     &.fixed {
+      height: 100vh;
+      top: unset;
       position: fixed;
-      top: 0;
+      bottom: 0;
     }
     &.bottom-absolute {
+      height: 100vh;
       top: unset;
       bottom: 0;
     }
@@ -1125,7 +1134,7 @@ div[data-verttical-start-2] {
     }
   }
   .napkins-headline {
-    padding-top: calc(141px + 60px);
+    padding-top: calc(541px - 30vh + 60px);
     padding-bottom: 30vh;
   }
 }
@@ -1252,7 +1261,7 @@ div[data-verttical-start-2] {
 }
 @media (min-width: 1280px) {
   .percents {
-    min-height: calc(200vw - 100vh); // 2 percents__item * 100vw
+    min-height: 200vw; // 2 percents__item * 100vw
     &__item {
       width: 100vw;
       height: 100vh;
@@ -1415,6 +1424,7 @@ div[data-verttical-start-2] {
 
   .approaches-headline {
     height: 100vh;
+    padding-bottom: 100px;
   }
   .approaches {
     height: calc(460px * 6);

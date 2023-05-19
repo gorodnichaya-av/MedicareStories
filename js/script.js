@@ -292,7 +292,8 @@ const coinsWrap = document.querySelector('.js-coins'),
       coinsContainerStart = document.querySelector('.js-percents').offsetTop,
       percentsArray = document.querySelectorAll('.percents__item'),
       percentsCount = percentsArray.length,
-      percentItemHeight = coinsContainerHeight / percentsCount;
+      percentItemHeight = coinsContainerHeight / percentsCount,
+      removeFixedClass = document.querySelector('.napkins-headline').offsetTop;
 
 var initialCoinPosition = []; // initial values of X,Y positions of coints
 coinsArray.forEach((item, i) => {
@@ -306,7 +307,9 @@ coinsArray.forEach((item, i) => {
 // moving conins on scroll
 window.addEventListener('scroll', function() {
     let percentVal,
-        centerWindow = this.scrollY + (this.innerHeight / 2);
+        centerWindow = this.scrollY + (this.innerHeight / 2),
+        coinsMovingStart = coinsContainerStart + coinsTop,
+        coinsMovingStop = coinsContainerStart + coinsContainerHeight - percentItemHeight + this.innerHeight / 2;
     
     var counterItems = 0;
     for (let i = 0; i < percentsCount; i++) {
@@ -315,23 +318,32 @@ window.addEventListener('scroll', function() {
         }
     }
 
-    if (this.scrollY < coinsContainerStart + coinsTop) { // window Scroll < (offset Top of main coin's parent (percents) + real negative top of coin's parent (coint-wrap))
+    console.log(this.scrollY);
+    console.log(coinsContainerStart + coinsContainerHeight - percentItemHeight);
+    if (this.scrollY >= coinsMovingStart && (this.scrollY + this.innerHeight) <= removeFixedClass) {
+        coinsWrap.classList.add('fixed');
+        coinsWrap.classList.remove('bottom-absolute');
+    } else {
+        coinsWrap.classList.remove('fixed');
+        coinsWrap.classList.add('bottom-absolute');
+    }
+
+    if (this.scrollY < coinsMovingStart) { // window Scroll < (offset Top of main coin's parent (percents) + real negative top of coin's parent (coint-wrap))
         percentVal = 1;
         coinsWrap.classList.remove('fixed');
         coinsWrap.classList.remove('bottom-absolute');
-    } else if (this.scrollY >= (coinsContainerStart + coinsTop) && this.scrollY <= (coinsContainerStart + coinsContainerHeight - percentItemHeight + this.innerHeight / 2)) {
-        coinsWrap.classList.add('fixed');
+    } else if (this.scrollY >= coinsMovingStart && this.scrollY <= coinsMovingStop) {
         if (this.scrollY < coinsContainerStart) {
             percentVal = (this.scrollY - coinsContainerStart - coinsTop) / (-coinsTop) * 100;
         } else {
             percentVal = 100;
         }
-        coinsWrap.classList.remove('bottom-absolute');
+        
     } else {
-        coinsWrap.classList.remove('fixed');
-        coinsWrap.classList.add('bottom-absolute');
         percentVal = 100;
     }
+
+    
 
     movingCoins(percentVal, counterItems);
 });
@@ -360,10 +372,14 @@ function movingCoins(percent, counter) {
 
         switch (indexVal) {
             case 0:
+                finishTop = 45,  // 50% - space from top
+                sumTop = finishTop - topVal;
+                topVal = topVal + (percent * sumTop / 100);
                 rotateVal = (counter % 2 === 0) ?  10 + (percent * 27 / 100) : -(10 + (percent * 27 / 100)); // 10 - initial value of rotate, 27 - changing of value = finish value = 37deg
                 skewVal = 0 - (percent * 15 / 100); // 0 - initial value of skew, 15 - changing of value = finish value = -15deg
                 leftVal = leftVal - (percent * positionXVal / 100);
                 item.style.left = `${leftVal}px`;
+                item.style.top = `${topVal}%`;
                 item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg) skew(${skewVal}deg)`;
               break;
             case 1:
@@ -377,7 +393,7 @@ function movingCoins(percent, counter) {
                 item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg)`;
               break;
             case 2:
-                positionXVal = 0 - (percent * positionXVal / 80);
+                positionXVal = 0 - (percent * positionXVal / 40);
                 item.style.transform = `scale(${scaleVal}) rotate(-40deg) translate(${positionXVal}px)`; 
               break;    
             case 3:
