@@ -5,7 +5,7 @@ window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 }
 window.addEventListener('resize', function() {
-    window.scrollTo(0, 0);
+    location.reload();
 });
 
 jQuery(document).ready(function() {
@@ -191,24 +191,15 @@ horizontalScrollContainer.forEach(item => {
 });
 
 function horizontalScroll(parent, items) {
-    const y = window.scrollY - parent.offsetTop;
+    const y = window.scrollY - parent.offsetTop,
+          neonArrow = document.querySelector('.neon-arrow-scroll');
     items.scrollTo({left: y});
 
     if (parent.classList.contains('approaches') && y >= 0) {
-        document
-            .querySelector('.neon-arrow-scroll').classList.add('hidden')
-        document
-            .querySelector('.js-neon-arrow')
-            .classList
-            .add('visible');
         journeyWord.classList.remove('fixed');
+        neonArrow.style.left = `calc(147px - ${y}px)`;
     } else {
-        document
-            .querySelector('.neon-arrow-scroll').classList.remove('hidden');
-        document
-            .querySelector('.js-neon-arrow')
-            .classList
-            .remove('visible');
+        neonArrow.style.left = `147px`;
     }
 };
 
