@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@700;800&display=swap');
 
 @font-face {
   font-family: "Termina";
@@ -231,8 +231,8 @@ p {
 .text-center {
   text-align: center;
 }
-.font-jetbrains-mono {
-  font-family: 'JetBrains Mono', monospace;
+.font-sofia-condensed {
+  font-family: 'Sofia Sans Extra Condensed', sans-serif;
 }
 strong {
   font-family: "Termina-Bold";
@@ -507,21 +507,68 @@ strong {
   transition-property: all;
   transition-duration: 0.3s;
   transition-timing-function: linear;
-  &.small {
-    max-width: 166px; 
-    height: 88px;
-    top: 50px;
-    left: 20px;
-    transform: translate(0, 0);
+  &__static--green,
+  &__static--blue,
+  &__static--pink {
+    opacity: 0;
   }
-  &__hover,
+  &.small {
+    max-width: 240px; 
+    width: 240px;
+    height: 157px;
+    top: 15px;
+    left: 0;
+    transform: translate(0, 0);
+    .logo__pulse,
+    .logo__static--main {
+      opacity: 0;
+    }
+    .logo__static {
+      position: absolute;
+      width: 100%;
+      height: auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s;
+    }
+  }
+  &.blue {
+    .logo__static--pink,
+    .logo__static--green {
+      opacity: 0;
+    }
+    .logo__static--blue {
+      opacity: 1;
+    }
+  }
+  &.green {
+    .logo__static--pink,
+    .logo__static--blue {
+      opacity: 0;
+    }
+    .logo__static--green {
+      opacity: 1;
+    }
+  }
+  &.pink {
+    .logo__static--green,
+    .logo__static--blue {
+      opacity: 0;
+    }
+    .logo__static--pink {
+      opacity: 1;
+      width: 240px;
+    }
+  }
+  &__pulse,
   &__static {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  &__hover {
+  &__pulse {
     animation: pulse 1s infinite;
     &-1 {
       width: 79.3%;
@@ -562,7 +609,7 @@ strong {
 
 @media (max-width: 767px) {
   .header {
-    &.colored {
+    /*&.colored {
       &:before {
         content: '';
         position: fixed;
@@ -572,7 +619,7 @@ strong {
         height: 80px;
         background-color: rgba(0,0,0,0.2);
       }
-    }
+    }*/
     &__menu {
       top: 29px;
     }
@@ -710,7 +757,7 @@ strong {
     align-items: center;
   }
   &__number {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Sofia Sans Extra Condensed', sans-serif;
     font-weight: 800;
     line-height: 1;
   }
@@ -1177,7 +1224,7 @@ div[data-verttical-start-2] {
     position: relative;
   }
   &__number-up {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Sofia Sans Extra Condensed', sans-serif;
     color: $blue;
     font-weight: 800;
     display: flex;
@@ -1248,14 +1295,14 @@ div[data-verttical-start-2] {
 @media (max-width: 767px) {
   .percents {
     &__number-up {
-      font-size: 100px;
+      font-size: 120px;
     }
   }
 }
 @media (min-width: 768px) {
   .percents {
     &__number-up {
-      font-size: 157px;
+      font-size: 187px;
     }
   }
 }

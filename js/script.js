@@ -4,43 +4,8 @@
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 }
-
-// add arrows to nav items with children
-const morelink = document.querySelectorAll('.more-link'),
-    svgArrow = document.createElement('span');
-
-svgArrow.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="currentColor"/></svg>`;
-
-morelink.forEach(elem => {
-    elem.append(svgArrow.cloneNode(true));
-});
-
-// Header screen
-const 
-    header = document.querySelector('.js-header'),
-    headerScrollStart = document.querySelector('.js-header').offsetTop,
-    headerScrollStop = document.querySelector('.js-header').offsetHeight + headerScrollStart,
-    headerLogo = document.querySelector('.js-logo'),
-    headerMenuContainer = document.querySelector('.js-menu-container');
-
-window.addEventListener('scroll', () => {
-    if (this.scrollY > 100) {
-        headerLogo
-            .classList
-            .add('small');
-        headerMenuContainer
-            .classList
-            .add('colored');
-        header.classList.add('colored');
-    } else {
-        headerLogo
-            .classList
-            .remove('small');
-        headerMenuContainer
-            .classList
-            .remove('colored');
-            header.classList.remove('colored');
-    }
+window.addEventListener('resize', function() {
+    window.scrollTo(0, 0);
 });
 
 jQuery(document).ready(function() {
@@ -97,6 +62,62 @@ jQuery(document).ready(function() {
             autoplay: true,
             autoplaySpeed: 2000,
         });
+    }
+});
+
+// add arrows to nav items with children
+const morelink = document.querySelectorAll('.more-link'),
+    svgArrow = document.createElement('span');
+
+svgArrow.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="currentColor"/></svg>`;
+
+morelink.forEach(elem => {
+    elem.append(svgArrow.cloneNode(true));
+});
+
+// Header screen
+const 
+    header = document.querySelector('.js-header'),
+    headerScrollStart = document.querySelector('.js-header').offsetTop,
+    headerScrollStop = document.querySelector('.js-header').offsetHeight + headerScrollStart,
+    headerLogo = document.querySelector('.js-logo'),
+    headerMenuContainer = document.querySelector('.js-menu-container'),
+    logoGreen = document.querySelector('.js-logo-green-mark').offsetTop,
+    logoBlue = document.querySelectorAll('.js-logo-blue-mark'),
+    logoPink = document.querySelector('.js-logo-pink-mark').offsetTop;
+
+window.addEventListener('scroll', () => {
+    if (this.scrollY >= logoGreen && this.scrollY < logoBlue[0].offsetTop) {
+        headerLogo.classList.remove('pink');
+        headerLogo.classList.remove('blue');
+        headerLogo.classList.add('green');
+    } else if (this.scrollY >= logoBlue && this.scrollY < logoPink) {
+        headerLogo.classList.remove('green');
+        headerLogo.classList.remove('pink')
+        headerLogo.classList.add('blue');
+    } else if (this.scrollY >= logoPink && this.scrollY < logoBlue[1].offsetTop) {
+        headerLogo.classList.remove('green');
+        headerLogo.classList.remove('blue');
+        headerLogo.classList.add('pink');
+    } else {
+        headerLogo.classList.remove('green');
+        headerLogo.classList.remove('pink')
+        headerLogo.classList.add('blue');
+    }
+    if (this.scrollY > 100) {
+        headerLogo
+            .classList
+            .add('small');
+        headerMenuContainer
+            .classList
+            .add('colored');
+    } else {
+        headerLogo
+            .classList
+            .remove('small', 'blue');
+        headerMenuContainer
+            .classList
+            .remove('colored');
     }
 });
 
@@ -318,8 +339,6 @@ window.addEventListener('scroll', function() {
         }
     }
 
-    console.log(this.scrollY);
-    console.log(coinsContainerStart + coinsContainerHeight - percentItemHeight);
     if (this.scrollY >= coinsMovingStart && (this.scrollY + this.innerHeight) <= removeFixedClass) {
         coinsWrap.classList.add('fixed');
         coinsWrap.classList.remove('bottom-absolute');
@@ -429,7 +448,7 @@ const goalsWord = document.querySelector('.js-word-goals'),
 
 window.addEventListener('scroll', function() {
     const journeyStop = document.querySelector('.approaches').offsetTop + document.querySelector('.approaches').offsetHeight - (this.innerHeight),
-          goalsStop = coinsContainerStart + coinsContainerHeight;
+          goalsStop = removeFixedClass - this.innerHeight;
 
     if (this.scrollY > (goalsWordTop + 80) && this.scrollY < goalsStop) {
         goalsWord.classList.add('fixed');
