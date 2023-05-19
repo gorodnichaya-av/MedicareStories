@@ -56,7 +56,7 @@ function buildJs() {
 function buildImg() {
   return gulp.src('./images/**/*')
     .pipe(plumber())
-    .pipe(gulp.dest('./dist/img'))
+    .pipe(gulp.dest('./dist/images'))
 }
 
 function buildFonts() {
