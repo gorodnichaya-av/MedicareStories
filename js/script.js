@@ -1,12 +1,12 @@
 'use strict';
 
 // scroll to top page on reload
-/* window.onbeforeunload = function () {
+window.onbeforeunload = function () {
     window.scrollTo(0, 0);
-}*/
-window.addEventListener('resize', function() {
+}
+/* window.addEventListener('resize', function() {
     location.reload();
-});
+});*/
 
 jQuery(document).ready(function() {
     const menuBtn = $('.js-menu-btn'),
