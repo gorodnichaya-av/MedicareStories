@@ -75,6 +75,7 @@ morelink.forEach(elem => {
     elem.append(svgArrow.cloneNode(true));
 });
 
+
 // Header screen
 const 
     header = document.querySelector('.js-header'),
@@ -86,7 +87,7 @@ const
     logoBlue = document.querySelectorAll('.js-logo-blue-mark'),
     logoPink = document.querySelector('.js-logo-pink-mark').offsetTop;
 
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', function () {
     if (this.scrollY >= logoGreen && this.scrollY < logoBlue[0].offsetTop) {
         headerLogo.classList.remove('pink');
         headerLogo.classList.remove('blue');
@@ -120,7 +121,6 @@ window.addEventListener('scroll', () => {
             .remove('colored');
     }
 });
-
 
 
 // Napkins moving
