@@ -1803,8 +1803,15 @@ div[data-verttical-start-2] {
   padding-right: 25px;
 }
 
+.full-width {
+  width: 100%;
+  display: block;
+}
+
 /***** client-detail ******/
 .client-detail {
+  margin-top: 52px;
+  margin-bottom: 65px;
   text-align: center;
   max-width: 852px;
   margin-left: auto;
@@ -1818,4 +1825,129 @@ div[data-verttical-start-2] {
   color: #A3A3A3;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+/***** paint-arrow *****/
+
+.paint-arrow {
+  position: relative;
+  z-index: 2;
+  &--client {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: -30px;
+    width: 139px;
+    height: 99px;
+  }
+  &--video {
+    position: absolute;
+    width: 162px;
+    height: 164px;
+    bottom: calc(100% - 66px);
+    left: 50%;
+    margin-left: -81px;
+  }
+}
+
+/****** js-photo-inside-parallax *****/
+.client-photo {
+  margin-bottom: 120px;
+}
+.js-photo-inside-parallax {
+  position: relative;
+  overflow: hidden;
+}
+
+/***** .row, .col *****/
+.row {
+  margin-left: -20px;
+  margin-right: -20px;
+}
+.col {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.block-text {
+  padding-left: 35px;
+  padding-right: 35px;
+  line-height: 2;
+  &--pl-0 {
+    padding-left: 0;
+  }
+  p {
+    margin-bottom: 20px;
+  }
+}
+@media (min-width: 768px) {
+  .row {
+    display: flex;
+  }
+  .col {
+    &--shrink {
+      flex-shrink: 0;
+    }
+  }
+}
+@media (min-width: 1120px) {
+  .single .container {
+    max-width: 1120px;
+  }
+}
+
+/***** progress ******/
+.progress {
+  margin-top: 50px;
+  &__number {
+    display: block;
+    font-size: 80px;
+    line-height: 1;
+    font-family: 'Sofia Sans Extra Condensed', sans-serif;
+  }
+  &__value {
+    font-size: 28px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  &__item {
+    margin-bottom: 70px;
+  }
+}
+
+/***** full-wideo *****/
+.full-video {
+  position: relative;
+  &__label {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    min-width: 267px;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 15px;
+    line-height: 57px;
+    z-index: 1;
+    text-align: center;
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 57px;
+      background-color: $white;
+      z-index: -1;
+    }
+  }
+  .container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
