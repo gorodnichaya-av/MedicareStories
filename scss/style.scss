@@ -22,6 +22,7 @@ $green:#26FFB1;
 $neonGreen:#92FF26;
 $neonPink: #FF26C2;
 $white: #ffffff;
+$grey: #BBBBBB;
 
 
 * {
@@ -31,9 +32,16 @@ $white: #ffffff;
 body {
   margin: 0;
   padding: 0;
+  font-family: "Termina";
+  line-height: 1.7;
+  font-weight: 400;
   &.overflow {
     overflow: hidden;
   }
+} 
+
+.wrap:not(.single) {
+  background-color: $black;
 } 
 
 a {
@@ -126,12 +134,6 @@ img {
 }
 
 /***** Typography ****/
-body {
-  font-family: "Termina";
-  line-height: 1.7;
-  background-color: $black;
-  font-weight: 400;
-}
 h1,
 h2,
 h3,
@@ -230,6 +232,9 @@ p {
 }
 .text-center {
   text-align: center;
+}
+.text-uppercase {
+  text-transform: uppercase;
 }
 .font-sofia-condensed {
   font-family: 'Sofia Sans Extra Condensed', sans-serif;
@@ -362,14 +367,16 @@ strong {
 .header {
   position: relative;
   width: 100%;
-  height: 100vh;
   z-index: 10;
-  &__container {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
+  &.js-header {
     height: 100vh;
+    .header__container {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+    }
   }
   &__contact {
     color: $neonGreen;
@@ -574,6 +581,28 @@ strong {
     display: block; 
     height: auto;
     transition: 0.3s all linear;
+  }
+}
+
+.single {
+  .header {
+    &__menu-btn {
+      &:before,
+      &:after,
+      span {
+        background-color: $black;
+      }
+    }
+  }
+  .logo {
+    top: 20px;
+    &.small {
+      width: 150px;
+      height: 80px;
+      .logo__static--main {
+        opacity: 1;
+      }
+    }
   }
 }
 
@@ -1703,4 +1732,90 @@ div[data-verttical-start-2] {
   .mobile-vertical-scroll {
     display: none;
   }
+}
+
+
+/***** banner ******/
+.banner {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 54.3%;
+  background-color: yellow;
+  &__content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 1px solid red;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+/***** top-page *****/
+.top-page {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  max-width: 850px;
+  padding-top: 45px;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 1;
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: $white;
+  }
+  &__list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 38px;
+    li {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  }
+}
+
+.border-link {
+  text-transform: uppercase;
+  border: 1px solid $grey;
+  font-size: 10px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+/***** client-detail ******/
+.client-detail {
+  text-align: center;
+  max-width: 852px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-label {
+  font-family: 'Sofia Sans Extra Condensed', sans-serif;
+  font-size: 20px;
+  line-height: 1.5;
+  color: #A3A3A3;
+  font-weight: 700;
+  text-transform: uppercase;
 }
