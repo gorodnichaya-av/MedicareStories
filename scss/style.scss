@@ -1750,11 +1750,6 @@ div[data-verttical-start-2] {
   }
 }
 
-.content {
-  position: relative;
-  z-index: 2;
-}
-
 .single-section {
   margin-bottom: 100px;
 }
@@ -1886,6 +1881,16 @@ div[data-verttical-start-2] {
     left: 50%;
     margin-left: -81px;
   }
+  &--photos {
+    width: 270px;
+    height: 310px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.paint-arrow-tip,
+.paint-arrow-path-passed {
+  opacity: 0;
 }
 
 @media (max-width: 991px) {
@@ -2004,8 +2009,6 @@ div[data-verttical-start-2] {
     }
   }
 }
-
-
 
 /***** progress, full-wideo *****/
 .progress {
@@ -2266,6 +2269,7 @@ div[data-verttical-start-2] {
 }
 @media (min-width: 1280px) {
   .parallax-photos {
+    padding-bottom: 150px;
     &__item {
       &--magazines {
         width: 584px;

@@ -219,7 +219,7 @@ function horizontalScroll(parent, items) {
 // Parallax elements
 const parallaxElements = document.querySelectorAll('.js-photos-item');
 
-if (isInPage(parallaxElements[0])) {
+if (isInPage(parallaxElements[0]) && device.desktop()) {
     const parallaxElementsStart = document.querySelector('.js-photos').offsetTop,
           parallaxPatentHeight = document.querySelector('.js-photos').offsetHeight,
           parallaxElementsStop = parallaxElementsStart + parallaxPatentHeight;
@@ -471,8 +471,7 @@ if (isInPage(goalsWord)) {
 }
 
 if (isInPage(journeyWord)) {
-    const journeyWordTop = journeyWord.offsetTop,
-          removeFixedClass = document.querySelector('.napkins-headline').offsetTop;
+    const journeyWordTop = journeyWord.offsetTop;
     window.addEventListener('scroll', function() {
         const journeyStop = document.querySelector('.approaches').offsetTop + document.querySelector('.approaches').offsetHeight - (this.innerHeight);
     
@@ -487,7 +486,6 @@ if (isInPage(journeyWord)) {
 
 
 // Ball slides on line
-
 const verticalScrollContent = document.querySelectorAll('.js-vertical-scroll');
 
 if (isInPage(verticalScrollContent[0])) {
@@ -506,20 +504,20 @@ if (isInPage(verticalScrollContent[0])) {
             
             let percentValue;
 
-              if (this.scrollY < (verticalScrollStart - (this.innerHeight / 2))) {
-                  percentValue = 0;
-              } else if (centerWindow >= (verticalScrollStart) && centerWindow <= verticalScrollStop) {
-                  percentValue = (centerWindow - verticalScrollStart) / verticalScrollContentHeight * 100;
-              } else {
-                  percentValue = 100;
-              }
+            if (this.scrollY < (verticalScrollStart - (this.innerHeight / 2))) {
+                percentValue = 0;
+            } else if (centerWindow >= (verticalScrollStart) && centerWindow <= verticalScrollStop) {
+                percentValue = (centerWindow - verticalScrollStart) / verticalScrollContentHeight * 100;
+            } else {
+                percentValue = 100;
+            }
               
-              moveObj(percentValue, verticalBall, verticalPath, verticalPathLength);
+            moveObj(percentValue, verticalBall, verticalPath, verticalPathLength);
         });
     });
 } 
 
-// Move obj element along path based on percentage of total length
+// move obj element along path based on percentage of total length
 function moveObj(prcnt, ball, path, pathLenth) {
     prcnt = (prcnt * pathLenth) / 100;
     // Get x and y values at a certain point in the line
@@ -529,6 +527,58 @@ function moveObj(prcnt, ball, path, pathLenth) {
 
     ball.style.transform = 'translate3d(' + pt.x + 'px,' + pt.y + 'px, 0)';
     path.setAttribute('stroke-dashoffset', (pathLenth - prcnt));
+}
+
+
+
+// Painting of arrow
+const paintArrows = document.querySelectorAll('.js-paint-arrow');
+if (isInPage(paintArrows[0])) {
+
+    
+    window.addEventListener('scroll', function () {
+        paintArrows.forEach(item => {
+            const paintArrowlId = item.getAttribute('data-arrow'), 
+              paintArrowContentStart = document.querySelector(`[${paintArrowlId}]`),
+              paintArrowContentHeight = item.offsetHeight,
+              paintArrowTip = item.querySelector('.paint-arrow-tip'),
+              paintArrowPath = item.querySelector('.paint-arrow-path-passed'),
+              paintArrowPathLength = Math.floor(paintArrowPath.getTotalLength()),
+              paintArrowStart = (item.classList.contains('paint-arrow--photos')) ? paintArrowContentStart.offsetTop + paintArrowContentHeight : paintArrowContentStart.offsetTop,
+              paintArrowStop = paintArrowContentHeight + paintArrowStart,
+              centerWindow = this.scrollY + (this.innerHeight / 2); 
+
+            var percentValue = 0;
+
+            if (this.scrollY < (paintArrowStart - (this.innerHeight / 2))) {
+                percentValue = 0;
+            } else if (centerWindow >= paintArrowStart && centerWindow <= paintArrowStop) {
+                percentValue = (centerWindow - paintArrowStart) / paintArrowContentHeight * 100;
+            } else {
+                percentValue = 100;
+            }
+
+            paintArrow(percentValue, paintArrowTip, paintArrowPath, paintArrowPathLength);
+        });
+    });
+    
+}
+// move obj element along path based on percentage of total length
+function paintArrow(prcnt, tip, path, pathLenth) {
+    console.log(prcnt);
+    if (prcnt > 0) {
+        path.style.opacity = '1';
+    } else {
+        path.style.opacity = '0';
+    }
+    if (prcnt == 100) {
+        tip.style.opacity = '1';
+    } else {
+        tip.style.opacity = '0';
+    }
+    prcnt = (prcnt * pathLenth) / 100;
+    path.setAttribute('stroke-dashoffset', (pathLenth - prcnt));
+    
 }
 
 
