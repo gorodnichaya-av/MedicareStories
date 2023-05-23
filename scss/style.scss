@@ -1847,6 +1847,16 @@ div[data-verttical-start-2] {
   max-width: 852px;
   margin-left: auto;
   margin-right: auto;
+  &__name {
+    text-transform: uppercase;
+    line-height: 1;
+    span {
+      display: inline-block;
+    }
+    span:first-letter {
+      font-size: 1.2em;
+    }
+  }
 }
 
 .text-label {
@@ -1881,12 +1891,18 @@ div[data-verttical-start-2] {
 @media (max-width: 991px) {
   .client-detail {
     margin-bottom: 30px;
+    &__name {
+      margin-bottom: 30px;
+    }
   }
 }
 @media (min-width: 992px) {
   .client-detail {
     margin-top: 52px;
     margin-bottom: 65px;
+    &__name {
+      margin-bottom: 52px;
+    }
   }
 }
 
@@ -1959,6 +1975,7 @@ div[data-verttical-start-2] {
     }
   }
   .block-text {
+    font-size: 16px;
     h2 {
       margin-bottom: 25px;
       letter-spacing: - 0.02em;
@@ -1981,6 +1998,9 @@ div[data-verttical-start-2] {
       padding-top: 45px;
       padding-left: 55px;
       padding-right: 55px;
+      p {
+        padding-right: 50px;
+      }
     }
   }
 }
@@ -1993,6 +2013,7 @@ div[data-verttical-start-2] {
     display: block;
     line-height: 1;
     font-family: 'Sofia Sans Extra Condensed', sans-serif;
+    text-transform: uppercase;
   }
   &__value {
     text-transform: uppercase;
@@ -2128,6 +2149,8 @@ div[data-verttical-start-2] {
   &__name {
     line-height: 1;
     text-transform: uppercase;
+    margin-bottom: -5px;
+    margin-top: 5px;
   }
   .text-label {
     line-height: 1;
@@ -2231,6 +2254,7 @@ div[data-verttical-start-2] {
     margin-top: 143px;
     margin-bottom: 120px;
     ul {
+      line-height: 1.2;
       column-count: 3;
     }
   }
@@ -2255,7 +2279,7 @@ div[data-verttical-start-2] {
         position: absolute;
         width: 571px;
         right: 0;
-        top: 0;
+        top: 200px;
         p {
           margin-top: 63px;
           margin-bottom: 30px;    
