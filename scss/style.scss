@@ -87,7 +87,7 @@ img {
 .money-bug-headline {
   background: linear-gradient(180deg, rgba(1,69,57,0) 0%, rgba(1,69,57,1) 100%);
 }
-.goals {
+.money-bug-container {
   margin-top: -25vh;
   position: relative;
   &:before {
@@ -1721,7 +1721,7 @@ div[data-verttical-start-2] {
 
 /***** visibility ******/
 @media (max-width: 1279px) {
-  .goals,
+  .money-bug-container,
   .coins-wrap,
   .vertical-scroll,
   .approaches__item--arrow {
@@ -2279,7 +2279,7 @@ div[data-verttical-start-2] {
         position: absolute;
         width: 571px;
         right: 0;
-        top: 200px;
+        top: 100px;
         p {
           margin-top: 63px;
           margin-bottom: 30px;    
