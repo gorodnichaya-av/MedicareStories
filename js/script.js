@@ -52,20 +52,23 @@ jQuery(document).ready(function() {
     const windowWidth = window.innerWidth;
 
     if (windowWidth < 1280) {
+        const percentItemsSlick = $('.percents__items');
 
-        $('.percents__items').slick({
-            arrows: false,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            fade: true,
-            autoplay: true,
-            autoplaySpeed: 2000,
-        });
+        if(percentItemsSlick.length > 0) {
+            percentItemsSlick.slick({
+                arrows: false,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                fade: true,
+                autoplay: true,
+                autoplaySpeed: 2000,
+            });
+        }
     }
 });
 
-// add arrows to nav items with children
+// Add arrows to nav items with children
 const morelink = document.querySelectorAll('.more-link'),
     svgArrow = document.createElement('span');
 
@@ -77,118 +80,126 @@ morelink.forEach(elem => {
 
 
 // Header screen
-const 
-    header = document.querySelector('.js-header'),
-    headerScrollStart = document.querySelector('.js-header').offsetTop,
-    headerScrollStop = document.querySelector('.js-header').offsetHeight + headerScrollStart,
-    headerLogo = document.querySelector('.js-logo'),
-    headerMenuContainer = document.querySelector('.js-menu-container'),
-    logoGreen = document.querySelector('.js-logo-green-mark').offsetTop,
-    logoBlue = document.querySelectorAll('.js-logo-blue-mark'),
-    logoPink = document.querySelector('.js-logo-pink-mark').offsetTop;
+const header = document.querySelector('.js-header');
 
-window.addEventListener('scroll', function () {
-    if (this.scrollY >= logoGreen && this.scrollY < logoBlue[0].offsetTop) {
-        headerLogo.classList.remove('pink');
-        headerLogo.classList.remove('blue');
-        headerLogo.classList.add('green');
-    } else if (this.scrollY >= logoBlue && this.scrollY < logoPink) {
-        headerLogo.classList.remove('green');
-        headerLogo.classList.remove('pink')
-        headerLogo.classList.add('blue');
-    } else if (this.scrollY >= logoPink && this.scrollY < logoBlue[1].offsetTop) {
-        headerLogo.classList.remove('green');
-        headerLogo.classList.remove('blue');
-        headerLogo.classList.add('pink');
-    } else {
-        headerLogo.classList.remove('green');
-        headerLogo.classList.remove('pink')
-        headerLogo.classList.add('blue');
-    }
-    if (this.scrollY > 10) {
-        headerLogo
-            .classList
-            .add('small');
-        headerMenuContainer
-            .classList
-            .add('colored');
-    } else {
-        headerLogo
-            .classList
-            .remove('small', 'blue');
-        headerMenuContainer
-            .classList
-            .remove('colored');
-    }
-});
+if (isInPage(header)) {
+    const headerScrollStart = document.querySelector('.js-header').offsetTop,
+         headerScrollStop = document.querySelector('.js-header').offsetHeight + headerScrollStart,
+         headerLogo = document.querySelector('.js-logo'),
+         headerMenuContainer = document.querySelector('.js-menu-container'),
+         logoGreen = document.querySelector('.js-logo-green-mark').offsetTop,
+         logoBlue = document.querySelectorAll('.js-logo-blue-mark'),
+         logoPink = document.querySelector('.js-logo-pink-mark').offsetTop;
+
+    window.addEventListener('scroll', function () {
+        if (this.scrollY >= logoGreen && this.scrollY < logoBlue[0].offsetTop) {
+            headerLogo.classList.remove('pink');
+            headerLogo.classList.remove('blue');
+            headerLogo.classList.add('green');
+        } else if (this.scrollY >= logoBlue && this.scrollY < logoPink) {
+            headerLogo.classList.remove('green');
+            headerLogo.classList.remove('pink')
+            headerLogo.classList.add('blue');
+        } else if (this.scrollY >= logoPink && this.scrollY < logoBlue[1].offsetTop) {
+            headerLogo.classList.remove('green');
+            headerLogo.classList.remove('blue');
+            headerLogo.classList.add('pink');
+        } else {
+            headerLogo.classList.remove('green');
+            headerLogo.classList.remove('pink')
+            headerLogo.classList.add('blue');
+        }
+        if (this.scrollY > 10) {
+            headerLogo
+                .classList
+                .add('small');
+            headerMenuContainer
+                .classList
+                .add('colored');
+        } else {
+            headerLogo
+                .classList
+                .remove('small', 'blue');
+            headerMenuContainer
+                .classList
+                .remove('colored');
+        }
+    });
+}
+
 
 
 // Napkins moving
-
 const napkins = document.querySelectorAll('.js-napkin');
 
-napkins.forEach(elem => {
-    var isDown = false,
-        offset = [0, 0];
-
-    elem.addEventListener('mousedown', function (e) {
-        isDown = true;
-        offset = [
-            elem.offsetLeft - e.clientX,
-            elem.offsetTop - e.clientY
-        ];
-    }, true);
-
-    elem.addEventListener('touchstart', function (e) {
-        isDown = true;
-        offset = [
-            elem.offsetLeft - e.touches[0].clientX,
-            elem.offsetTop - e.touches[0].clientY
-        ];
-    }, true);
-
-    elem.addEventListener('mouseup', endMoving, true);
-    elem.addEventListener('touchend', endMoving, true);
-
-    document.addEventListener('mousemove', function (event) {
-        event.preventDefault();
-        if (isDown) {
-            let mousePosition = {
-                x: event.clientX,
-                y: event.clientY
-            };
-            elem.style.left = (mousePosition.x + offset[0]) + 'px';
-            elem.style.top = (mousePosition.y + offset[1]) + 'px';
+if (isInPage(napkins[0])) {
+    napkins.forEach(elem => {
+        var isDown = false,
+            offset = [0, 0];
+    
+        elem.addEventListener('mousedown', function (e) {
+            isDown = true;
+            offset = [
+                elem.offsetLeft - e.clientX,
+                elem.offsetTop - e.clientY
+            ];
+        }, true);
+    
+        elem.addEventListener('touchstart', function (e) {
+            isDown = true;
+            offset = [
+                elem.offsetLeft - e.touches[0].clientX,
+                elem.offsetTop - e.touches[0].clientY
+            ];
+        }, true);
+    
+        elem.addEventListener('mouseup', endMoving, true);
+        elem.addEventListener('touchend', endMoving, true);
+    
+        document.addEventListener('mousemove', function (event) {
+            event.preventDefault();
+            if (isDown) {
+                let mousePosition = {
+                    x: event.clientX,
+                    y: event.clientY
+                };
+                elem.style.left = (mousePosition.x + offset[0]) + 'px';
+                elem.style.top = (mousePosition.y + offset[1]) + 'px';
+            }
+        }, true);
+    
+        document.addEventListener('touchmove', function (event) {
+            event.preventDefault();
+            if (isDown) {
+                let touchPosition = {
+                    x: event.touches[0].clientX,
+                    y: event.touches[0].clientY
+                };
+                elem.style.left = (touchPosition.x + offset[0]) + 'px';
+                elem.style.top = (touchPosition.y + offset[1]) + 'px';
+            }
+        }, true);
+    
+        function endMoving() {
+            isDown = false;
         }
-    }, true);
+    });
+}
 
-    document.addEventListener('touchmove', function (event) {
-        event.preventDefault();
-        if (isDown) {
-            let touchPosition = {
-                x: event.touches[0].clientX,
-                y: event.touches[0].clientY
-            };
-            elem.style.left = (touchPosition.x + offset[0]) + 'px';
-            elem.style.top = (touchPosition.y + offset[1]) + 'px';
-        }
-    }, true);
 
-    function endMoving() {
-        isDown = false;
-    }
-});
 
 // Horizontal scroll content
 const horizontalScrollContainer = document.querySelectorAll('.js-horizontal-scroll');
 
-horizontalScrollContainer.forEach(item => {
-    const horizontalItems = item.querySelector('.js-horizontal-items');
-
-    window.addEventListener("scroll", function () {
-        horizontalScroll(item, horizontalItems);
+if (isInPage(horizontalScrollContainer[0])) {
+    horizontalScrollContainer.forEach(item => {
+        const horizontalItems = item.querySelector('.js-horizontal-items');
+    
+        window.addEventListener("scroll", function () {
+            horizontalScroll(item, horizontalItems);
+        });
     });
-});
+}
 
 function horizontalScroll(parent, items) {
     const y = window.scrollY - parent.offsetTop,
@@ -203,12 +214,36 @@ function horizontalScroll(parent, items) {
     }
 };
 
-// Parallax elements
 
-const parallaxElements = document.querySelectorAll('.js-photos-item'),
-      parallaxElementsStart = document.querySelector('.js-photos').offsetTop,
-      parallaxPatentHeight = document.querySelector('.js-photos').offsetHeight,
-      parallaxElementsStop = parallaxElementsStart + parallaxPatentHeight;
+
+// Parallax elements
+const parallaxElements = document.querySelectorAll('.js-photos-item');
+
+if (isInPage(parallaxElements[0])) {
+    const parallaxElementsStart = document.querySelector('.js-photos').offsetTop,
+          parallaxPatentHeight = document.querySelector('.js-photos').offsetHeight,
+          parallaxElementsStop = parallaxElementsStart + parallaxPatentHeight;
+
+    parallaxElements.forEach(item => {
+      parallaxInitElem(item);
+  
+      window.addEventListener('scroll', function () {
+          let indexScroll = 1;
+          if (this.scrollY > (parallaxElementsStart - parallaxPatentHeight / 5) && this.scrollY < parallaxElementsStop) {
+              indexScroll = (this.scrollY - parallaxElementsStart) / parallaxPatentHeight * 100; 
+              if (indexScroll > 20) {
+                  item.classList.add('colored');
+              } else {
+                  item.classList.remove('colored');
+              }
+              parallaxPhotos(item, indexScroll);
+          } else if (this.scrollY >= parallaxElementsStop) {
+              indexScroll = 100;
+          }
+          
+      });
+    });
+}
 
 function parallaxPhotos(elem, scrollYVal) {
     const dataScrollY = elem.getAttribute('data-initial-scroll'),
@@ -216,147 +251,135 @@ function parallaxPhotos(elem, scrollYVal) {
 
     elem.style.transform = 'translate3d(0px ,' + parallaxMoving + '%, 0px)'
 }
-
 function parallaxInitElem(elem) {
     const dataScrollY = elem.getAttribute('data-initial-scroll');
     elem.style.transform = 'translate3d(0px ,' + dataScrollY + '%, 0px)'
 }
 
-parallaxElements.forEach(item => {
-    parallaxInitElem(item);
 
-    window.addEventListener('scroll', function () {
-        let indexScroll = 1;
-        if (this.scrollY > (parallaxElementsStart - parallaxPatentHeight / 5) && this.scrollY < parallaxElementsStop) {
-            indexScroll = (this.scrollY - parallaxElementsStart) / parallaxPatentHeight * 100; 
-            if (indexScroll > 20) {
-                item.classList.add('colored');
-            } else {
-                item.classList.remove('colored');
-            }
-            parallaxPhotos(item, indexScroll);
-        } else if (this.scrollY >= parallaxElementsStop) {
-            indexScroll = 100;
-        }
-        
-    });
-});
 
 // Money bug animation
+const moneyBugContainer = document.querySelector('.js-money-bug-container');
 
-const moneyBugContainer = document.querySelector('.js-money-bug-container'),
-      moneyBug = moneyBugContainer.querySelector('.js-money-bug'),
-      moneyLines = moneyBugContainer.querySelectorAll('.js-money-line'),
-      moneyBugStart = moneyBugContainer.offsetTop,
-      moneyBugContainerHeight = moneyBugContainer.offsetHeight;
+if (isInPage(moneyBugContainer) && device.desktop()) {
+    const moneyBug = moneyBugContainer.querySelector('.js-money-bug'),
+          moneyLines = moneyBugContainer.querySelectorAll('.js-money-line'),
+          moneyBugStart = moneyBugContainer.offsetTop,
+          moneyBugContainerHeight = moneyBugContainer.offsetHeight;
 
-var initialHeightArray = [],
-    initialTopArray = [];
-moneyLines.forEach((item) => {
-  const initialHeight = item.offsetHeight,
-        itemTop = item.offsetTop;
-  initialHeightArray.push(initialHeight);
-  initialTopArray.push(itemTop);
-});     
+    var initialHeightArray = [],
+          initialTopArray = [];
 
-window.addEventListener('scroll', function () {
-    let percentVal,
-        centerWindow = this.scrollY + (this.innerHeight / 2);
-    if (centerWindow < moneyBugStart) {
-        percentVal = 1;
-    } else if (centerWindow < (moneyBugStart + moneyBugContainerHeight / 4)) {
-        percentVal = (centerWindow - moneyBugStart) / moneyBugContainerHeight * 100;
-    } else {
-        percentVal = 100;
-    }
+    moneyLines.forEach((item) => {
+        const initialHeight = item.offsetHeight,
+              itemTop = item.offsetTop;
+        initialHeightArray.push(initialHeight);
+        initialTopArray.push(itemTop);
+    }); 
 
-    moneyLines.forEach((item, i) => {
-      const itemHide = initialTopArray[i] + initialHeightArray[i] + 200;
-
-      if ((centerWindow - moneyBugStart) > initialTopArray[i] && (centerWindow - moneyBugStart) < itemHide) {
-        item.style.height = `${initialHeightArray[i]}px`;
-        item.style.top = `${initialTopArray[i]*1.8}px`;
-        item.classList.remove('bg-hidden')
-      } else if ((centerWindow - moneyBugStart) >= itemHide){
-        item.style.height = `${initialHeightArray[i]}px`;
-        item.classList.add('bg-hidden');
-        
-      } else {
-        item.style.height = '0px';
-        item.style.top = `${initialTopArray[i]}px`; 
-      }
-    });
-
-    movingBug(percentVal);
-});
-
-function movingBug(percent) {
-    let scaleVal = 0.5 + (percent * 0.5 / 100),
-        rotateVal = -45 + (percent * 45 / 100);
-    moneyBug.style.transform = `translate(-50%, -50%) scale(${scaleVal}) rotate(${rotateVal}deg) `;
-}
-
-// Coins animation
-const coinsWrap = document.querySelector('.js-coins'),
-      coinsArray = coinsWrap.querySelectorAll('.js-coin'),
-      coinsTop = coinsWrap.offsetTop,
-      coinsContainerHeight = document.querySelector('.js-percents').offsetHeight,
-      coinsContainerStart = document.querySelector('.js-percents').offsetTop,
-      percentsArray = document.querySelectorAll('.percents__item'),
-      percentsCount = percentsArray.length,
-      percentItemHeight = coinsContainerHeight / percentsCount,
-      removeFixedClass = document.querySelector('.napkins-headline').offsetTop;
-
-var initialCoinPosition = []; // initial values of X,Y positions of coints
-coinsArray.forEach((item, i) => {
-  initialCoinPosition.push({
-    pageX: getOffset(item).left,
-    pageY: getOffset(item).top,
-    parentX: item.offsetLeft,
-    parentY: item.offsetTop
-  });
-});
-// moving conins on scroll
-window.addEventListener('scroll', function() {
-    let percentVal,
-        centerWindow = this.scrollY + (this.innerHeight / 2),
-        coinsMovingStart = coinsContainerStart + coinsTop,
-        coinsMovingStop = coinsContainerStart + coinsContainerHeight - percentItemHeight + this.innerHeight / 2;
-    
-    var counterItems = 0;
-    for (let i = 0; i < percentsCount; i++) {
-        if (this.scrollY >= (coinsContainerStart + percentItemHeight * i)) {
-            counterItems = i;
-        }
-    }
-
-    if (this.scrollY >= coinsMovingStart && (this.scrollY + this.innerHeight) <= removeFixedClass) {
-        coinsWrap.classList.add('fixed');
-        coinsWrap.classList.remove('bottom-absolute');
-    } else {
-        coinsWrap.classList.remove('fixed');
-        coinsWrap.classList.add('bottom-absolute');
-    }
-
-    if (this.scrollY < coinsMovingStart) { // window Scroll < (offset Top of main coin's parent (percents) + real negative top of coin's parent (coint-wrap))
-        percentVal = 1;
-        coinsWrap.classList.remove('fixed');
-        coinsWrap.classList.remove('bottom-absolute');
-    } else if (this.scrollY >= coinsMovingStart && this.scrollY <= coinsMovingStop) {
-        if (this.scrollY < coinsContainerStart) {
-            percentVal = (this.scrollY - coinsContainerStart - coinsTop) / (-coinsTop) * 100;
+    window.addEventListener('scroll', function () {
+        let percentVal,
+            centerWindow = this.scrollY + (this.innerHeight / 2);
+        if (centerWindow < moneyBugStart) {
+            percentVal = 1;
+        } else if (centerWindow < (moneyBugStart + moneyBugContainerHeight / 4)) {
+            percentVal = (centerWindow - moneyBugStart) / moneyBugContainerHeight * 100;
         } else {
             percentVal = 100;
         }
-        
-    } else {
-        percentVal = 100;
-    }
-
     
+        moneyLines.forEach((item, i) => {
+          const itemHide = initialTopArray[i] + initialHeightArray[i] + 200;
+    
+          if ((centerWindow - moneyBugStart) > initialTopArray[i] && (centerWindow - moneyBugStart) < itemHide) {
+            item.style.height = `${initialHeightArray[i]}px`;
+            item.style.top = `${initialTopArray[i]*1.8}px`;
+            item.classList.remove('bg-hidden')
+          } else if ((centerWindow - moneyBugStart) >= itemHide){
+            item.style.height = `${initialHeightArray[i]}px`;
+            item.classList.add('bg-hidden');
+            
+          } else {
+            item.style.height = '0px';
+            item.style.top = `${initialTopArray[i]}px`; 
+          }
+        });
+    
+        movingBug(percentVal, moneyBug);
+    });
+}
 
-    movingCoins(percentVal, counterItems);
-});
+function movingBug(percent, movingElement) {
+    let scaleVal = 0.5 + (percent * 0.5 / 100),
+        rotateVal = -45 + (percent * 45 / 100);
+    movingElement.style.transform = `translate(-50%, -50%) scale(${scaleVal}) rotate(${rotateVal}deg) `;
+}
+
+
+
+// Coins animation
+const coinsWrap = document.querySelector('.js-coins');
+
+if (isInPage(coinsWrap) && device.desktop()) {
+    const coinsArray = coinsWrap.querySelectorAll('.js-coin'),
+          coinsTop = coinsWrap.offsetTop,
+          coinsContainerHeight = document.querySelector('.js-percents').offsetHeight,
+          coinsContainerStart = document.querySelector('.js-percents').offsetTop,
+          percentsArray = document.querySelectorAll('.percents__item'),
+          percentsCount = percentsArray.length,
+          percentItemHeight = coinsContainerHeight / percentsCount,
+          removeFixedClass = document.querySelector('.napkins-headline').offsetTop;
+
+    var initialCoinPosition = []; // initial values of X,Y positions of coints
+    coinsArray.forEach((item, i) => {
+        initialCoinPosition.push({
+            pageX: getOffset(item).left,
+            pageY: getOffset(item).top,
+            parentX: item.offsetLeft,
+            parentY: item.offsetTop
+        });
+    });
+
+    // moving conins on scroll
+    window.addEventListener('scroll', function() {
+        let percentVal
+
+        const coinsMovingStart = coinsContainerStart + coinsTop,
+              coinsMovingStop = coinsContainerStart + coinsContainerHeight - percentItemHeight + this.innerHeight / 2;
+        
+        var counterItems = 0;
+        for (let i = 0; i < percentsCount; i++) {
+            if (this.scrollY >= (coinsContainerStart + percentItemHeight * i)) {
+                counterItems = i;
+            }
+        }
+
+        if (this.scrollY >= coinsMovingStart && (this.scrollY + this.innerHeight) <= removeFixedClass) {
+            coinsWrap.classList.add('fixed');
+            coinsWrap.classList.remove('bottom-absolute');
+        } else {
+            coinsWrap.classList.remove('fixed');
+            coinsWrap.classList.add('bottom-absolute');
+        }
+
+        if (this.scrollY < coinsMovingStart) { // window Scroll < (offset Top of main coin's parent (percents) + real negative top of coin's parent (coint-wrap))
+            percentVal = 1;
+            coinsWrap.classList.remove('fixed');
+            coinsWrap.classList.remove('bottom-absolute');
+        } else if (this.scrollY >= coinsMovingStart && this.scrollY <= coinsMovingStop) {
+            if (this.scrollY < coinsContainerStart) {
+                percentVal = (this.scrollY - coinsContainerStart - coinsTop) / (-coinsTop) * 100;
+            } else {
+                percentVal = 100;
+            }
+        } else {
+            percentVal = 100;
+        }
+
+        movingCoins(percentVal, counterItems, coinsArray);
+    });
+}
+
 // get Offset of coins
 function getOffset(el) {
   const rect = el.getBoundingClientRect();
@@ -365,13 +388,13 @@ function getOffset(el) {
     top: rect.top + window.scrollY
   };
 }
-
-function movingCoins(percent, counter) {
+// moving coins
+function movingCoins(percent, counter, array) {
     let scaleVal = 1 + (percent * 0.5 / 100),
         rotateVal,
         skewVal;
 
-    coinsArray.forEach((item, i) => {
+    array.forEach((item, i) => {
         const indexVal = i;
 
         let positionXVal = initialCoinPosition[i].pageX,
@@ -427,37 +450,48 @@ function movingCoins(percent, counter) {
           item.style.opacity = `0.8`;
           
     });
-   
 }
 
 
 // Words position 
 const goalsWord = document.querySelector('.js-word-goals'),
-      goalsWordTop = goalsWord.offsetTop,
-      journeyWord = document.querySelector('.js-word-journey'),
-      journeyWordTop = journeyWord.offsetTop;
+      journeyWord = document.querySelector('.js-word-journey');
 
-window.addEventListener('scroll', function() {
-    const journeyStop = document.querySelector('.approaches').offsetTop + document.querySelector('.approaches').offsetHeight - (this.innerHeight),
-          goalsStop = removeFixedClass - this.innerHeight;
+if (isInPage(goalsWord)) {
+    const goalsWordTop = goalsWord.offsetTop,
+          removeFixedClass = document.querySelector('.napkins-headline').offsetTop;
+    window.addEventListener('scroll', function() {
+        const goalsStop = removeFixedClass - this.innerHeight;
+        if (this.scrollY > (goalsWordTop + 80) && this.scrollY < goalsStop) {
+            goalsWord.classList.add('fixed');
+        } else {
+            goalsWord.classList.remove('fixed');
+        } 
+    });
+}
 
-    if (this.scrollY > (goalsWordTop + 80) && this.scrollY < goalsStop) {
-        goalsWord.classList.add('fixed');
-    } else {
-        goalsWord.classList.remove('fixed');
-    }
-    if (this.scrollY > (journeyWordTop + 80) && this.scrollY < journeyStop) {
-        journeyWord.classList.add('fixed');
-    } else {
-        journeyWord.classList.remove('fixed');
-    } 
-});
+if (isInPage(journeyWord)) {
+    const journeyWordTop = journeyWord.offsetTop,
+          removeFixedClass = document.querySelector('.napkins-headline').offsetTop;
+    window.addEventListener('scroll', function() {
+        const journeyStop = document.querySelector('.approaches').offsetTop + document.querySelector('.approaches').offsetHeight - (this.innerHeight);
+    
+        if (this.scrollY > (journeyWordTop + 80) && this.scrollY < journeyStop) {
+            journeyWord.classList.add('fixed');
+        } else {
+            journeyWord.classList.remove('fixed');
+        } 
+    });
+}
+
+
 
 // Ball slides on line
 
 const verticalScrollContent = document.querySelectorAll('.js-vertical-scroll');
 
-window
+if (isInPage(verticalScrollContent[0])) {
+    window
     .addEventListener('scroll', function () {
         verticalScrollContent.forEach(item => {
             const verticalId = item.getAttribute('data-vertical'), 
@@ -483,6 +517,7 @@ window
               moveObj(percentValue, verticalBall, verticalPath, verticalPathLength);
         });
     });
+} 
 
 // Move obj element along path based on percentage of total length
 function moveObj(prcnt, ball, path, pathLenth) {
@@ -494,4 +529,11 @@ function moveObj(prcnt, ball, path, pathLenth) {
 
     ball.style.transform = 'translate3d(' + pt.x + 'px,' + pt.y + 'px, 0)';
     path.setAttribute('stroke-dashoffset', (pathLenth - prcnt));
+}
+
+
+
+// Function to checking if element is on page
+function isInPage(node) {
+    return node === document.body ? false : document.body.contains(node);
 }
