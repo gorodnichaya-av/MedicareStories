@@ -534,8 +534,6 @@ function moveObj(prcnt, ball, path, pathLenth) {
 // Painting of arrow
 const paintArrows = document.querySelectorAll('.js-paint-arrow');
 if (isInPage(paintArrows[0])) {
-
-    
     window.addEventListener('scroll', function () {
         paintArrows.forEach(item => {
             const paintArrowlId = item.getAttribute('data-arrow'), 
@@ -561,11 +559,9 @@ if (isInPage(paintArrows[0])) {
             paintArrow(percentValue, paintArrowTip, paintArrowPath, paintArrowPathLength);
         });
     });
-    
 }
-// move obj element along path based on percentage of total length
+
 function paintArrow(prcnt, tip, path, pathLenth) {
-    console.log(prcnt);
     if (prcnt > 0) {
         path.style.opacity = '1';
     } else {
@@ -581,6 +577,20 @@ function paintArrow(prcnt, tip, path, pathLenth) {
     
 }
 
+
+
+// Banner text background
+const topPage = document.querySelector('.js-top-page');
+
+if (isInPage(topPage)) {
+    window.addEventListener('scroll', function () {
+        if (this.scrollY > 100) {
+            topPage.classList.add('large');
+        } else {
+            topPage.classList.remove('large');
+        }
+    });
+}
 
 
 // Function to checking if element is on page
