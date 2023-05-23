@@ -48,7 +48,6 @@ jQuery(document).ready(function() {
     });
 
     // slider for percents on mobile
-
     const windowWidth = window.innerWidth;
 
     if (windowWidth < 1280) {
@@ -591,6 +590,12 @@ if (isInPage(topPage)) {
         }
     });
 }
+
+
+
+// Full-width parallax
+const fullWidthParallaxImages = document.querySelectorAll('.js-photo-inside-parallax');
+new simpleParallax(fullWidthParallaxImages);
 
 
 // Function to checking if element is on page
