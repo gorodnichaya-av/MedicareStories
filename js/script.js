@@ -74,16 +74,19 @@ jQuery(document).ready(function() {
     modalBtn.on('click', function() {
         const dataModal = $(this).attr('data-modal');
         $(dataModal).fadeIn();
+        $('body').addClass('overflow');
     });
     modalClose.on('click', function() {
         const parent = $(this).closest('.js-modal');
         parent.fadeOut();
+        $('body').removeClass('overflow');
     });
     $('.js-modal').mouseup(function (e) {
         var container = $('.modal__content');
         if(!container.is(e.target) && 
         container.has(e.target).length === 0) {
             container.closest('.js-modal').fadeOut();
+            $('body').removeClass('overflow');
         }
     });
 });
@@ -245,35 +248,41 @@ if (isInPage(parallaxElements[0]) && device.desktop()) {
           parallaxElementsStop = parallaxElementsStart + parallaxPatentHeight;
 
     parallaxElements.forEach(item => {
-      parallaxInitElem(item);
+        parallaxInitElem(item);
   
-      window.addEventListener('scroll', function () {
-          let indexScroll = 1;
-          if (this.scrollY > (parallaxElementsStart - parallaxPatentHeight / 5) && this.scrollY < parallaxElementsStop) {
-              indexScroll = (this.scrollY - parallaxElementsStart) / parallaxPatentHeight * 100; 
-              if (indexScroll > 20) {
+         window.addEventListener('scroll', function () {
+            let indexScroll = 1;
+          // if (this.scrollY > (parallaxElementsStart - parallaxPatentHeight / 5) && this.scrollY < parallaxElementsStop) {
+            if (this.scrollY > parallaxElementsStart && this.scrollY < parallaxElementsStop) {
+              indexScroll = Math.min((this.scrollY - parallaxElementsStart) / this.innerHeight * 100, 100);
+              console.log('y', this.scrollY);
+              console.log('start', parallaxElementsStart);
+              console.log('height', parallaxPatentHeight);
+              console.log('heightY', this.innerHeight);
+              console.log('indexScroll', indexScroll);
+              if (indexScroll > 50) {
                   item.classList.add('colored');
               } else {
                   item.classList.remove('colored');
               }
-              parallaxPhotos(item, indexScroll);
-          } else if (this.scrollY >= parallaxElementsStop) {
-              indexScroll = 100;
-          }
-          
+            } else if (this.scrollY >= parallaxElementsStop) {
+                indexScroll = 100;
+            }
+            parallaxPhotos(item, indexScroll);
       });
     });
 }
 
 function parallaxPhotos(elem, scrollYVal) {
     const dataScrollY = elem.getAttribute('data-initial-scroll'),
-          parallaxMoving = dataScrollY - (scrollYVal * dataScrollY / 100) * (1 + dataScrollY * 3 / 100);
+          //parallaxMoving = dataScrollY - (scrollYVal * dataScrollY / 100) * (1 + dataScrollY * 3 / 100);
+          parallaxMoving = dataScrollY - (dataScrollY*scrollYVal/100);
 
-    elem.style.transform = 'translate3d(0px ,' + parallaxMoving + '%, 0px)'
+    elem.style.transform = 'translate3d(0px ,' + parallaxMoving + 'px, 0px)'
 }
 function parallaxInitElem(elem) {
     const dataScrollY = elem.getAttribute('data-initial-scroll');
-    elem.style.transform = 'translate3d(0px ,' + dataScrollY + '%, 0px)'
+    elem.style.transform = 'translate3d(0px ,' + dataScrollY + 'px, 0px)'
 }
 
 
@@ -614,9 +623,12 @@ if (isInPage(topPage)) {
 
 
 
-// Full-width parallax
+// Full-width parallax initial
 const fullWidthParallaxImages = document.querySelectorAll('.js-photo-inside-parallax');
-new simpleParallax(fullWidthParallaxImages);
+if (isInPage(fullWidthParallaxImages[0])) {
+    new simpleParallax(fullWidthParallaxImages);
+}
+
 
 
 // Function to checking if element is on page

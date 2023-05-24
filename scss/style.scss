@@ -1751,7 +1751,7 @@ div[data-verttical-start-2] {
 }
 
 .single-section {
-  margin-bottom: 100px;
+  padding-bottom: 100px;
 }
 
 .top-page {
@@ -2265,7 +2265,7 @@ div[data-verttical-start-2] {
 @media (min-width: 992px) {
   .services-list {
     margin-top: 143px;
-    margin-bottom: 120px;
+    margin-bottom: 20px;
     ul {
       line-height: 1.2;
       column-count: 3;
@@ -2293,7 +2293,7 @@ div[data-verttical-start-2] {
         position: absolute;
         width: 571px;
         right: 0;
-        top: 100px;
+        top: 0;
         p {
           margin-top: 63px;
           margin-bottom: 30px;    
