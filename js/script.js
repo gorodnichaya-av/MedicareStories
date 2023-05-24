@@ -47,7 +47,7 @@ jQuery(document).ready(function() {
         }
     });
 
-    // slider for percents on mobile
+    // Slider for percents on mobile
     const windowWidth = window.innerWidth;
 
     if (windowWidth < 1280) {
@@ -65,6 +65,27 @@ jQuery(document).ready(function() {
             });
         }
     }
+
+    // Show/hide modal 
+    const modal = document.querySelectorAll('.js-modal'),
+          modalBtn = $('.js-modal-btn'),
+          modalClose = $('.js-modal-close');
+
+    modalBtn.on('click', function() {
+        const dataModal = $(this).attr('data-modal');
+        $(dataModal).fadeIn();
+    });
+    modalClose.on('click', function() {
+        const parent = $(this).closest('.js-modal');
+        parent.fadeOut();
+    });
+    $('.js-modal').mouseup(function (e) {
+        var container = $('.modal__content');
+        if(!container.is(e.target) && 
+        container.has(e.target).length === 0) {
+            container.closest('.js-modal').fadeOut();
+        }
+    });
 });
 
 // Add arrows to nav items with children

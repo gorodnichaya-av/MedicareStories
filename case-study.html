@@ -127,8 +127,9 @@
 
     <div class="single-section" data-arrow-start-2>
       <div class="full-video">
-        <img class="full-width" src="images/CaseStudy/ScreenShot2.jpg" alt=""> 
+        <img class="full-width js-photo-inside-parallax" src="images/CaseStudy/ScreenShot2.jpg" alt=""> 
         <div class="container">
+          <div class="full-video__btn js-modal-btn" data-modal="#video-modal"></div>
           <div class="full-video__label">
             <div class="paint-arrow paint-arrow--video js-paint-arrow" data-arrow="data-arrow-start-2">
               <svg width="162" height="164" viewBox="0 0 162 164" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -285,10 +286,19 @@
       </div><!-- /.container -->
     </div><!-- /.single-section -->
 
-    <div class="js-modal">
-      
-    </div>
-  </div>
+    <div id="video-modal" class="js-modal modal">
+      <div class="modal__overlay">
+        <div class="modal__content modal__content--video">
+          <div class="modal__close js-modal-close">x</div>
+          <div class="video">
+            <div class="video__over">
+              <img class="video__frame" src="images/CaseStudy/FrameVideo.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.modal__overlay -->
+  </div><!-- /.modal -->
 
   <script src="js/jquery-3.7.0.min.js"></script>
   <script src="js/current-device.min.js"></script>
