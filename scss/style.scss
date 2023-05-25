@@ -1807,6 +1807,15 @@ div[data-verttical-start-2] {
 }
 
 @media (max-width: 1279px) {
+  .banner {
+    padding-top: 0;
+    &__content {
+      position: relative;
+      video {
+        display: block;
+      }
+    }
+  }
   .top-page {
     position: relative;
     padding: 40px;
