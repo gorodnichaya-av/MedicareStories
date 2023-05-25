@@ -67,25 +67,29 @@ jQuery(document).ready(function() {
     }
 
     // Show/hide modal 
-    const modal = document.querySelectorAll('.js-modal'),
-          modalBtn = $('.js-modal-btn'),
+    const modalBtn = $('.js-modal-btn'),
           modalClose = $('.js-modal-close');
 
-    modalBtn.on('click', function() {
-        const dataModal = $(this).attr('data-modal');
+    modalBtn.on('click', function(e) {
+        const dataModal = $(this).attr('data-modal'),
+              srcVideo = $(this).attr('data-src');
         $(dataModal).fadeIn();
         $('body').addClass('overflow');
+
+        $(dataModal).find('iframe').attr('src', srcVideo + '?autoplay=1');
     });
     modalClose.on('click', function() {
         const parent = $(this).closest('.js-modal');
         parent.fadeOut();
         $('body').removeClass('overflow');
+        parent.find('iframe').attr('src', ' ');
     });
     $('.js-modal').mouseup(function (e) {
         var container = $('.modal__content');
         if(!container.is(e.target) && 
         container.has(e.target).length === 0) {
             container.closest('.js-modal').fadeOut();
+            container.closest('.js-modal').find('iframe').attr('src', ' ');
             $('body').removeClass('overflow');
         }
     });
