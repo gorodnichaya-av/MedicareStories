@@ -1738,15 +1738,20 @@ div[data-verttical-start-2] {
 /***** banner, top-page, single-section, border-link, sticky ******/
 .banner {
   position: relative;
+  overflow: hidden;
   width: 100%;
-  padding-top: 54.3%;
-  background-color: yellow;
+  padding-top: 56.3%;
   &__content {
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: -5px;
     left: 0;
     right: 0;
+    background: url(../images/CaseStudy/ViveMedicarePreview.jpg) no-repeat 50% 50% / cover;
+  }
+  video {
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -1946,11 +1951,14 @@ div[data-verttical-start-2] {
     }
   }
 }
-.block-image {
+.block-image,
+.block-video {
   img {
+    width: 100%;
     display: block;
   }
 }
+
 @media (max-width: 991px) {
   .client-photo {
     &:not(.client-photo--no-margin) {
@@ -2007,6 +2015,10 @@ div[data-verttical-start-2] {
         padding-right: 50px;
       }
     }
+  }
+  .block-video {
+    max-width: 565px;
+    width: 100%;
   }
 }
 
