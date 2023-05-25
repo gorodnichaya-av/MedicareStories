@@ -1,13 +1,5 @@
 'use strict';
 
-// scroll to top page on reload
-window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-}
-/* window.addEventListener('resize', function() {
-    location.reload();
-});*/
-
 jQuery(document).ready(function() {
     const menuBtn = $('.js-menu-btn'),
           subMenuBtn = $('.js-submenu-btn'),
@@ -247,33 +239,23 @@ function horizontalScroll(parent, items) {
 const parallaxElements = document.querySelectorAll('.js-photos-item');
 
 if (isInPage(parallaxElements[0]) && device.desktop()) {
-    const parallaxElementsStart = document.querySelector('.js-photos').offsetTop,
-          parallaxPatentHeight = document.querySelector('.js-photos').offsetHeight,
-          parallaxElementsStop = parallaxElementsStart + parallaxPatentHeight;
+    
 
     parallaxElements.forEach(item => {
         parallaxInitElem(item);
 
-        console.dir(item);
-  
         window.addEventListener('scroll', function (e) {
             let indexScroll = 1;
+
+            const parallaxParent = this.document.querySelector('.js-photos'),
+                  parallaxElementsStart = (parallaxParent.classList.contains('parallax-photos-bottom')) ? document.querySelector('.js-photos').offsetTop - (this.innerHeight * 0.75) : document.querySelector('.js-photos').offsetTop - (this.innerHeight * 0.25),
+                  parallaxPatentHeight = parallaxParent.offsetHeight,
+                  parallaxElementsStop = parallaxElementsStart + parallaxPatentHeight;
             
-            // console.log('sum', this.scrollY - parallaxElementsStart + parallaxPatentHeight );
-            //console.log('y', this.scrollY);
-            //console.log('heightY', this.innerHeight);
-            //console.log('start', parallaxElementsStart);
-            //console.log('height', parallaxPatentHeight);
-            //console.log('stop', parallaxElementsStop);
-            
-          // if (this.scrollY > (parallaxElementsStart - parallaxPatentHeight / 5) && this.scrollY < parallaxElementsStop) {
             if (this.scrollY > parallaxElementsStart && this.scrollY < parallaxElementsStop) {
-              indexScroll = Math.min((this.scrollY - parallaxElementsStart) / this.innerHeight * 100, 100);
-              //console.log('start', parallaxElementsStart);
-              //console.log('height', parallaxPatentHeight);
-              //console.log('heightY', this.innerHeight);
-              // console.log('indexScroll', indexScroll);
-              if (indexScroll > 50) {
+              indexScroll = Math.max(1, Math.min((this.scrollY - parallaxElementsStart) / (this.innerHeight /  2) * 100, 100));
+
+              if (indexScroll > 80) {
                   item.classList.add('colored');
               } else {
                   item.classList.remove('colored');
@@ -647,4 +629,11 @@ if (isInPage(fullWidthParallaxImages[0])) {
 // Function to checking if element is on page
 function isInPage(node) {
     return node === document.body ? false : document.body.contains(node);
+}
+
+
+
+// scroll to top page on reload
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
 }

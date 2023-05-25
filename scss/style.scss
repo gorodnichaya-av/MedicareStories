@@ -908,7 +908,8 @@ strong {
   &--photos {
     position: relative;
     top: -462px;
-    margin-bottom: -100px;
+    margin-bottom: -916px;
+    z-index: 2;
     .vertical-scroll__container-ball {
       width: 421px;
       left: -45px;
@@ -1672,6 +1673,9 @@ div[data-verttical-start-2] {
   }
 }
 @media (min-width: 1280px) {
+  .section--photos {
+    padding-top: 500px;
+  }
   .photos {
     &__item {
       padding-left: 40px;
@@ -1744,7 +1748,7 @@ div[data-verttical-start-2] {
   &__content {
     position: absolute;
     top: 0;
-    bottom: -5px;
+    bottom: 0;
     left: 0;
     right: 0;
     background: url(../images/CaseStudy/ViveMedicarePreview.jpg) no-repeat 50% 50% / cover;
