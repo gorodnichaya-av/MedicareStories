@@ -253,17 +253,26 @@ if (isInPage(parallaxElements[0]) && device.desktop()) {
 
     parallaxElements.forEach(item => {
         parallaxInitElem(item);
+
+        console.dir(item);
   
-         window.addEventListener('scroll', function () {
+        window.addEventListener('scroll', function (e) {
             let indexScroll = 1;
+            
+            // console.log('sum', this.scrollY - parallaxElementsStart + parallaxPatentHeight );
+            //console.log('y', this.scrollY);
+            //console.log('heightY', this.innerHeight);
+            //console.log('start', parallaxElementsStart);
+            //console.log('height', parallaxPatentHeight);
+            //console.log('stop', parallaxElementsStop);
+            
           // if (this.scrollY > (parallaxElementsStart - parallaxPatentHeight / 5) && this.scrollY < parallaxElementsStop) {
             if (this.scrollY > parallaxElementsStart && this.scrollY < parallaxElementsStop) {
               indexScroll = Math.min((this.scrollY - parallaxElementsStart) / this.innerHeight * 100, 100);
-              console.log('y', this.scrollY);
-              console.log('start', parallaxElementsStart);
-              console.log('height', parallaxPatentHeight);
-              console.log('heightY', this.innerHeight);
-              console.log('indexScroll', indexScroll);
+              //console.log('start', parallaxElementsStart);
+              //console.log('height', parallaxPatentHeight);
+              //console.log('heightY', this.innerHeight);
+              // console.log('indexScroll', indexScroll);
               if (indexScroll > 50) {
                   item.classList.add('colored');
               } else {
