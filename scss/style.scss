@@ -109,22 +109,16 @@ img {
   background: linear-gradient(180deg, rgba(76,165,215,1) 0%, rgba(46,148,243,1) 100%);
 }
 .section--napkin {
-  background: linear-gradient(180deg, rgba(46,148,243,1) 0%, rgba(251,55,255,1) 100%);
+  background: linear-gradient(180deg, rgba(46,148,243,1) 0%, rgba(255,38,194,1) 100%);
 }
 .section--approach {
-  background: linear-gradient(180deg, rgba(251,55,255,1) 0%, rgba(201,25,151,1) 100%);
+  background: linear-gradient(180deg, rgba(255,38,194,1) 0%, rgba(157,12,47,1) 100%);
 }
 .approaches {
-  .js-horizontal-items {
-    background: linear-gradient(180deg, rgba(201,25,151,1) 0%, rgba(206,35,155,1) 100%);
-  }
-}
-.stories-arrow {
-  background: linear-gradient(180deg, rgba(206,35,155,1) 0%, rgba(157,12,47,1) 100%);
+  background: linear-gradient(180deg, rgba(157,12,47,1) 0%, rgba(0,0,0,1) 45%, rgba(0,0,0,1) 100%);
 }
 .section--photos {
   position: relative;
-  background: linear-gradient(180deg, rgba(157,12,47,1) 0%, rgba(157,12,47,0) 100%);
 }
 
 @media (max-width: 1279px) {
