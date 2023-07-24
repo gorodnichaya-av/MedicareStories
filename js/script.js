@@ -105,6 +105,7 @@ if (isInPage(header)) {
     const headerScrollStart = document.querySelector('.js-header').offsetTop,
          headerScrollStop = document.querySelector('.js-header').offsetHeight + headerScrollStart,
          headerLogo = document.querySelector('.js-logo'),
+         heeaderLogoText = document.querySelector('.js-logo-text'),
          headerMenuContainer = document.querySelector('.js-menu-container'),
          logoGreen = document.querySelector('.js-logo-green-mark').offsetTop,
          logoBlue = document.querySelectorAll('.js-logo-blue-mark'),
