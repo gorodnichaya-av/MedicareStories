@@ -571,6 +571,8 @@ if (isInPage(paintArrows[0])) {
               paintArrowStop = paintArrowContentHeight + paintArrowStart,
               centerWindow = this.scrollY + (this.innerHeight / 2); 
 
+              console.log(paintArrowPathLength);
+
             var percentValue = 0;
 
             if (this.scrollY < (paintArrowStart - (this.innerHeight / 2))) {
