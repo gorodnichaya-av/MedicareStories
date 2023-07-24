@@ -250,14 +250,16 @@ strong {
   min-height: 25px;
   max-width: 100%;
   &--stories {
-    width: 100%;
+    position: absolute;
+    right: 0;
+    top: calc(100% - 50px);
   }
   img {
     display: block;
   }
 }
 .word-stories {
-  position: absolute;
+  position: relative;
   right: -83px;
   bottom: 0;
   display: inline-block;
@@ -275,6 +277,9 @@ strong {
     }
     &--goals {
       display: none;
+    }
+    &--stories {
+      top: calc(100% - 25px);
     }
   }
   .word-success {
@@ -345,12 +350,6 @@ strong {
         right: 0;
       }
     }
-  }
-  .word-stories {
-    position: absolute; 
-    right: -83px;
-    bottom: 0;
-    display: inline-block;
   }
   .word-journey {
     position: relative;
