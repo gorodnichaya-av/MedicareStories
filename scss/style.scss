@@ -47,6 +47,7 @@ body {
 a {
   color: $blue;
   text-decoration: none;
+  transition: color 0.3s;
   &:hover {
     color: $lightBlue
   }
@@ -1715,6 +1716,17 @@ div[data-verttical-start-2] {
   background-color: $black;
   h2 {
     margin-bottom: 46px;
+  }
+}
+.copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  font-size: 12px;
+  .container {
+    display: flex;
+    justify-content: space-between;
   }
 }
 
