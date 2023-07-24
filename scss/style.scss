@@ -115,7 +115,7 @@ img {
   background: linear-gradient(180deg, rgba(255,38,194,1) 0%, rgba(157,12,47,1) 100%);
 }
 .approaches {
-  background: linear-gradient(180deg, rgba(157,12,47,1) 0%, rgba(0,0,0,1) 45%, rgba(0,0,0,1) 100%);
+  background: linear-gradient(180deg, rgba(157,12,47,1) 0%, rgba(0,0,0,1) 100%);
 }
 .section--photos {
   position: relative;
@@ -1555,12 +1555,12 @@ div[data-verttical-start-2] {
     padding-bottom: 250px;
   }
 }
-@media (min-width: 1280px) {
+/*@media (min-width: 1280px) {
   .stories-arrow {
     padding-top: 302px;
     padding-bottom: 302px;
   }
-}
+}*/
 
 /***** photos ******/
 
