@@ -1718,11 +1718,16 @@ div[data-verttical-start-2] {
     margin-bottom: 46px;
   }
 }
+.single-footer {
+  position: relative;
+}
 .copy {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 24px;
+  bottom: 0;
+  padding-bottom: 24px;
+  padding-top: 24px;
   font-size: 12px;
   .container {
     display: flex;
@@ -1747,6 +1752,12 @@ div[data-verttical-start-2] {
   }
   .word-wrap--success {
     margin-top: 20px;
+  }
+  .copy {
+    .container {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }
 @media (min-width: 1280px) {
@@ -1793,6 +1804,9 @@ div[data-verttical-start-2] {
 
 .single-section {
   padding-bottom: 100px;
+  .col {
+    flex: 1;
+  }
 }
 
 .top-page {
@@ -2263,6 +2277,14 @@ div[data-verttical-start-2] {
   .author {
     &__name {
       font-size: 22px;
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .testimonial {
+    &__text {
+      max-width: 408px;
     }
   }
 }
