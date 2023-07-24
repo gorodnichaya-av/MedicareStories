@@ -177,6 +177,13 @@ p {
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+    transition: all 0.3s;
+  }
+  &:hover {
+    text-decoration: underline;
+    svg {
+      right: -5px;
+    }
   }
 }
 @media (max-width: 991px) {
@@ -1402,15 +1409,22 @@ div[data-verttical-start-2] {
 }
 
 .approaches {
+  &__item {
+    padding: 15px;
+  }
   &__circle {
-    width: 460px;
-    height: 450px;
+    width: 346px;
+    height: 346px;
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: url(../images/pink-circle.svg) no-repeat 50% 50% / contain;
+    background: $white;
+    transition: box-shadow 0.3s;
+    &:hover {
+      box-shadow: 15px 15px $black;
+    }
     h2 {
       font-family: 'Termina-Bold';
       font-weight: 700;
@@ -1426,7 +1440,7 @@ div[data-verttical-start-2] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
   }
   .js-horizontal-items {
     align-items: center;
@@ -1467,11 +1481,13 @@ div[data-verttical-start-2] {
 
 @media (max-width: 991px) {
   .approaches {
+    &__item {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
     &__circle {
-      max-width: 375px;
-      max-height: 375px;
-      width: calc(100vw - 40px);
-      height: calc(100vw - 40px);
+      width: 258px;
+      height: 258px;
     }
     &__content {
       width: 246px;
@@ -1480,11 +1496,10 @@ div[data-verttical-start-2] {
   }
 }
 
-@media (min-width: 991px) {
+@media (min-width: 992px) {
   .approaches {
     &__content {
-      min-height: 215px;
-      width: 305px;
+      width: 300px;
     }
   }
 }
@@ -1504,7 +1519,7 @@ div[data-verttical-start-2] {
 
 @media (min-width: 1280px) {
   .neon-arrow-scroll {
-    width: 425px;
+    width: 390px;
     &.hidden {
       .neon-arrow {
         opacity: 0;
