@@ -42,6 +42,7 @@ body {
   font-family: "Termina";
   line-height: 1.7;
   font-weight: 400;
+  font-size: 16px;
   &.overflow {
     overflow: hidden;
   }
@@ -212,9 +213,6 @@ p {
   }
 }
 @media (min-width: 992px) {
-  body {
-    font-size: 18px;
-  }
   h1 {
     font-size: 50px;
   }
@@ -742,6 +740,14 @@ strong {
   }
 }
 
+@media (min-width: 992px) {
+  .logo {
+    &__text {
+      font-size: 18px;
+    }
+  }
+}
+
 /***** main-headline ******/
 
 @media (max-width: 767px) {
@@ -889,14 +895,6 @@ strong {
   .profitable-stories {
     .container {
       max-width: 660px;
-    }
-  }
-}
-
-@media (min-width: 992px) {
-  .profitable-stories {
-    p {
-      font-size: 16px;
     }
   }
 }
@@ -1703,7 +1701,7 @@ div[data-verttical-start-2] {
 }
 @media (min-width: 1280px) {
   .section--photos {
-    padding-top: 500px;
+    padding-top: 230px;
   }
   .photos {
     &__item {
@@ -1901,6 +1899,7 @@ div[data-verttical-start-2] {
     position: -webkit-sticky;
     position: sticky;
     top: 20px;
+    padding-bottom: 20px;
     display: block;
   }
 }
@@ -2165,7 +2164,7 @@ div[data-verttical-start-2] {
   }
   .col {
     &:first-child {
-      .block-text {
+      .block-text:not(.block-text--negative-mt) {
         padding-left: 0;
         padding-right: 55px;
       }
@@ -2217,7 +2216,7 @@ div[data-verttical-start-2] {
   }
   &__label {
     position: absolute;
-    left: 0;
+    left: 20px;
     bottom: 0;
     top: 0;
     padding-left: 16px;
@@ -2240,7 +2239,7 @@ div[data-verttical-start-2] {
     }
     &--top {
       left: auto;
-      right: 0;
+      right: 20px;
       align-items: flex-start;
       &:before {
         bottom: auto;
@@ -2340,7 +2339,7 @@ div[data-verttical-start-2] {
       font-size: 28px;
     }
     &__item {
-      margin-bottom: 70px;
+      margin-bottom: 60px;
     }
   }
 }
@@ -2390,6 +2389,14 @@ div[data-verttical-start-2] {
   }
 }
 
+@media (max-width: 1279px) {
+  .testimonial {
+    &__text {
+      font-size: 20px;
+    }
+  }
+}
+
 @media (max-width: 991px) {
   .testimonial {
     margin-bottom: 40px;
@@ -2404,9 +2411,6 @@ div[data-verttical-start-2] {
 }
 @media (min-width: 992px) {
   .testimonial {
-    &__text {
-      font-size: 25px;
-    }
     &__name {
       font-size: 20px;
     }
@@ -2429,6 +2433,7 @@ div[data-verttical-start-2] {
   .testimonial {
     &__text {
       max-width: 408px;
+      font-size: 24px;
     }
   }
 }
