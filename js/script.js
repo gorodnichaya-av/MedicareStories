@@ -617,6 +617,21 @@ if (isInPage(topPage)) {
     });
 }
 
+// Form's field 
+const customFormElements = document.querySelectorAll('.js-form-field');
+customFormElements.forEach(item => {
+    const fieldParent = item.parentElement;
+    item.addEventListener('click', () => {
+        fieldParent.querySelector('label').classList.add('top');
+    });
+    item.addEventListener('blur', () => {
+        if (item.value.length < 1) {
+            fieldParent.querySelector('label').classList.remove('top');
+        } else {
+            fieldParent.querySelector('label').classList.add('top');
+        }
+    });
+});
 
 
 // Full-width parallax initial
