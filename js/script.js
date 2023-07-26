@@ -99,19 +99,42 @@ morelink.forEach(elem => {
 
 
 // Header screen
-const header = document.querySelector('.js-header');
+const header = document.querySelector('.js-header'),
+      headerLogo = document.querySelector('.js-logo');
 
 if (isInPage(header)) {
-    const headerScrollStart = document.querySelector('.js-header').offsetTop,
-         headerScrollStop = document.querySelector('.js-header').offsetHeight + headerScrollStart,
-         headerLogo = document.querySelector('.js-logo'),
-         heeaderLogoText = document.querySelector('.js-logo-text'),
-         headerMenuContainer = document.querySelector('.js-menu-container'),
-         logoGreen = document.querySelector('.js-logo-green-mark').offsetTop,
-         logoBlue = document.querySelectorAll('.js-logo-blue-mark'),
-         logoPink = document.querySelector('.js-logo-pink-mark').offsetTop;
+    const headerMenuContainer = document.querySelector('.js-menu-container');
 
     window.addEventListener('scroll', function () {
+        if (this.scrollY > 10) {
+            headerMenuContainer
+                .classList
+                .add('colored');
+        } else {
+            headerMenuContainer
+                .classList
+                .remove('colored');
+        }
+    });
+}
+
+if (isInPage(headerLogo)) {
+    const logoGreen = document.querySelector('.js-logo-green-mark').offsetTop,
+          logoBlue = document.querySelectorAll('.js-logo-blue-mark'),
+          logoPink = document.querySelector('.js-logo-pink-mark').offsetTop;
+
+    window.addEventListener('scroll', function () {
+
+        if (this.scrollY > 10) {
+            headerLogo
+                .classList
+                .add('small');
+        } else {
+            headerLogo
+                .classList
+                .remove('small', 'blue');
+        }
+
         if (this.scrollY >= logoGreen && this.scrollY < logoBlue[0].offsetTop) {
             headerLogo.classList.remove('pink');
             headerLogo.classList.remove('blue');
@@ -128,21 +151,6 @@ if (isInPage(header)) {
             headerLogo.classList.remove('green');
             headerLogo.classList.remove('pink')
             headerLogo.classList.add('blue');
-        }
-        if (this.scrollY > 10) {
-            headerLogo
-                .classList
-                .add('small');
-            headerMenuContainer
-                .classList
-                .add('colored');
-        } else {
-            headerLogo
-                .classList
-                .remove('small', 'blue');
-            headerMenuContainer
-                .classList
-                .remove('colored');
         }
     });
 }
