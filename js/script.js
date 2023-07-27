@@ -125,6 +125,24 @@ if (isInPage(headerLogo)) {
 
     window.addEventListener('scroll', function () {
 
+        if (this.scrollY >= logoGreen && this.scrollY < logoBlue[0].offsetTop) {
+            headerLogo.classList.remove('pink');
+            headerLogo.classList.remove('blue');
+            headerLogo.classList.add('green');
+        } else if (this.scrollY >= logoBlue && this.scrollY < logoPink) {
+            headerLogo.classList.remove('green');
+            headerLogo.classList.remove('pink');
+            headerLogo.classList.add('blue');
+        } else if (this.scrollY >= logoPink && this.scrollY < logoBlue[1].offsetTop) {
+            headerLogo.classList.remove('green');
+            headerLogo.classList.remove('blue');
+            headerLogo.classList.add('pink');
+        } else {
+            headerLogo.classList.remove('green');
+            headerLogo.classList.remove('pink');
+            headerLogo.classList.add('blue');
+        }
+
         if (this.scrollY > 10) {
             headerLogo
                 .classList
@@ -133,24 +151,6 @@ if (isInPage(headerLogo)) {
             headerLogo
                 .classList
                 .remove('small', 'blue');
-        }
-
-        if (this.scrollY >= logoGreen && this.scrollY < logoBlue[0].offsetTop) {
-            headerLogo.classList.remove('pink');
-            headerLogo.classList.remove('blue');
-            headerLogo.classList.add('green');
-        } else if (this.scrollY >= logoBlue && this.scrollY < logoPink) {
-            headerLogo.classList.remove('green');
-            headerLogo.classList.remove('pink')
-            headerLogo.classList.add('blue');
-        } else if (this.scrollY >= logoPink && this.scrollY < logoBlue[1].offsetTop) {
-            headerLogo.classList.remove('green');
-            headerLogo.classList.remove('blue');
-            headerLogo.classList.add('pink');
-        } else {
-            headerLogo.classList.remove('green');
-            headerLogo.classList.remove('pink')
-            headerLogo.classList.add('blue');
         }
     });
 }

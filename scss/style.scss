@@ -538,7 +538,6 @@ strong {
   }
   &__text {
     position: absolute;
-    top: calc(100% + 40px);
     width: 100%;
     color: $white;
     text-align: center;
@@ -549,8 +548,8 @@ strong {
     height: 157px;
     top: 15px;
     left: 0;
-    .logo__pulse,
-    .logo__static--main {
+    .logo__static--main,
+    .logo__pulse {
       opacity: 0;
     }
     .logo__static {
@@ -643,6 +642,14 @@ strong {
   }
   .main-menu {
     background-size: 92% auto;
+  }
+}
+
+@media (max-width: 991px) {
+  .logo {
+    &__text {
+      top: 100%;
+    }
   }
 }
 
@@ -761,6 +768,7 @@ strong {
   .logo {
     &__text {
       font-size: 18px;
+      top: calc(100% + 40px);
     }
   }
 }
@@ -1213,12 +1221,12 @@ div[data-verttical-start-2] {
     &__drawings {
       bottom: 10%;
       left: 50%;
-      transform: translateX(-85%);
+      transform: translateX(-65%);
     }
     &__craft {
       top: 15%;
       left: 50%;
-      transform: translateX(-65%);
+      transform: translateX(-55%);
     }
   }
 
@@ -1235,16 +1243,16 @@ div[data-verttical-start-2] {
     height: 800px;
     &__empty {
       left: 50%;
-      top: 50%;
+      top: 40%;
       transform: translate(-50%, -50%);
     }
     &__drawings {
-      bottom: 0;
-      left: 40%;
+      bottom: -60px;
+      left: 34%;
     }
     &__craft {
-      top: 50%;
-      left: 10%;
+      top: 46%;
+      left: 5%;
       transform: translateY(-50%);
     }
   }
@@ -1829,6 +1837,9 @@ div[data-verttical-start-2] {
     background-size: cover;
     &--case-study {
       background-image: url(../images/CaseStudy/ViveMedicarePreview.jpg);
+    }
+    &--branding {
+      background-image: url(../images/BrandingCreative/banner.jpg);
     }
     img {
       width: 100%;
