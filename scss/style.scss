@@ -1457,7 +1457,6 @@ div[data-verttical-start-2] {
       margin-bottom: 16px;
     }
     p {
-      flex-grow: 1;
       margin-bottom: 15px;
     }
   }
@@ -1467,6 +1466,9 @@ div[data-verttical-start-2] {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+  &__text {
+    flex-grow: 1;
   }
   .js-horizontal-items {
     align-items: center;
@@ -1491,13 +1493,6 @@ div[data-verttical-start-2] {
       justify-content: center;
       font-size: 15px;
       line-height: 1.5;
-      h2 {
-        margin-bottom: 7px;
-        line-height: 1.3;
-      }
-      p {
-        margin-bottom: 7px;
-      }
       .more-link {
         max-width: 155px;
       }
@@ -1517,7 +1512,13 @@ div[data-verttical-start-2] {
     }
     &__content {
       width: 246px;
-
+    }
+    h2 {
+      margin-bottom: 7px;
+      line-height: 1.3;
+    }
+    p {
+      margin-bottom: 7px;
     }
   }
 }
@@ -1575,6 +1576,13 @@ div[data-verttical-start-2] {
           }
         }
       }
+    }
+    &__text {
+      min-height: 176px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
@@ -2420,7 +2428,7 @@ div[data-verttical-start-2] {
 .testimonial {
   margin-top: 10px;
   &__name {
-    margin-top: 20px;
+    margin-top: 30px;
   }
 }
 
@@ -2484,7 +2492,7 @@ div[data-verttical-start-2] {
 @media (min-width: 992px) {
   .testimonial {
     &__name {
-      font-size: 20px;
+      font-size: 18px;
     }
     & + .testimonial {
       margin-top: 100px;
@@ -2504,7 +2512,7 @@ div[data-verttical-start-2] {
 @media (min-width: 1280px) {
   .testimonial {
     &__text {
-      max-width: 408px;
+      max-width: 394px;
       font-size: 24px;
     }
   }
