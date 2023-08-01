@@ -530,7 +530,7 @@ strong {
 .logo {
   position: fixed;
   display: inline-block;
-  transition: all 0.3s linear;
+  transition: all 0.2s linear;
   &__static--green,
   &__static--blue,
   &__static--pink {
@@ -1384,7 +1384,7 @@ div[data-verttical-start-2] {
 }
 @media (min-width: 1280px) {
   .percents {
-    min-height: 200vw; // 2 percents__item * 100vw
+    min-height: 200vw;
     &__item {
       width: 100vw;
       height: 100vh;

@@ -354,14 +354,25 @@ function movingBug(percent, movingElement) {
 const coinsWrap = document.querySelector('.js-coins');
 
 if (isInPage(coinsWrap) && device.desktop()) {
-    const coinsArray = coinsWrap.querySelectorAll('.js-coin'),
-          coinsTop = coinsWrap.offsetTop,
-          coinsContainerHeight = document.querySelector('.js-percents').offsetHeight,
-          coinsContainerStart = document.querySelector('.js-percents').offsetTop,
+
+    const windowWidth = window.innerWidth,
+          coinsContainer = document.querySelector('.js-percents'),
           percentsArray = document.querySelectorAll('.percents__item'),
           percentsCount = percentsArray.length,
+          minHeightCoinsContainer = percentsCount * 100;
+
+
+    if (windowWidth >= 1280) {
+        coinsContainer.style.minHeight = `${minHeightCoinsContainer}vw`;
+    }
+
+    const coinsArray = coinsWrap.querySelectorAll('.js-coin'),
+          coinsTop = coinsWrap.offsetTop,
+          coinsContainerHeight = coinsContainer.offsetHeight,
+          coinsContainerStart = coinsContainer.offsetTop,
           percentItemHeight = coinsContainerHeight / percentsCount,
           removeFixedClass = document.querySelector('.napkins-headline').offsetTop;
+          
 
     var initialCoinPosition = []; // initial values of X,Y positions of coints
     coinsArray.forEach((item, i) => {
@@ -375,7 +386,7 @@ if (isInPage(coinsWrap) && device.desktop()) {
 
     // moving conins on scroll
     window.addEventListener('scroll', function() {
-        let percentVal
+        let percentVal;
 
         const coinsMovingStart = coinsContainerStart + coinsTop,
               coinsMovingStop = coinsContainerStart + coinsContainerHeight - percentItemHeight + this.innerHeight / 2;
@@ -493,6 +504,8 @@ const goalsWord = document.querySelector('.js-word-goals'),
 if (isInPage(goalsWord)) {
     const goalsWordTop = goalsWord.offsetTop,
           removeFixedClass = document.querySelector('.napkins-headline').offsetTop;
+
+    
     window.addEventListener('scroll', function() {
         const goalsStop = removeFixedClass - this.innerHeight;
         if (this.scrollY > (goalsWordTop + 80) && this.scrollY < goalsStop) {
