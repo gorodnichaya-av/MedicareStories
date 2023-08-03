@@ -3,7 +3,7 @@
 jQuery(document).ready(function() {
     const menuBtn = $('.js-menu-btn'),
           subMenuBtn = $('.js-submenu-btn'),
-          mainMenu = $('.js-menu')
+          mainMenu = $('.js-menu');
 
     // Show/hide main-menu
     menuBtn.on('click', function(e) {
@@ -40,23 +40,35 @@ jQuery(document).ready(function() {
     });
 
     // Slider for percents on mobile
-    const windowWidth = window.innerWidth;
+    function percentSliderMobile () {
+        const windowWidth = window.innerWidth,
+              percentItemsSlick = $('.percents__items');
 
-    if (windowWidth < 1280) {
-        const percentItemsSlick = $('.percents__items');
-
-        if(percentItemsSlick.length > 0) {
-            percentItemsSlick.slick({
-                arrows: false,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 1,
-                fade: true,
-                autoplay: true,
-                autoplaySpeed: 2000,
-            });
+        if (windowWidth < 1280) {
+            if(percentItemsSlick.length > 0) {
+                percentItemsSlick.slick({
+                    arrows: false,
+                    infinite: true,
+                    speed: 500,
+                    slidesToShow: 1,
+                    fade: true,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                });
+            }
+        } else {
+            if(percentItemsSlick.hasClass('slick-initialized')) {
+                percentItemsSlick.slick('unslick');
+                return;
+            }
         }
     }
+
+    percentSliderMobile ();
+
+    window.addEventListener("resize", percentSliderMobile);
+
+
 
     // Show/hide modal 
     const modalBtn = $('.js-modal-btn'),
@@ -354,17 +366,26 @@ function movingBug(percent, movingElement) {
 const coinsWrap = document.querySelector('.js-coins');
 
 if (isInPage(coinsWrap) && device.desktop()) {
-
-    const windowWidth = window.innerWidth,
-          coinsContainer = document.querySelector('.js-percents'),
+    
+    const coinsContainer = document.querySelector('.js-percents'),
           percentsArray = document.querySelectorAll('.percents__item'),
           percentsCount = percentsArray.length,
           minHeightCoinsContainer = percentsCount * 100;
 
+    function addMinHeight() {
+        const windowWidth = window.innerWidth;
 
-    if (windowWidth >= 1280) {
-        coinsContainer.style.minHeight = `${minHeightCoinsContainer}vw`;
+        if (windowWidth < 1280) {
+            coinsContainer.style.minHeight = ``;
+        } else {
+            coinsContainer.style.minHeight = `${minHeightCoinsContainer}vw`;
+        }
     }
+    addMinHeight();
+
+    window.addEventListener("resize", () => {
+        addMinHeight();
+    });
 
     const coinsArray = coinsWrap.querySelectorAll('.js-coin'),
           coinsTop = coinsWrap.offsetTop,
