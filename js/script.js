@@ -171,13 +171,61 @@ if (isInPage(headerLogo)) {
 
 
 // Napkins moving
-const napkins = document.querySelectorAll('.js-napkin');
+const napkins = document.querySelectorAll('.js-napkin'),
+      napkinsInitPosition = {
+        empty: {
+            mobile: {
+                left: '50%',
+                top: '5%'
+            },
+            tablet: {
+                left: '30%',
+                top: '2%'
+            },
+            desktop: {
+                left: '50%',
+                top: '40%'
+            }
+        },
+        drawings: {
+            mobile: {
+                left: '50%',
+                top: '31%'
+            },
+            tablet: {
+                left: '50%',
+                top: '10%'
+            },
+            desktop: {
+                left: '34%',
+                top: '-60px'
+            }
+        },
+        craft: {
+            mobile: {
+                left: '50%',
+                top: '3%'
+            },
+            tablet: {
+                left: '50%',
+                top: '15%'
+            },
+            desktop: {
+                left: '5%',
+                top: '46%'
+            }
+        }
+      };
 
 if (isInPage(napkins[0])) {
-    function movingNapkins(offsetVal) {
+    function movingNapkins() {
         napkins.forEach((elem) => {
             var isDown = false,
-                offset = offsetVal;
+                offset = [0, 0];
+
+            const leftMaxVal = elem.getClientRects()[0].left.toFixed(0)
+
+            console.log(leftMaxVal);
     
             elem.addEventListener('mousedown', function (e) {
                 isDown = true;
@@ -228,12 +276,59 @@ if (isInPage(napkins[0])) {
         });
     }
 
-    movingNapkins([0, 0]);
+    movingNapkins();
     
 
     window.addEventListener("resize", () => {
-        // console.log('resize');
-        movingNapkins([0, 0]);
+        const windowWidth = window.innerWidth;
+
+        if (windowWidth <= 767) {
+            napkins.forEach(elem => {
+                if (elem.classList.contains('napkins__empty')) {
+                    elem.style.left = napkinsInitPosition.empty.mobile.left;
+                    elem.style.top = napkinsInitPosition.empty.mobile.top;
+                }
+                if (elem.classList.contains('napkins__drawings')) {
+                    elem.style.left = napkinsInitPosition.drawings.mobile.left;
+                    elem.style.top = napkinsInitPosition.drawings.mobile.top;
+                }
+                if (elem.classList.contains('napkins__craft')) {
+                    elem.style.left = napkinsInitPosition.craft.mobile.left;
+                    elem.style.top = napkinsInitPosition.craft.mobile.top;
+                }
+            });
+        } else if (windowWidth > 767 && windowWidth < 1280) {
+            napkins.forEach(elem => {
+                if (elem.classList.contains('napkins__empty')) {
+                    elem.style.left = napkinsInitPosition.empty.tablet.left;
+                    elem.style.top = napkinsInitPosition.empty.tablet.top;
+                }
+                if (elem.classList.contains('napkins__drawings')) {
+                    elem.style.left = napkinsInitPosition.drawings.tablet.left;
+                    elem.style.top = napkinsInitPosition.drawings.tablet.top;
+                }
+                if (elem.classList.contains('napkins__craft')) {
+                    elem.style.left = napkinsInitPosition.craft.tablet.left;
+                    elem.style.top = napkinsInitPosition.craft.tablet.top;
+                }
+            });
+        } else {
+            napkins.forEach(elem => {
+                if (elem.classList.contains('napkins__empty')) {
+                    elem.style.left = napkinsInitPosition.empty.desktop.left;
+                    elem.style.top = napkinsInitPosition.empty.desktop.top;
+                }
+                if (elem.classList.contains('napkins__drawings')) {
+                    elem.style.left = napkinsInitPosition.drawings.desktop.left;
+                    elem.style.top = napkinsInitPosition.drawings.desktop.top;
+                }
+                if (elem.classList.contains('napkins__craft')) {
+                    elem.style.left = napkinsInitPosition.craft.desktop.left;
+                    elem.style.top = napkinsInitPosition.craft.desktop.top;
+                }
+            });
+        }
+        movingNapkins();
     });
 }
 
@@ -414,6 +509,7 @@ if (isInPage(coinsWrap) && device.desktop()) {
                 parentY: item.offsetTop
             });
         });
+        // console.log(initialCoinPosition);
     }
 
     getInitialCoinPosition()
@@ -433,6 +529,10 @@ if (isInPage(coinsWrap) && device.desktop()) {
                 counterItems = i;
             }
         }
+
+        // console.log('scroll', this.scrollY);
+        // console.log('start', coinsMovingStart);
+        // console.log('stop', removeFixedClass);
 
         if (this.scrollY >= coinsMovingStart && (this.scrollY + this.innerHeight) <= removeFixedClass) {
             coinsWrap.classList.add('fixed');
