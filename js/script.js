@@ -110,6 +110,7 @@ morelink.forEach(elem => {
 });
 
 
+
 // Header screen
 const header = document.querySelector('.js-header'),
       headerLogo = document.querySelector('.js-logo');
@@ -173,56 +174,66 @@ if (isInPage(headerLogo)) {
 const napkins = document.querySelectorAll('.js-napkin');
 
 if (isInPage(napkins[0])) {
-    napkins.forEach(elem => {
-        var isDown = false,
-            offset = [0, 0];
+    function movingNapkins(offsetVal) {
+        napkins.forEach((elem) => {
+            var isDown = false,
+                offset = offsetVal;
     
-        elem.addEventListener('mousedown', function (e) {
-            isDown = true;
-            offset = [
-                elem.offsetLeft - e.clientX,
-                elem.offsetTop - e.clientY
-            ];
-        }, true);
-    
-        elem.addEventListener('touchstart', function (e) {
-            isDown = true;
-            offset = [
-                elem.offsetLeft - e.touches[0].clientX,
-                elem.offsetTop - e.touches[0].clientY
-            ];
-        }, true);
-    
-        elem.addEventListener('mouseup', endMoving, true);
-        elem.addEventListener('touchend', endMoving, true);
-    
-        document.addEventListener('mousemove', function (event) {
-            event.preventDefault();
-            if (isDown) {
-                let mousePosition = {
-                    x: event.clientX,
-                    y: event.clientY
-                };
-                elem.style.left = (mousePosition.x + offset[0]) + 'px';
-                elem.style.top = (mousePosition.y + offset[1]) + 'px';
+            elem.addEventListener('mousedown', function (e) {
+                isDown = true;
+                offset = [
+                    elem.offsetLeft - e.clientX,
+                    elem.offsetTop - e.clientY
+                ];
+            }, true);
+        
+            elem.addEventListener('touchstart', function (e) {
+                isDown = true;
+                offset = [
+                    elem.offsetLeft - e.touches[0].clientX,
+                    elem.offsetTop - e.touches[0].clientY
+                ];
+            }, true);
+        
+            elem.addEventListener('mouseup', endMoving, true);
+            elem.addEventListener('touchend', endMoving, true);
+        
+            document.addEventListener('mousemove', function (event) {
+                event.preventDefault();
+                if (isDown) {
+                    let mousePosition = {
+                        x: event.clientX,
+                        y: event.clientY
+                    };
+                    elem.style.left = (mousePosition.x + offset[0]) + 'px';
+                    elem.style.top = (mousePosition.y + offset[1]) + 'px';
+                }
+            }, true);
+        
+            document.addEventListener('touchmove', function (event) {
+                event.preventDefault();
+                if (isDown) {
+                    let touchPosition = {
+                        x: event.touches[0].clientX,
+                        y: event.touches[0].clientY
+                    };
+                    elem.style.left = (touchPosition.x + offset[0]) + 'px';
+                    elem.style.top = (touchPosition.y + offset[1]) + 'px';
+                }
+            }, true);
+        
+            function endMoving() {
+                isDown = false;
             }
-        }, true);
+        });
+    }
+
+    movingNapkins([0, 0]);
     
-        document.addEventListener('touchmove', function (event) {
-            event.preventDefault();
-            if (isDown) {
-                let touchPosition = {
-                    x: event.touches[0].clientX,
-                    y: event.touches[0].clientY
-                };
-                elem.style.left = (touchPosition.x + offset[0]) + 'px';
-                elem.style.top = (touchPosition.y + offset[1]) + 'px';
-            }
-        }, true);
-    
-        function endMoving() {
-            isDown = false;
-        }
+
+    window.addEventListener("resize", () => {
+        // console.log('resize');
+        movingNapkins([0, 0]);
     });
 }
 
@@ -383,9 +394,7 @@ if (isInPage(coinsWrap) && device.desktop()) {
     }
     addMinHeight();
 
-    window.addEventListener("resize", () => {
-        addMinHeight();
-    });
+    window.addEventListener("resize", addMinHeight);
 
     const coinsArray = coinsWrap.querySelectorAll('.js-coin'),
           coinsTop = coinsWrap.offsetTop,
@@ -396,14 +405,20 @@ if (isInPage(coinsWrap) && device.desktop()) {
           
 
     var initialCoinPosition = []; // initial values of X,Y positions of coints
-    coinsArray.forEach((item, i) => {
-        initialCoinPosition.push({
-            pageX: getOffset(item).left,
-            pageY: getOffset(item).top,
-            parentX: item.offsetLeft,
-            parentY: item.offsetTop
+    function getInitialCoinPosition() {
+        coinsArray.forEach((item, i) => {
+            initialCoinPosition.push({
+                pageX: getOffset(item).left,
+                pageY: getOffset(item).top,
+                parentX: item.offsetLeft,
+                parentY: item.offsetTop
+            });
         });
-    });
+    }
+
+    getInitialCoinPosition()
+
+    window.addEventListener("resize", getInitialCoinPosition);
 
     // moving conins on scroll
     window.addEventListener('scroll', function() {
