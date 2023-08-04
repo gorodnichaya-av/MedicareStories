@@ -66,7 +66,11 @@ jQuery(document).ready(function() {
 
     percentSliderMobile ();
 
-    window.addEventListener("resize", percentSliderMobile);
+    try {
+        window.addEventListener("resize", percentSliderMobile);
+    } catch {
+        
+    };
 
 
 
@@ -470,6 +474,7 @@ const coinsWrap = document.querySelector('.js-coins');
 
 if (isInPage(coinsWrap) && device.desktop()) {
     
+    // add min-height for percent wrapper
     const coinsContainer = document.querySelector('.js-percents'),
           percentsArray = document.querySelectorAll('.percents__item'),
           percentsCount = percentsArray.length,
@@ -488,16 +493,24 @@ if (isInPage(coinsWrap) && device.desktop()) {
 
     window.addEventListener("resize", addMinHeight);
 
-    const coinsArray = coinsWrap.querySelectorAll('.js-coin'),
-          coinsTop = coinsWrap.offsetTop,
-          coinsContainerHeight = coinsContainer.offsetHeight,
-          coinsContainerStart = coinsContainer.offsetTop,
-          percentItemHeight = coinsContainerHeight / percentsCount,
-          removeFixedClass = document.querySelector('.napkins-headline').offsetTop;
-          
 
-    var initialCoinPosition = []; // initial values of X,Y positions of coints
-    function getInitialCoinPosition() {
+    // get variables for coins moving
+    var initialCoinPosition = [], // initial values of X,Y positions of coints
+        coinsArray = coinsWrap.querySelectorAll('.js-coin'),
+        coinsTop = coinsWrap.offsetTop,
+        coinsContainerHeight,
+        coinsContainerStart,
+        percentItemHeight,
+        paddingTopRemoveClass,
+        removeFixedClass;
+
+    function getCoinsVariables() {
+        coinsContainerHeight = coinsContainer.offsetHeight,
+        coinsContainerStart = coinsContainer.offsetTop,
+        percentItemHeight = coinsContainerHeight / percentsCount,
+        paddingTopRemoveClass = parseInt((window.getComputedStyle(document.querySelector('.napkins-headline'))).paddingTop, 10),
+        removeFixedClass = document.querySelector('.napkins-headline').offsetTop + paddingTopRemoveClass;
+
         coinsArray.forEach((item, i) => {
             initialCoinPosition.push({
                 pageX: getOffset(item).left,
@@ -506,31 +519,25 @@ if (isInPage(coinsWrap) && device.desktop()) {
                 parentY: item.offsetTop
             });
         });
-        // console.log(initialCoinPosition);
     }
+    getCoinsVariables();
 
-    getInitialCoinPosition()
+    window.addEventListener('resize', getCoinsVariables);
+    
 
-    window.addEventListener("resize", getInitialCoinPosition);
-
-    // moving conins on scroll
-    window.addEventListener('scroll', function() {
+    addMultipleEventListener(window, ['scroll', 'resize'], function() {
         let percentVal;
-
+    
         const coinsMovingStart = coinsContainerStart + coinsTop,
               coinsMovingStop = coinsContainerStart + coinsContainerHeight - percentItemHeight + this.innerHeight / 2;
-        
+    
         var counterItems = 0;
         for (let i = 0; i < percentsCount; i++) {
             if (this.scrollY >= (coinsContainerStart + percentItemHeight * i)) {
                 counterItems = i;
             }
         }
-
-        // console.log('scroll', this.scrollY);
-        // console.log('start', coinsMovingStart);
-        // console.log('stop', removeFixedClass);
-
+    
         if (this.scrollY >= coinsMovingStart && (this.scrollY + this.innerHeight) <= removeFixedClass) {
             coinsWrap.classList.add('fixed');
             coinsWrap.classList.remove('bottom-absolute');
@@ -538,6 +545,7 @@ if (isInPage(coinsWrap) && device.desktop()) {
             coinsWrap.classList.remove('fixed');
             coinsWrap.classList.add('bottom-absolute');
         }
+    
 
         if (this.scrollY < coinsMovingStart) { // window Scroll < (offset Top of main coin's parent (percents) + real negative top of coin's parent (coint-wrap))
             percentVal = 1;
@@ -554,7 +562,13 @@ if (isInPage(coinsWrap) && device.desktop()) {
         }
 
         movingCoins(percentVal, counterItems, coinsArray);
-    });
+    })
+}
+
+
+
+function addMultipleEventListener(element, events, handler) {
+    events.forEach(e => element.addEventListener(e, handler))
 }
 
 // get Offset of coins
@@ -591,6 +605,8 @@ function movingCoins(percent, counter, array) {
                 item.style.left = `${leftVal}px`;
                 item.style.top = `${topVal}%`;
                 item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg) skew(${skewVal}deg)`;
+
+                console.log(positionXVal);
               break;
             case 1:
                 finishTop = 101,  // 101 - space from top
@@ -603,7 +619,7 @@ function movingCoins(percent, counter, array) {
                 item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg)`;
               break;
             case 2:
-                positionXVal = 0 - (percent * positionXVal / 40);
+                positionXVal = 0 - (percent * positionXVal / 30);
                 item.style.transform = `scale(${scaleVal}) rotate(-40deg) translate(${positionXVal}px)`; 
               break;    
             case 3:
@@ -628,6 +644,7 @@ function movingCoins(percent, counter, array) {
           
     });
 }
+
 
 
 // Words position 

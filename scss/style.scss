@@ -1154,6 +1154,7 @@ div[data-verttical-start-2] {
   text-align: center;
   z-index: 2;
   contain: layout;
+  min-height: 100vh;
 }
 .napkins {
   touch-action: none;
@@ -1167,7 +1168,7 @@ div[data-verttical-start-2] {
 
 @media (max-width: 1279px) {
   .wrap:not(.single) {
-    width: 100vw;
+    max-width: 100vw;
     overflow: hidden;
   }
   .napkins-headline {
