@@ -1147,10 +1147,13 @@ div[data-verttical-start-2] {
 }
 
 /***** napkins *****/
+/* all posisiotns for napkins items need to duplicate to script.js  */ 
+
 .section--napkin {
   position: relative;
   text-align: center;
   z-index: 2;
+  contain: layout;
 }
 .napkins {
   touch-action: none;

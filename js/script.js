@@ -171,6 +171,7 @@ if (isInPage(headerLogo)) {
 
 
 // Napkins moving
+// napkinsInitPosition - is position of napkins from style.css
 const napkins = document.querySelectorAll('.js-napkin'),
       napkinsInitPosition = {
         empty: {
@@ -222,10 +223,6 @@ if (isInPage(napkins[0])) {
         napkins.forEach((elem) => {
             var isDown = false,
                 offset = [0, 0];
-
-            const leftMaxVal = elem.getClientRects()[0].left.toFixed(0)
-
-            console.log(leftMaxVal);
     
             elem.addEventListener('mousedown', function (e) {
                 isDown = true;
