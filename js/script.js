@@ -46,7 +46,7 @@ jQuery(document).ready(function() {
 
         if (windowWidth < 1280) {
             if(percentItemsSlick.length > 0) {
-                percentItemsSlick.slick({
+                percentItemsSlick.not('.slick-initialized').slick({
                     arrows: false,
                     infinite: true,
                     speed: 500,
@@ -68,9 +68,7 @@ jQuery(document).ready(function() {
 
     try {
         window.addEventListener("resize", percentSliderMobile);
-    } catch {
-        
-    };
+    } catch {};
 
 
 
@@ -603,7 +601,6 @@ function movingCoins(percent, counter, array) {
                 rotateVal = (counter % 2 === 0) ?  10 + (percent * 27 / 100) : -(10 + (percent * 27 / 100)); // 10 - initial value of rotate, 27 - changing of value = finish value = 37deg
                 skewVal = 0 - (percent * 15 / 100); // 0 - initial value of skew, 15 - changing of value = finish value = -15deg
                 leftVal = leftVal - (percent * positionXVal / 100);
-                console.log(leftVal);
                 item.style.left = `${leftVal}px`;
                 item.style.top = `${topVal}%`;
                 item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg) skew(${skewVal}deg)`;
@@ -620,7 +617,7 @@ function movingCoins(percent, counter, array) {
               break;
             case 2:
                 positionXVal = 0 - (percent * positionXVal / 10);
-                item.style.transform = `scale(${scaleVal}) rotate(-40deg) translate(${positionXVal}px)`; 
+                item.style.transform = `scale(${scaleVal}) rotate(-40deg) translate(${positionXVal}px)`;  
               break;    
             case 3:
                 finishTop = window.innerHeight - 50 - item.offsetHeight,  // 50 - space from bottom
@@ -707,8 +704,10 @@ if (isInPage(verticalScrollContent[0])) {
             } else {
                 percentValue = 100;
             }
-              
-            moveObj(percentValue, verticalBall, verticalPath, verticalPathLength);
+
+            try {
+                moveObj(percentValue, verticalBall, verticalPath, verticalPathLength);
+            } catch {};
         });
     });
 } 
