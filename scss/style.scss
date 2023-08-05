@@ -1072,31 +1072,26 @@ div[data-verttical-start-2] {
     position: absolute;
     transition: all 0.3s;
     &--0 {
-      // top: 450px;
       top: 0;
       left: 51px;
       transform: rotate(10deg);
     }
     &--1 {
-      // top: calc(60px + 450px);
       top: 60px;
       left: 650px;
       transform: rotate(-25deg);
     }
     &--2 {
-      //top: calc(290px + 450px);
       top: 290px;
       left: -60px;
       transform: rotate(-40deg);
     }
     &--3 {
-      // top: calc(290px + 450px);
       top: 290px;
       left: 730px;
       transform: rotate(35deg);
     }
     &--4 {
-      //top: calc(130px + 450px);
       top: 130px;
       left: 167px;
     }

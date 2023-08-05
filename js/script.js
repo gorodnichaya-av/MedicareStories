@@ -604,7 +604,6 @@ function movingCoins(percent, counter, array) {
                 skewVal = 0 - (percent * 15 / 100); // 0 - initial value of skew, 15 - changing of value = finish value = -15deg
                 leftVal = leftVal - (percent * positionXVal / 100);
                 console.log(leftVal);
-                //leftVal = (leftVal/window.innerWidth*100) - ((leftVal/window.innerWidth*100) + ((percent*positionXVal)/window.innerWidth)*1.8);
                 item.style.left = `${leftVal}px`;
                 item.style.top = `${topVal}%`;
                 item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg) skew(${skewVal}deg)`;
