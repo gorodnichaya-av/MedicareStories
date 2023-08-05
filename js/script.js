@@ -523,8 +523,9 @@ if (isInPage(coinsWrap) && device.desktop()) {
     getCoinsVariables();
 
     window.addEventListener('resize', getCoinsVariables);
-    
 
+
+    // moving coins on scroll and resize
     addMultipleEventListener(window, ['scroll', 'resize'], function() {
         let percentVal;
     
@@ -561,8 +562,8 @@ if (isInPage(coinsWrap) && device.desktop()) {
             percentVal = 100;
         }
 
-        movingCoins(percentVal, counterItems, coinsArray);
-    })
+         movingCoins(percentVal, counterItems, coinsArray);
+    });
 }
 
 
@@ -602,24 +603,24 @@ function movingCoins(percent, counter, array) {
                 rotateVal = (counter % 2 === 0) ?  10 + (percent * 27 / 100) : -(10 + (percent * 27 / 100)); // 10 - initial value of rotate, 27 - changing of value = finish value = 37deg
                 skewVal = 0 - (percent * 15 / 100); // 0 - initial value of skew, 15 - changing of value = finish value = -15deg
                 leftVal = leftVal - (percent * positionXVal / 100);
+                console.log(leftVal);
+                //leftVal = (leftVal/window.innerWidth*100) - ((leftVal/window.innerWidth*100) + ((percent*positionXVal)/window.innerWidth)*1.8);
                 item.style.left = `${leftVal}px`;
                 item.style.top = `${topVal}%`;
                 item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg) skew(${skewVal}deg)`;
-
-                console.log(positionXVal);
               break;
             case 1:
                 finishTop = 101,  // 101 - space from top
                 sumTop = finishTop - topVal;
                 topVal = topVal + (percent * sumTop / 100);
-                leftVal = leftVal + (percent * (window.innerWidth*0.122) / 100); // window.innerWidth*0.122 - moving space to left in percent of window width (12,2%)
+                leftVal = leftVal + (percent * (window.innerWidth*0.00122)); // window.innerWidth*0.122 - moving space to left in percent of window width (0.122%)
                 rotateVal = (counter % 2 === 0) ? -25 + (percent * 50 / 100) : -25 + (percent * 70 / 100);
                 item.style.top = `${topVal}px`;
                 item.style.left = `${leftVal}px`;
                 item.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg)`;
               break;
             case 2:
-                positionXVal = 0 - (percent * positionXVal / 30);
+                positionXVal = 0 - (percent * positionXVal / 10);
                 item.style.transform = `scale(${scaleVal}) rotate(-40deg) translate(${positionXVal}px)`; 
               break;    
             case 3:
